@@ -1,0 +1,1287 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<title>Handicraft Bazaar — Smart Khata</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{
+  --sand:#FAF7F2; --warm:#FFFCF8; --ivory:#F5F0E8;
+  --clay:#C8622A; --clay-l:#F5E6DA; --clay-ll:#FDF0E8; --clay-d:#9A4520; --clay-dd:#7A3518;
+  --bark:#2E2218; --bark-m:#7A6A60; --bark-lt:#B0A098;
+  --leaf:#2E7D52; --leaf-l:#E6F4ED; --leaf-d:#1f5a3a;
+  --amber:#D4880A; --amber-l:#FEF3DC; --amber-d:#A86800;
+  --red:#C0392B; --red-l:#FDECEA; --red-d:#922b21;
+  --blue:#2471A3; --blue-l:#D6EAF8;
+  --white:#FFFFFF; --border:#EDE6DC;
+  --sh:0 2px 16px rgba(46,34,24,0.08);
+  --sh-md:0 6px 24px rgba(46,34,24,0.14);
+  --r-s:10px; --r-m:16px; --r-l:20px; --r-xl:26px;
+  --HDR:62px; --NAV:72px;
+  --ff:'Sora',sans-serif; --fd:'Playfair Display',serif;
+}
+
+/* ─── BASE ─── */
+html,body{ height:100%; overflow:hidden; }
+body{
+  background:var(--sand);
+  font-family:var(--ff);
+  color:var(--bark);
+  font-size:14px;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ─── FIXED HEADER ─── */
+#hdr{
+  position:fixed; top:0; left:0; right:0;
+  height:var(--HDR);
+  background:rgba(255,252,248,0.97);
+  border-bottom:1.5px solid var(--border);
+  z-index:500;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 16px;
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  box-shadow:0 1px 12px rgba(46,34,24,0.07);
+}
+.hdr-logo{ display:flex; align-items:center; gap:10px; }
+.logo-box{
+  width:38px; height:38px;
+  background:linear-gradient(140deg,var(--clay),var(--clay-dd));
+  border-radius:12px;
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 4px 14px rgba(200,98,42,0.4);
+  flex-shrink:0;
+}
+.logo-box svg{ width:20px; height:20px; }
+.brand{ font-family:var(--fd); font-size:15.5px; font-weight:700; color:var(--bark); line-height:1.1; }
+.brand-s{ font-size:9px; color:var(--bark-lt); letter-spacing:.9px; text-transform:uppercase; margin-top:1px; }
+.hdr-right{ display:flex; gap:7px; align-items:center; }
+.hdr-btn{
+  width:36px; height:36px; border-radius:50%;
+  background:var(--clay-l); border:none;
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer; transition:all .18s;
+  font-size:14px; font-weight:700; color:var(--clay-d);
+}
+.hdr-btn:active{ transform:scale(.88); background:var(--clay); color:#fff; }
+
+/* ─── SCROLLABLE BODY ─── */
+#app{
+  position:fixed;
+  top:var(--HDR);
+  bottom:var(--NAV);
+  left:0; right:0;
+  overflow-y:auto;
+  overflow-x:hidden;
+  -webkit-overflow-scrolling:touch;
+  scroll-behavior:smooth;
+  background:var(--sand);
+}
+
+/* ─── SCREENS ─── */
+.screen{ display:none; padding:18px 0 28px; animation:fadeUp .22s ease; }
+.screen.active{ display:block; }
+@keyframes fadeUp{ from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+
+/* ─── FIXED BOTTOM NAV ─── */
+#nav{
+  position:fixed; bottom:0; left:0; right:0;
+  height:var(--NAV);
+  background:rgba(255,252,248,0.97);
+  border-top:1.5px solid var(--border);
+  z-index:500;
+  display:flex; align-items:flex-start;
+  padding:8px 4px 0;
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  box-shadow:0 -1px 12px rgba(46,34,24,0.07);
+}
+.ni{
+  flex:1; display:flex; flex-direction:column; align-items:center; gap:3px;
+  padding:7px 2px; cursor:pointer; border-radius:13px;
+  transition:all .2s; border:none; background:none; font-family:var(--ff);
+}
+.ni-ico{ width:24px; height:24px; display:flex; align-items:center; justify-content:center; }
+.ni-ico svg{
+  width:21px; height:21px; stroke:var(--bark-lt); fill:none;
+  stroke-width:1.85; stroke-linecap:round; stroke-linejoin:round; transition:all .2s;
+}
+.ni-lbl{ font-size:9.5px; color:var(--bark-lt); font-weight:500; transition:all .2s; }
+.ni.active .ni-ico svg{ stroke:var(--clay); }
+.ni.active .ni-lbl{ color:var(--clay); font-weight:700; }
+.ni.active{ background:var(--clay-ll); }
+
+/* ─── FAB ─── */
+#fab{
+  position:fixed;
+  bottom:calc(var(--NAV) + 16px); right:16px;
+  width:54px; height:54px; border-radius:50%;
+  background:linear-gradient(140deg,var(--clay),var(--clay-dd));
+  box-shadow:0 6px 22px rgba(200,98,42,.55);
+  border:none; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  z-index:400; transition:all .2s;
+}
+#fab:active{ transform:scale(.9); }
+#fab svg{ width:22px; height:22px; stroke:#fff; fill:none; stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round; }
+
+/* ─── TOAST ─── */
+#toastWrap{
+  position:fixed; top:calc(var(--HDR) + 10px);
+  left:50%; transform:translateX(-50%);
+  z-index:999; display:flex; flex-direction:column; gap:6px; align-items:center;
+  pointer-events:none;
+}
+.toast{
+  background:var(--bark); color:#fff;
+  padding:10px 20px; border-radius:30px;
+  font-size:12.5px; font-weight:600;
+  opacity:0; transition:all .3s; transform:translateY(-8px);
+  white-space:nowrap; box-shadow:var(--sh-md);
+}
+.toast.show{ opacity:1; transform:translateY(0); }
+.toast.success{ background:var(--leaf-d); }
+.toast.error{ background:var(--red-d); }
+.toast.info{ background:var(--clay-dd); }
+
+/* ─── LAYOUT ─── */
+.px{ padding-left:16px; padding-right:16px; }
+.sec{ padding:0 16px; margin-bottom:10px; }
+.sec-hdr{ display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
+.sec-title{ font-size:10px; font-weight:700; color:var(--bark-lt); text-transform:uppercase; letter-spacing:1px; }
+.sec-link{ font-size:11.5px; font-weight:600; color:var(--clay); cursor:pointer; }
+.card{
+  background:var(--white); border-radius:var(--r-l);
+  padding:16px; box-shadow:var(--sh); border:1px solid var(--border);
+  margin-bottom:12px;
+}
+.cbadge{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:20px; height:20px; border-radius:50%;
+  background:var(--clay); color:#fff; font-size:9.5px; font-weight:700; margin-left:6px;
+}
+.div-line{ height:1px; background:var(--border); margin:10px 0; }
+
+/* ─── WELCOME ─── */
+.welcome{ padding:0 16px 18px; }
+.wg{ font-family:var(--fd); font-size:22px; font-weight:700; color:var(--bark); line-height:1.2; }
+.wd{ font-size:11.5px; color:var(--bark-lt); margin-top:3px; }
+
+/* ─── STAT GRID ─── */
+.stat-grid{
+  display:grid; grid-template-columns:1fr 1fr; gap:10px;
+  padding:0 16px; margin-bottom:18px;
+}
+.sc{
+  background:var(--white); border-radius:var(--r-m);
+  padding:15px; border:1px solid var(--border); box-shadow:var(--sh);
+  position:relative; overflow:hidden;
+}
+.sc::before{
+  content:''; position:absolute; top:-25px; right:-25px;
+  width:80px; height:80px; border-radius:50%; opacity:.07;
+}
+.sc.c1::before{ background:var(--clay); }
+.sc.c2::before{ background:var(--leaf); }
+.sc.c3::before{ background:var(--amber); }
+.sc.c4::before{ background:var(--red); }
+.sc-ico{ width:30px; height:30px; border-radius:9px; display:flex; align-items:center; justify-content:center; margin-bottom:9px; }
+.sc-ico svg{ width:14px; height:14px; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; fill:none; }
+.ic-clay{ background:var(--clay-l); } .ic-clay svg{ stroke:var(--clay); }
+.ic-leaf{ background:var(--leaf-l); } .ic-leaf svg{ stroke:var(--leaf); }
+.ic-amb{ background:var(--amber-l); } .ic-amb svg{ stroke:var(--amber); }
+.ic-red{ background:var(--red-l); } .ic-red svg{ stroke:var(--red); }
+.sc-val{ font-size:30px; font-weight:800; color:var(--bark); font-family:var(--fd); line-height:1; }
+.sc-lbl{ font-size:10px; color:var(--bark-lt); margin-top:4px; font-weight:600; }
+
+/* ─── ALERT ─── */
+.alert-strip{
+  background:var(--red-l); border:1px solid rgba(192,57,43,.15);
+  border-radius:var(--r-m); padding:12px 14px;
+  display:flex; align-items:center; gap:10px; margin-bottom:10px;
+}
+.al-ico{ width:32px; height:32px; border-radius:9px; background:var(--red); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.al-ico svg{ width:14px; height:14px; stroke:#fff; fill:none; stroke-width:2; stroke-linecap:round; }
+.al-text{ font-size:12px; font-weight:700; color:var(--red); }
+.al-sub{ font-size:10px; color:rgba(192,57,43,.65); margin-top:2px; }
+
+/* ─── SEARCH ─── */
+.srch-box{
+  display:flex; align-items:center; gap:9px;
+  background:var(--white); border:1.5px solid var(--border);
+  border-radius:12px; padding:10px 14px; transition:border-color .2s;
+}
+.srch-box:focus-within{ border-color:var(--clay); }
+.srch-box svg{ width:15px; height:15px; stroke:var(--bark-lt); fill:none; stroke-width:2; flex-shrink:0; }
+.srch-box input{ border:none; background:none; font-family:var(--ff); font-size:13.5px; color:var(--bark); outline:none; width:100%; }
+.srch-box input::placeholder{ color:var(--bark-lt); }
+
+/* ─── CHIPS ─── */
+.chips{
+  display:flex; gap:7px; overflow-x:auto;
+  padding:0 16px 6px; margin-bottom:10px; scrollbar-width:none;
+}
+.chips::-webkit-scrollbar{ display:none; }
+.chip{
+  flex-shrink:0; padding:6px 14px; border-radius:20px;
+  font-size:11px; font-weight:600; cursor:pointer;
+  border:1.5px solid var(--border); background:var(--white); color:var(--bark-lt);
+  transition:all .18s; font-family:var(--ff); white-space:nowrap;
+}
+.chip.active{ background:var(--clay); color:#fff; border-color:var(--clay); }
+
+/* ─── SORT BAR ─── */
+.sort-bar{ display:flex; align-items:center; justify-content:flex-end; padding:0 16px; margin-bottom:10px; gap:8px; }
+.sort-lbl{ font-size:11px; color:var(--bark-lt); font-weight:600; }
+.sort-sel{ font-size:12px; font-weight:700; color:var(--clay); border:none; background:none; font-family:var(--ff); cursor:pointer; outline:none; }
+
+/* ─── PRODUCT CARD ─── */
+.pc{
+  background:var(--white); border-radius:var(--r-l);
+  border:1px solid var(--border); box-shadow:var(--sh);
+  margin-bottom:10px; overflow:hidden;
+  transition:transform .14s,box-shadow .14s;
+}
+.pc:active{ transform:scale(.985); }
+.pc.low{ border-left:3.5px solid var(--red); }
+.pc-top{ padding:14px 15px 10px; display:flex; align-items:flex-start; gap:11px; }
+.pc-emoji{
+  width:44px; height:44px; border-radius:13px;
+  background:linear-gradient(135deg,var(--clay-l),var(--ivory));
+  display:flex; align-items:center; justify-content:center; font-size:22px; flex-shrink:0;
+}
+.pc-info{ flex:1; min-width:0; }
+.pc-name{ font-size:15px; font-weight:700; color:var(--bark); font-family:var(--fd); line-height:1.25; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.pc-sub{ font-size:10.5px; color:var(--bark-lt); margin-top:3px; }
+.pc-cat{ display:inline-block; font-size:9px; font-weight:700; padding:2px 8px; border-radius:20px; background:var(--clay-l); color:var(--clay-d); text-transform:uppercase; letter-spacing:.4px; margin-top:5px; }
+.pc-nums{ display:flex; }
+.pn{ text-align:center; padding:0 8px; }
+.pn-v{ font-size:18px; font-weight:800; font-family:var(--fd); line-height:1; }
+.pn-l{ font-size:8.5px; text-transform:uppercase; letter-spacing:.4px; color:var(--bark-lt); font-weight:700; margin-top:2px; }
+.pn-v.s{ color:var(--bark); } .pn-v.b{ color:var(--leaf); }
+.pn-v.r{ color:var(--red); } .pn-v.a{ color:var(--amber); }
+.pc-actions{ display:flex; gap:6px; padding:0 14px 12px; flex-wrap:wrap; }
+.pa{
+  flex:1; min-width:58px;
+  display:flex; align-items:center; justify-content:center; gap:4px;
+  padding:9px 6px; border-radius:9px; border:none;
+  cursor:pointer; font-family:var(--ff); font-size:11px; font-weight:700;
+  transition:all .15s;
+}
+.pa:active{ transform:scale(.92); }
+.pa svg{ width:11px; height:11px; stroke-width:2.2; stroke-linecap:round; fill:none; }
+.pa-add{ background:var(--clay-l); color:var(--clay-d); } .pa-add svg{ stroke:var(--clay-d); }
+.pa-box{ background:var(--leaf-l); color:var(--leaf-d); } .pa-box svg{ stroke:var(--leaf-d); }
+.pa-sell{ background:var(--red-l); color:var(--red-d); } .pa-sell svg{ stroke:var(--red-d); }
+.pa-edit{ background:var(--amber-l); color:var(--amber-d); } .pa-edit svg{ stroke:var(--amber-d); }
+.pa-del{ background:#FEF2F2; color:var(--red); } .pa-del svg{ stroke:var(--red); }
+.pc-foot{ padding:0 14px 13px; }
+.prog{ height:5px; background:var(--border); border-radius:5px; overflow:hidden; }
+.prog-b{ height:100%; border-radius:5px; transition:width .5s ease; }
+.prog-b.norm{ background:linear-gradient(90deg,#f5c9a8,var(--clay)); }
+.prog-b.hi{ background:linear-gradient(90deg,#8acfad,var(--leaf)); }
+.prog-meta{ display:flex; justify-content:space-between; font-size:9.5px; color:var(--bark-lt); margin-top:4px; }
+
+/* ─── FORMS ─── */
+.ff{ margin-bottom:13px; }
+.fl{ font-size:10px; font-weight:700; color:var(--bark-lt); text-transform:uppercase; letter-spacing:.7px; margin-bottom:6px; display:block; }
+.fi{
+  width:100%; padding:11px 13px;
+  border:1.5px solid var(--border); border-radius:var(--r-s);
+  font-family:var(--ff); font-size:14px; color:var(--bark);
+  background:var(--warm); outline:none; transition:border-color .2s;
+}
+.fi:focus{ border-color:var(--clay); }
+.fsel{
+  appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%237A6A60' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; background-position:right 13px center; padding-right:34px;
+}
+.adj-row{ display:flex; align-items:center; gap:8px; }
+.adj-btn{
+  width:38px; height:38px; border-radius:10px;
+  border:1.5px solid var(--border); background:var(--white);
+  font-size:18px; font-weight:700; cursor:pointer;
+  display:flex; align-items:center; justify-content:center; color:var(--bark);
+  transition:all .15s; flex-shrink:0;
+}
+.adj-btn:active{ background:var(--clay-l); color:var(--clay-d); }
+.adj-inp{
+  flex:1; text-align:center; font-size:22px; font-weight:800; font-family:var(--fd);
+  border:1.5px solid var(--border); border-radius:10px; padding:9px;
+  background:var(--warm); color:var(--bark); outline:none;
+}
+.adj-inp:focus{ border-color:var(--clay); }
+.qbs{ display:flex; gap:7px; margin-top:9px; flex-wrap:wrap; }
+.qb{
+  padding:7px 13px; border-radius:8px;
+  background:var(--clay-l); color:var(--clay-d);
+  font-weight:700; font-size:12px; border:none; cursor:pointer;
+  transition:all .15s; font-family:var(--ff);
+}
+.qb:active{ transform:scale(.93); background:var(--clay); color:#fff; }
+
+/* ─── BUTTONS ─── */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:7px;
+  padding:13px 20px; border-radius:var(--r-s);
+  font-family:var(--ff); font-size:13.5px; font-weight:700;
+  border:none; cursor:pointer; transition:all .18s; width:100%;
+}
+.btn:active{ transform:scale(.97); }
+.btn-p{ background:linear-gradient(135deg,var(--clay),var(--clay-dd)); color:#fff; box-shadow:0 4px 14px rgba(200,98,42,.3); }
+.btn-s{ background:var(--sand); color:var(--bark); border:1.5px solid var(--border); }
+.btn-d{ background:var(--red-l); color:var(--red); border:1.5px solid rgba(192,57,43,.2); }
+.btn-g{ background:var(--leaf-l); color:var(--leaf-d); border:1.5px solid rgba(46,125,82,.2); }
+.btn-a{ background:var(--amber-l); color:var(--amber-d); border:1.5px solid rgba(212,136,10,.2); }
+.btn svg{ width:15px; height:15px; stroke:currentColor; fill:none; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; }
+
+/* ─── TOGGLE GROUP ─── */
+.tg-grp{ display:flex; background:var(--border); border-radius:var(--r-s); padding:3px; gap:2px; margin-bottom:14px; }
+.tg-opt{
+  flex:1; padding:8px 4px; text-align:center; border-radius:8px;
+  font-size:11px; font-weight:700; cursor:pointer; transition:all .18s;
+  color:var(--bark-lt); border:none; background:none; font-family:var(--ff); white-space:nowrap;
+}
+.tg-opt.active{ background:var(--white); color:var(--bark); box-shadow:var(--sh); }
+
+/* ─── OVERLAY / SHEET ─── */
+.overlay{
+  position:fixed; inset:0;
+  background:rgba(46,34,24,.52);
+  z-index:600; display:none; align-items:flex-end;
+  backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px);
+}
+.overlay.open{ display:flex; animation:fadeIn .15s; }
+@keyframes fadeIn{ from{opacity:0} to{opacity:1} }
+.sheet{
+  background:var(--warm);
+  border-radius:var(--r-xl) var(--r-xl) 0 0;
+  padding:18px 16px 52px; width:100%;
+  max-height:92vh; overflow-y:auto; -webkit-overflow-scrolling:touch;
+  animation:slideUp .26s ease;
+}
+@keyframes slideUp{ from{transform:translateY(32px)} to{transform:translateY(0)} }
+.sh-handle{ width:36px; height:4px; background:var(--border); border-radius:4px; margin:0 auto 18px; }
+.sh-title{ font-size:18px; font-weight:700; color:var(--bark); font-family:var(--fd); margin-bottom:18px; }
+
+/* ─── CONFIRM BOX ─── */
+.confirm-box{
+  background:var(--warm); border-radius:var(--r-xl) var(--r-xl) 0 0;
+  padding:24px 16px 52px; width:100%; animation:slideUp .26s ease;
+}
+.confirm-ico{
+  width:58px; height:58px; border-radius:18px;
+  background:var(--red-l);
+  display:flex; align-items:center; justify-content:center; margin:0 auto 14px;
+}
+.confirm-ico svg{ width:26px; height:26px; stroke:var(--red); fill:none; stroke-width:2; stroke-linecap:round; }
+
+/* ─── INFO BLOCK (inside modals) ─── */
+.info-block{ background:var(--sand); border-radius:var(--r-m); padding:12px 14px; margin-bottom:14px; }
+.ib-name{ font-size:15px; font-weight:700; color:var(--bark); font-family:var(--fd); margin-top:3px; }
+.ib-sub{ font-size:11px; color:var(--bark-lt); margin-top:3px; }
+.ib-nums{ display:flex; gap:16px; margin-top:8px; flex-wrap:wrap; }
+.ibn{ font-size:11px; color:var(--bark-lt); }
+.ibn b{ color:var(--bark); }
+
+/* ─── KHATA ─── */
+.kh-day{ margin-bottom:18px; }
+.kh-date-lbl{
+  font-size:10px; font-weight:700; color:var(--bark-lt);
+  text-transform:uppercase; letter-spacing:.9px;
+  margin-bottom:9px; display:flex; align-items:center; gap:8px;
+}
+.kh-date-lbl::after{ content:''; flex:1; height:1px; background:var(--border); }
+.kh-entry{ display:flex; align-items:flex-start; gap:10px; padding:10px 0; border-bottom:1px solid var(--border); }
+.kh-entry:last-child{ border-bottom:none; }
+.kh-dot{ width:9px; height:9px; border-radius:50%; flex-shrink:0; margin-top:4px; }
+.kh-dot.add{ background:var(--clay); }
+.kh-dot.box{ background:var(--leaf); }
+.kh-dot.sell{ background:var(--red); }
+.kh-body{ flex:1; min-width:0; }
+.kh-txt{ font-size:12.5px; color:var(--bark); line-height:1.45; }
+.kh-time{ font-size:10px; color:var(--bark-lt); margin-top:2px; }
+.kh-badge{ display:inline-block; font-size:8.5px; padding:2px 7px; border-radius:20px; font-weight:700; margin-left:5px; vertical-align:middle; }
+.kb-add{ background:var(--clay-l); color:var(--clay-d); }
+.kb-box{ background:var(--leaf-l); color:var(--leaf-d); }
+.kb-sell{ background:var(--red-l); color:var(--red-d); }
+.kh-qty{ font-size:15px; font-weight:800; font-family:var(--fd); flex-shrink:0; }
+.kh-qty.add{ color:var(--clay); } .kh-qty.box{ color:var(--leaf); } .kh-qty.sell{ color:var(--red); }
+
+/* ─── RTO ─── */
+.rto-card{
+  background:var(--white); border-radius:var(--r-l);
+  border:1px solid var(--border); box-shadow:var(--sh);
+  margin-bottom:11px; overflow:hidden;
+}
+.rto-top{ padding:13px 14px 11px; border-bottom:1px solid var(--border); }
+.rto-name{ font-size:15px; font-weight:700; color:var(--bark); font-family:var(--fd); line-height:1.2; }
+.rto-meta{ font-size:10.5px; color:var(--bark-lt); margin-top:3px; }
+.rto-status-badge{ display:inline-flex; align-items:center; gap:4px; font-size:9.5px; font-weight:700; padding:3px 10px; border-radius:20px; margin-top:7px; }
+.rs-transit{ background:#FEF3DC; color:#A86800; }
+.rs-delivered{ background:var(--leaf-l); color:var(--leaf-d); }
+.rs-pending{ background:var(--red-l); color:var(--red-d); }
+.rs-lost{ background:#F0E8F5; color:#6C3483; }
+.rto-grid{ display:grid; grid-template-columns:1fr 1fr; gap:7px; padding:11px 14px; }
+.rg-item{ background:var(--sand); border-radius:8px; padding:8px 10px; }
+.rg-lbl{ font-size:8.5px; color:var(--bark-lt); text-transform:uppercase; letter-spacing:.5px; font-weight:700; }
+.rg-val{ font-size:11.5px; font-weight:600; color:var(--bark); margin-top:3px; word-break:break-all; }
+.rto-remark{ margin:0 14px 11px; font-size:11px; color:var(--bark-lt); background:var(--sand); border-radius:8px; padding:8px 10px; line-height:1.5; }
+.rto-actions{ display:flex; gap:8px; padding:0 14px 13px; }
+
+/* ─── REPORT ─── */
+.rep-grid{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:9px; margin-bottom:14px; }
+.rc{ background:var(--white); border-radius:var(--r-m); padding:12px 9px; text-align:center; border:1px solid var(--border); box-shadow:var(--sh); }
+.rc-v{ font-size:22px; font-weight:800; font-family:var(--fd); color:var(--bark); }
+.rc-l{ font-size:9px; color:var(--bark-lt); font-weight:700; text-transform:uppercase; letter-spacing:.4px; margin-top:3px; }
+.hero-band{
+  background:linear-gradient(140deg,var(--clay),var(--clay-dd));
+  padding:20px 16px 24px; position:relative; overflow:hidden; margin-bottom:20px;
+}
+.hero-band::before{ content:''; position:absolute; top:-50px; right:-30px; width:160px; height:160px; background:rgba(255,255,255,.07); border-radius:50%; }
+.hero-band::after{ content:''; position:absolute; bottom:-40px; left:-10px; width:100px; height:100px; background:rgba(255,255,255,.05); border-radius:50%; }
+.hero-back{
+  background:rgba(255,255,255,.2); border:none; border-radius:8px;
+  padding:6px 13px; color:#fff; font-family:var(--ff); font-weight:700; font-size:12px;
+  cursor:pointer; display:inline-flex; align-items:center; gap:5px;
+  margin-bottom:12px; position:relative; z-index:1;
+}
+.hero-back svg{ width:12px; height:12px; stroke:#fff; fill:none; stroke-width:2.5; stroke-linecap:round; }
+.hero-title{ font-size:21px; font-weight:700; color:#fff; font-family:var(--fd); position:relative; z-index:1; }
+.hero-sub{ font-size:10.5px; color:rgba(255,255,255,.6); text-transform:uppercase; letter-spacing:.9px; margin-top:4px; position:relative; z-index:1; }
+.top-row{ display:flex; align-items:center; gap:10px; padding:9px 0; border-bottom:1px solid var(--border); }
+.top-row:last-child{ border-bottom:none; }
+.top-num{ width:24px; height:24px; border-radius:8px; background:var(--clay-l); display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:800; color:var(--clay-d); flex-shrink:0; }
+
+/* ─── EMPTY ─── */
+.empty{ text-align:center; padding:50px 20px; }
+.empty-ico{ font-size:44px; margin-bottom:14px; }
+.empty-title{ font-size:16px; font-weight:700; color:var(--bark); font-family:var(--fd); margin-bottom:6px; }
+.empty-desc{ font-size:12px; color:var(--bark-lt); line-height:1.65; }
+
+::-webkit-scrollbar{ width:0; height:0; }
+</style>
+</head>
+<body>
+
+<!-- FIXED HEADER -->
+<header id="hdr">
+  <div class="hdr-logo">
+    <div class="logo-box">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 2L3 7v10l9 5 9-5V7z"/>
+        <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+        <line x1="12" y1="22" x2="12" y2="12"/>
+      </svg>
+    </div>
+    <div>
+      <div class="brand">Handicraft Bazaar</div>
+      <div class="brand-s">Smart Khata System</div>
+    </div>
+  </div>
+  <div class="hdr-right">
+    <button class="hdr-btn" onclick="showScreen('report')">📊</button>
+    <button class="hdr-btn" onclick="openAddProduct()">
+      <svg viewBox="0 0 24 24" style="width:15px;height:15px;stroke:var(--clay-d);fill:none;stroke-width:2.5;stroke-linecap:round">
+        <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<!-- TOAST -->
+<div id="toastWrap"></div>
+
+<!-- ══ SCROLLABLE CONTENT ══ -->
+<div id="app">
+
+  <!-- DASHBOARD -->
+  <div class="screen active" id="screen-dashboard">
+    <div class="welcome">
+      <div class="wg" id="dashGreet">Namaste 🙏</div>
+      <div class="wd" id="dashDate"></div>
+    </div>
+    <div class="stat-grid">
+      <div class="sc c1">
+        <div class="sc-ico ic-clay"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+        <div class="sc-val" id="d-total">0</div><div class="sc-lbl">Products</div>
+      </div>
+      <div class="sc c2">
+        <div class="sc-ico ic-leaf"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/></svg></div>
+        <div class="sc-val" id="d-stock">0</div><div class="sc-lbl">Total Stock</div>
+      </div>
+      <div class="sc c3">
+        <div class="sc-ico ic-amb"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8l5 1v8H16"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+        <div class="sc-val" id="d-box">0</div><div class="sc-lbl">Box Ready</div>
+      </div>
+      <div class="sc c4">
+        <div class="sc-ico ic-red"><svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg></div>
+        <div class="sc-val" id="d-today">0</div><div class="sc-lbl">Dispatched Today</div>
+      </div>
+    </div>
+    <div class="sec" id="d-alerts"></div>
+    <div class="sec">
+      <div class="sec-hdr">
+        <div class="sec-title">Recent Activity</div>
+        <div class="sec-link" onclick="showScreen('khata')">Khata देखें →</div>
+      </div>
+      <div class="card" style="padding:10px 14px" id="d-recent"></div>
+    </div>
+    <div class="sec">
+      <div class="sec-hdr">
+        <div class="sec-title">Products</div>
+        <div class="sec-link" onclick="showScreen('inventory')">सब देखें →</div>
+      </div>
+      <div id="d-products"></div>
+    </div>
+  </div>
+
+  <!-- INVENTORY -->
+  <div class="screen" id="screen-inventory">
+    <div style="padding:0 16px 12px">
+      <div class="srch-box">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="invSearch" placeholder="Search products…" oninput="renderInventory()"/>
+      </div>
+    </div>
+    <div class="chips" id="invChips"></div>
+    <div class="sort-bar">
+      <span class="sort-lbl">Sort:</span>
+      <select class="sort-sel" id="invSort" onchange="renderInventory()">
+        <option value="name">Name A–Z</option>
+        <option value="stock">Stock ↓</option>
+        <option value="low">Low First</option>
+      </select>
+    </div>
+    <div class="sec">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+        <div style="display:flex;align-items:center">
+          <span class="sec-title" style="margin:0">All Products</span>
+          <span class="cbadge" id="invCount">0</span>
+        </div>
+        <button class="qb" onclick="openAddProduct()" style="border-radius:10px">+ Add</button>
+      </div>
+      <div id="invList"></div>
+      <div id="invEmpty" style="display:none">
+        <div class="empty"><div class="empty-ico">📦</div><div class="empty-title">No Products Found</div><div class="empty-desc">Add a new product or change the filter.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KHATA -->
+  <div class="screen" id="screen-khata">
+    <div style="padding:0 16px 12px">
+      <div class="srch-box">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="khSearch" placeholder="Search entries…" oninput="renderKhata()"/>
+      </div>
+    </div>
+    <div style="padding:0 16px;margin-bottom:4px">
+      <div class="tg-grp">
+        <button class="tg-opt active" id="kf-all"  onclick="setKF('all')">All</button>
+        <button class="tg-opt"        id="kf-add"  onclick="setKF('add')">➕ Stock</button>
+        <button class="tg-opt"        id="kf-box"  onclick="setKF('box')">📦 Box</button>
+        <button class="tg-opt"        id="kf-sell" onclick="setKF('sell')">🛒 Sold</button>
+      </div>
+    </div>
+    <div class="sec" id="khataFeed"></div>
+  </div>
+
+  <!-- RTO -->
+  <div class="screen" id="screen-rto">
+    <div style="padding:0 16px 12px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+        <div style="display:flex;align-items:center">
+          <span class="sec-title" style="margin:0">RTO &amp; Returns</span>
+          <span class="cbadge" id="rtoCount">0</span>
+        </div>
+        <button class="qb" onclick="openAddRTO()" style="border-radius:10px">+ Add</button>
+      </div>
+      <div class="srch-box">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="rtoSearch" placeholder="Search RTO…" oninput="renderRTO()"/>
+      </div>
+    </div>
+    <div class="chips" id="rtoChips"></div>
+    <div class="sec">
+      <div id="rtoList"></div>
+      <div id="rtoEmpty" style="display:none">
+        <div class="empty"><div class="empty-ico">📬</div><div class="empty-title">No RTO Records</div><div class="empty-desc">RTO entry add करें यहाँ track करने के लिए।</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- REPORT -->
+  <div class="screen" id="screen-report">
+    <div class="hero-band">
+      <button class="hero-back" onclick="showScreen('dashboard')">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back
+      </button>
+      <div class="hero-title">Business Report</div>
+      <div class="hero-sub" id="repDate"></div>
+    </div>
+    <div class="sec">
+      <div class="sec-title" style="margin-bottom:10px">Overview</div>
+      <div class="rep-grid" id="repGrid"></div>
+      <div class="sec-title" style="margin-bottom:10px">Today</div>
+      <div class="card" id="repToday" style="padding:14px;margin-bottom:14px"></div>
+      <div class="sec-title" style="margin-bottom:10px">Top 5 by Stock</div>
+      <div class="card" style="padding:12px 14px;margin-bottom:14px" id="repTop"></div>
+      <div class="sec-title" style="margin-bottom:10px">Category Breakdown</div>
+      <div class="card" id="repCats" style="padding:14px"></div>
+    </div>
+  </div>
+
+</div><!-- /#app -->
+
+<!-- BOTTOM NAV -->
+<nav id="nav">
+  <button class="ni active" id="nav-dashboard" onclick="showScreen('dashboard')">
+    <div class="ni-ico"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
+    <span class="ni-lbl">Home</span>
+  </button>
+  <button class="ni" id="nav-inventory" onclick="showScreen('inventory')">
+    <div class="ni-ico"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/></svg></div>
+    <span class="ni-lbl">Inventory</span>
+  </button>
+  <button class="ni" id="nav-khata" onclick="showScreen('khata')">
+    <div class="ni-ico"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+    <span class="ni-lbl">Khata</span>
+  </button>
+  <button class="ni" id="nav-rto" onclick="showScreen('rto')">
+    <div class="ni-ico"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg></div>
+    <span class="ni-lbl">RTO</span>
+  </button>
+</nav>
+
+<!-- FAB -->
+<button id="fab" onclick="openModal('modal-fab')">
+  <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+</button>
+
+<!-- ══════════ MODALS ══════════ -->
+
+<!-- Add/Edit Product -->
+<div class="overlay" id="modal-product">
+  <div class="sheet">
+    <div class="sh-handle"></div>
+    <div class="sh-title" id="mProdTitle">Add Product</div>
+    <div class="ff"><label class="fl">Product Name</label><input type="text" class="fi" id="pName" placeholder="e.g. Makrana Marble Elephant"/></div>
+    <div class="ff"><label class="fl">Category</label>
+      <select class="fi fsel" id="pCat">
+        <option>Idols</option><option>Kitchen Items</option><option>Tulsi Pots</option>
+        <option>Tissue Boxes</option><option>Decorative Items</option><option>Other</option>
+      </select>
+    </div>
+    <div class="ff"><label class="fl">Type / Finish</label><input type="text" class="fi" id="pType" placeholder="e.g. Painting, Inlay, Plain White"/></div>
+    <div class="ff"><label class="fl">Size / Variant</label><input type="text" class="fi" id="pSize" placeholder="e.g. 6 inch, 1 ft, Medium"/></div>
+    <div class="ff"><label class="fl">Initial Stock</label>
+      <div class="adj-row">
+        <button class="adj-btn" onclick="adj('pStock',-1)">−</button>
+        <input type="number" class="adj-inp" id="pStock" placeholder="0" min="0"/>
+        <button class="adj-btn" onclick="adj('pStock',1)">+</button>
+      </div>
+      <div class="qbs">
+        <button class="qb" onclick="setV('pStock',10)">10</button>
+        <button class="qb" onclick="setV('pStock',25)">25</button>
+        <button class="qb" onclick="setV('pStock',50)">50</button>
+        <button class="qb" onclick="setV('pStock',100)">100</button>
+      </div>
+    </div>
+    <div id="pErr" style="font-size:12px;color:var(--red);margin-bottom:10px;display:none"></div>
+    <div style="display:flex;gap:9px">
+      <button class="btn btn-s" onclick="closeModal('modal-product')" style="flex:0.65">Cancel</button>
+      <button class="btn btn-p" onclick="saveProd()">Save Product</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add Stock -->
+<div class="overlay" id="modal-addstock">
+  <div class="sheet">
+    <div class="sh-handle"></div>
+    <div class="sh-title">➕ Stock Add करें</div>
+    <div class="info-block" id="addstockInfo"></div>
+    <div class="ff"><label class="fl">Quantity to Add</label>
+      <div class="adj-row">
+        <button class="adj-btn" onclick="adj('addstockQty',-1)">−</button>
+        <input type="number" class="adj-inp" id="addstockQty" placeholder="0" min="1"/>
+        <button class="adj-btn" onclick="adj('addstockQty',1)">+</button>
+      </div>
+      <div class="qbs">
+        <button class="qb" onclick="addQ('addstockQty',10)">+10</button>
+        <button class="qb" onclick="addQ('addstockQty',25)">+25</button>
+        <button class="qb" onclick="addQ('addstockQty',50)">+50</button>
+        <button class="qb" onclick="addQ('addstockQty',100)">+100</button>
+      </div>
+    </div>
+    <div id="addstockErr" style="font-size:12px;color:var(--red);margin-bottom:10px;display:none"></div>
+    <button class="btn btn-p" onclick="submitAddStock()">Add Stock</button>
+  </div>
+</div>
+
+<!-- Move to Box -->
+<div class="overlay" id="modal-box">
+  <div class="sheet">
+    <div class="sh-handle"></div>
+    <div class="sh-title">📦 Box में Move करें</div>
+    <div class="info-block" id="boxInfo"></div>
+    <div class="ff"><label class="fl">Quantity to Move</label>
+      <div class="adj-row">
+        <button class="adj-btn" onclick="adj('boxQty',-5)">−5</button>
+        <button class="adj-btn" onclick="adj('boxQty',-1)">−</button>
+        <input type="number" class="adj-inp" id="boxQty" placeholder="0" min="1"/>
+        <button class="adj-btn" onclick="adj('boxQty',1)">+</button>
+        <button class="adj-btn" onclick="adj('boxQty',5)">+5</button>
+      </div>
+      <div class="qbs">
+        <button class="qb" onclick="addQ('boxQty',10)">+10</button>
+        <button class="qb" onclick="addQ('boxQty',25)">+25</button>
+        <button class="qb" onclick="addQ('boxQty',50)">+50</button>
+      </div>
+    </div>
+    <div id="boxErr" style="font-size:12px;color:var(--red);margin-bottom:10px;display:none"></div>
+    <button class="btn btn-g" onclick="submitBox()">Confirm Move to Box</button>
+  </div>
+</div>
+
+<!-- Dispatch/Sell -->
+<div class="overlay" id="modal-sell">
+  <div class="sheet">
+    <div class="sh-handle"></div>
+    <div class="sh-title">🛒 Dispatch / Sell</div>
+    <div class="info-block" id="sellInfo"></div>
+    <div class="ff"><label class="fl">Quantity Dispatched</label>
+      <div class="adj-row">
+        <button class="adj-btn" onclick="adj('sellQty',-5)">−5</button>
+        <button class="adj-btn" onclick="adj('sellQty',-1)">−</button>
+        <input type="number" class="adj-inp" id="sellQty" placeholder="0" min="1"/>
+        <button class="adj-btn" onclick="adj('sellQty',1)">+</button>
+        <button class="adj-btn" onclick="adj('sellQty',5)">+5</button>
+      </div>
+      <div class="qbs">
+        <button class="qb" onclick="addQ('sellQty',1)">+1</button>
+        <button class="qb" onclick="addQ('sellQty',5)">+5</button>
+        <button class="qb" onclick="addQ('sellQty',10)">+10</button>
+      </div>
+    </div>
+    <div class="ff"><label class="fl">Platform / Customer</label>
+      <select class="fi fsel" id="sellPlatform">
+        <option>Amazon</option><option>Flipkart</option><option>Meesho</option>
+        <option>Snapdeal</option><option>Walk-in Customer</option><option>Other</option>
+      </select>
+    </div>
+    <div id="sellErr" style="font-size:12px;color:var(--red);margin-bottom:10px;display:none"></div>
+    <button class="btn btn-d" onclick="submitSell()">Confirm Dispatch</button>
+  </div>
+</div>
+
+<!-- Delete Product -->
+<div class="overlay" id="modal-delete">
+  <div class="confirm-box">
+    <div class="sh-handle" style="margin-bottom:14px"></div>
+    <div class="confirm-ico"><svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6M9 6V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg></div>
+    <div style="text-align:center;margin-bottom:20px">
+      <div style="font-size:17px;font-weight:700;color:var(--bark);font-family:var(--fd);margin-bottom:6px">Delete करें?</div>
+      <div style="font-size:12px;color:var(--bark-lt);line-height:1.65"><b id="delName" style="color:var(--bark)">product</b> और इसकी सारी history हट जाएगी।</div>
+    </div>
+    <div style="display:flex;gap:9px">
+      <button class="btn btn-s" onclick="closeModal('modal-delete')" style="flex:1">Cancel</button>
+      <button class="btn btn-d" onclick="confirmDelete()" style="flex:1">Delete करें</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add/Edit RTO -->
+<div class="overlay" id="modal-rto">
+  <div class="sheet">
+    <div class="sh-handle"></div>
+    <div class="sh-title" id="mRTOTitle">Add RTO Entry</div>
+    <div class="ff"><label class="fl">Product Name</label><input type="text" class="fi" id="rtoProduct" placeholder="e.g. Marble Elephant 6 inch"/></div>
+    <div class="ff"><label class="fl">Company</label>
+      <select class="fi fsel" id="rtoCompany">
+        <option>Amazon</option><option>Flipkart</option><option>Meesho</option>
+        <option>Snapdeal</option><option>Direct/Walk-in</option><option>Other</option>
+      </select>
+    </div>
+    <div class="ff"><label class="fl">Order ID</label><input type="text" class="fi" id="rtoOrderId" placeholder="OD123456789"/></div>
+    <div class="ff"><label class="fl">Tracking ID</label><input type="text" class="fi" id="rtoTrackId" placeholder="DTDC987654"/></div>
+    <div class="ff"><label class="fl">Return Date</label><input type="date" class="fi" id="rtoReturnDate"/></div>
+    <div class="ff"><label class="fl">Delivered Date (if applicable)</label><input type="date" class="fi" id="rtoDelivDate"/></div>
+    <div class="ff"><label class="fl">Status</label>
+      <select class="fi fsel" id="rtoStatus">
+        <option value="transit">In Transit</option>
+        <option value="delivered">Delivered</option>
+        <option value="pending">Pending</option>
+        <option value="lost">Lost</option>
+      </select>
+    </div>
+    <div class="ff"><label class="fl">Safe-T Claim</label>
+      <select class="fi fsel" id="rtoSafet">
+        <option value="not_filed">Not Filed</option>
+        <option value="filed">Filed</option>
+        <option value="approved">Approved ✅</option>
+        <option value="rejected">Rejected ❌</option>
+      </select>
+    </div>
+    <div class="ff"><label class="fl">Remark</label><input type="text" class="fi" id="rtoRemark" placeholder="Any note…"/></div>
+    <div id="rtoErr" style="font-size:12px;color:var(--red);margin-bottom:10px;display:none"></div>
+    <div style="display:flex;gap:9px">
+      <button class="btn btn-s" onclick="closeModal('modal-rto')" style="flex:0.65">Cancel</button>
+      <button class="btn btn-p" onclick="saveRTO()">Save Entry</button>
+    </div>
+  </div>
+</div>
+
+<!-- Delete RTO -->
+<div class="overlay" id="modal-delrto">
+  <div class="confirm-box">
+    <div class="sh-handle" style="margin-bottom:14px"></div>
+    <div class="confirm-ico"><svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg></div>
+    <div style="text-align:center;margin-bottom:20px">
+      <div style="font-size:17px;font-weight:700;color:var(--bark);font-family:var(--fd);margin-bottom:6px">RTO Delete करें?</div>
+      <div style="font-size:12px;color:var(--bark-lt);line-height:1.65">यह RTO record permanently delete हो जाएगा।</div>
+    </div>
+    <div style="display:flex;gap:9px">
+      <button class="btn btn-s" onclick="closeModal('modal-delrto')" style="flex:1">Cancel</button>
+      <button class="btn btn-d" onclick="confirmDelRTO()" style="flex:1">Delete करें</button>
+    </div>
+  </div>
+</div>
+
+<!-- FAB Quick -->
+<div class="overlay" id="modal-fab">
+  <div class="sheet">
+    <div class="sh-handle"></div>
+    <div class="sh-title">Quick Action</div>
+    <div style="display:flex;flex-direction:column;gap:9px">
+      <button class="btn btn-p" onclick="closeModal('modal-fab');openAddProduct()">
+        <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>New Product Add करें
+      </button>
+      <button class="btn btn-g" onclick="closeModal('modal-fab');showScreen('inventory')">📦 Inventory देखें</button>
+      <button class="btn" style="background:var(--clay-l);color:var(--clay-d)" onclick="closeModal('modal-fab');showScreen('khata')">📒 Khata देखें</button>
+      <button class="btn btn-a" onclick="closeModal('modal-fab');openAddRTO()">📬 RTO Entry Add करें</button>
+      <button class="btn btn-s" onclick="closeModal('modal-fab');showScreen('report')">📊 Report देखें</button>
+    </div>
+  </div>
+</div>
+
+<script>
+'use strict';
+
+/* ═══ DATA ═══ */
+let products=[], logs=[], rtoRecords=[];
+let editProdId=null, curItemId=null, editRTOId=null, deleteProdId=null, deleteRTOId=null;
+let kFilter='all', rtoStatusFilter='all', invCatFilter='all';
+
+const CAT_EMOJI={'Idols':'🪨','Kitchen Items':'🍽️','Tulsi Pots':'🌿','Tissue Boxes':'🗂️','Decorative Items':'💎','Other':'✨'};
+const STATUS_CLASS={transit:'rs-transit',delivered:'rs-delivered',pending:'rs-pending',lost:'rs-lost'};
+const STATUS_LABEL={transit:'In Transit',delivered:'Delivered',pending:'Pending',lost:'Lost'};
+const SAFET_LABEL={not_filed:'Not Filed',filed:'Filed',approved:'Approved ✅',rejected:'Rejected ❌'};
+
+/* ═══ SEED DATA ═══ */
+(function(){
+  const n=Date.now();
+  products=[
+    {id:1,name:'Marble Elephant',category:'Idols',type:'Plain White',size:'6 inch',stock:120,box:45},
+    {id:2,name:'Marble Elephant',category:'Idols',type:'Painting',size:'9 inch',stock:80,box:30},
+    {id:3,name:'Marble Elephant',category:'Idols',type:'Inlay',size:'12 inch',stock:25,box:8},
+    {id:4,name:'Marble Atta Box',category:'Kitchen Items',type:'Plain',size:'Medium',stock:60,box:22},
+    {id:5,name:'Marble Rolling Pin',category:'Kitchen Items',type:'Plain White',size:'Standard',stock:40,box:15},
+    {id:6,name:'Tulsi Pot',category:'Tulsi Pots',type:'Painting',size:'15 inch',stock:35,box:10},
+    {id:7,name:'Tulsi Pot',category:'Tulsi Pots',type:'Inlay',size:'18 inch',stock:4,box:2},
+    {id:8,name:'Marble Tissue Box',category:'Tissue Boxes',type:'Inlay',size:'Standard',stock:55,box:20},
+    {id:9,name:'Marble Tissue Box',category:'Tissue Boxes',type:'Plain',size:'Small',stock:70,box:28},
+    {id:10,name:'Marble Flower Vase',category:'Decorative Items',type:'Painting',size:'10 inch',stock:5,box:1},
+  ];
+  logs=[
+    {id:1,type:'add',productId:1,productName:'Marble Elephant (Plain, 6")',qty:50,note:'Initial stock',time:n-86400000*2},
+    {id:2,type:'box',productId:1,productName:'Marble Elephant (Plain, 6")',qty:20,note:'Amazon ke liye',time:n-86400000*2+3600000},
+    {id:3,type:'sell',productId:1,productName:'Marble Elephant (Plain, 6")',qty:5,platform:'Amazon',time:n-86400000},
+    {id:4,type:'add',productId:6,productName:'Tulsi Pot (Painting, 15")',qty:35,note:'New batch',time:n-86400000+7200000},
+    {id:5,type:'box',productId:6,productName:'Tulsi Pot (Painting, 15")',qty:10,note:'Box ready',time:n-43200000},
+    {id:6,type:'sell',productId:2,productName:'Marble Elephant (Painting, 9")',qty:3,platform:'Flipkart',time:n-3600000},
+    {id:7,type:'box',productId:4,productName:'Marble Atta Box (Plain, Medium)',qty:12,note:'',time:n-1800000},
+    {id:8,type:'sell',productId:8,productName:'Marble Tissue Box (Inlay)',qty:4,platform:'Meesho',time:n-900000},
+  ];
+  rtoRecords=[
+    {id:1,product:'Marble Elephant 6 inch',company:'Amazon',orderId:'OD-123456789',trackId:'DTDC987654',returnDate:'2025-03-10',delivDate:'',status:'transit',safet:'filed',remark:'Customer refused delivery'},
+    {id:2,product:'Tulsi Pot Inlay 18 inch',company:'Flipkart',orderId:'FK-987654321',trackId:'DELHIVERY123',returnDate:'2025-03-08',delivDate:'2025-03-15',status:'delivered',safet:'approved',remark:'Item intact'},
+    {id:3,product:'Marble Tissue Box',company:'Meesho',orderId:'MSH-456789',trackId:'SHIPROCKET99',returnDate:'2025-03-12',delivDate:'',status:'pending',safet:'not_filed',remark:'Awaiting pickup'},
+  ];
+})();
+
+/* ═══ HELPERS ═══ */
+const $=id=>document.getElementById(id);
+function adj(id,n){const el=$(id);el.value=Math.max(0,(parseInt(el.value)||0)+n);}
+function addQ(id,n){const el=$(id);el.value=Math.max(0,(parseInt(el.value)||0)+n);}
+function setV(id,n){$(id).value=n;}
+function openModal(id){$(id).classList.add('open');}
+function closeModal(id){$(id).classList.remove('open');}
+function nextId(arr){return arr.length?Math.max(...arr.map(x=>x.id))+1:1;}
+function emoji(cat){return CAT_EMOJI[cat]||'✨';}
+function fmtTime(ts){return new Date(ts).toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});}
+function fmtDate(ts){
+  const d=new Date(ts),t=new Date();
+  if(d.toDateString()===t.toDateString())return 'Today';
+  const y=new Date(t);y.setDate(y.getDate()-1);
+  if(d.toDateString()===y.toDateString())return 'Yesterday';
+  return d.toLocaleDateString('en-IN',{day:'numeric',month:'short'});
+}
+function todayDispatched(pid=null){
+  const today=new Date().toDateString();
+  return logs.filter(l=>l.type==='sell'&&new Date(l.time).toDateString()===today&&(pid===null||l.productId===pid)).reduce((s,l)=>s+l.qty,0);
+}
+function toast(msg,type='success'){
+  const tw=$('toastWrap');
+  const el=document.createElement('div');
+  el.className='toast '+type; el.textContent=msg; tw.appendChild(el);
+  setTimeout(()=>el.classList.add('show'),10);
+  setTimeout(()=>{el.classList.remove('show');setTimeout(()=>el.remove(),400);},2500);
+}
+
+/* ═══ ROUTING ═══ */
+function showScreen(name){
+  $('app').scrollTop=0;
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.ni').forEach(n=>n.classList.remove('active'));
+  $('screen-'+name).classList.add('active');
+  const nav=$('nav-'+name);if(nav)nav.classList.add('active');
+  ({dashboard:renderDash,inventory:()=>{buildInvChips();renderInventory();},
+    khata:renderKhata,rto:()=>{buildRTOChips();renderRTO();},report:renderReport}[name]||function(){})();
+}
+
+/* ═══ INIT ═══ */
+const h=new Date().getHours();
+$('dashGreet').textContent=(h<12?'Namaste 🙏':h<17?'Good Afternoon ☀️':'Good Evening 🌙');
+$('dashDate').textContent=new Date().toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+buildInvChips(); renderDash(); buildRTOChips(); renderRTO();
+
+/* ═══ DASHBOARD ═══ */
+function renderDash(){
+  $('d-total').textContent=products.length;
+  $('d-stock').textContent=products.reduce((a,p)=>a+p.stock,0);
+  $('d-box').textContent=products.reduce((a,p)=>a+p.box,0);
+  $('d-today').textContent=todayDispatched();
+  const low=products.filter(p=>(p.stock-p.box)<5);
+  $('d-alerts').innerHTML=low.map(p=>`<div class="alert-strip">
+    <div class="al-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M12 9v4M12 17h.01"/><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg></div>
+    <div><div class="al-text">⚠️ Low: ${p.name}</div><div class="al-sub">${p.type} ${p.size} — सिर्फ ${p.stock-p.box} बचे</div></div>
+  </div>`).join('');
+  const rec=[...logs].reverse().slice(0,5);
+  $('d-recent').innerHTML=rec.length?rec.map(l=>khataEntry(l)).join(''):`<div style="font-size:12px;color:var(--bark-lt);text-align:center;padding:10px">No activity yet</div>`;
+  $('d-products').innerHTML=products.slice(0,5).map(p=>prodCardSmall(p)).join('');
+}
+function prodCardSmall(p){
+  const rem=p.stock-p.box,low=rem<5,pct=p.stock>0?Math.round(p.box/p.stock*100):0;
+  return `<div class="pc${low?' low':''}">
+    <div class="pc-top">
+      <div class="pc-emoji">${emoji(p.category)}</div>
+      <div class="pc-info">
+        <div class="pc-name">${p.name}</div>
+        <div class="pc-sub">${p.type} · ${p.size}</div>
+        <div class="pc-cat">${p.category}</div>
+      </div>
+      <div class="pc-nums">
+        <div class="pn"><div class="pn-v s">${p.stock}</div><div class="pn-l">Stock</div></div>
+        <div class="pn"><div class="pn-v b">${p.box}</div><div class="pn-l">Box</div></div>
+      </div>
+    </div>
+    <div class="pc-foot">
+      <div class="prog"><div class="prog-b ${pct>60?'hi':'norm'}" style="width:${pct}%"></div></div>
+      <div class="prog-meta"><span>${pct}% boxed</span><span>${low?'⚠️ Low':rem+' left'}</span></div>
+    </div>
+  </div>`;
+}
+
+/* ═══ INVENTORY ═══ */
+function buildInvChips(){
+  const cats=['all',...new Set(products.map(p=>p.category))];
+  $('invChips').innerHTML=cats.map(c=>`<div class="chip${invCatFilter===c?' active':''}" onclick="setInvCat('${c}')">${c==='all'?'🏠 All':c}</div>`).join('');
+}
+function setInvCat(c){invCatFilter=c;buildInvChips();renderInventory();}
+function renderInventory(){
+  const q=($('invSearch')?.value||'').toLowerCase();
+  const sort=$('invSort')?.value||'name';
+  let list=products.filter(p=>(!q||(p.name.toLowerCase().includes(q)||p.category.toLowerCase().includes(q)||p.type.toLowerCase().includes(q)||p.size.toLowerCase().includes(q)))&&(invCatFilter==='all'||p.category===invCatFilter));
+  if(sort==='name')list.sort((a,b)=>a.name.localeCompare(b.name));
+  else if(sort==='stock')list.sort((a,b)=>b.stock-a.stock);
+  else if(sort==='low')list.sort((a,b)=>(a.stock-a.box)-(b.stock-b.box));
+  const el=$('invList'),emp=$('invEmpty'),cnt=$('invCount');
+  if(cnt)cnt.textContent=list.length;
+  if(!list.length){el.innerHTML='';emp.style.display='block';return;}
+  emp.style.display='none';
+  el.innerHTML=list.map(p=>prodCard(p)).join('');
+}
+function prodCard(p){
+  const rem=p.stock-p.box,low=rem<5,pct=p.stock>0?Math.round(p.box/p.stock*100):0,ts=todayDispatched(p.id);
+  return `<div class="pc${low?' low':''}">
+    <div class="pc-top">
+      <div class="pc-emoji">${emoji(p.category)}</div>
+      <div class="pc-info">
+        <div class="pc-name">${p.name}</div>
+        <div class="pc-sub">${p.type} · ${p.size}${ts>0?` · <span style="color:var(--red);font-weight:700">🛒${ts} today</span>`:''}</div>
+        <div class="pc-cat">${p.category}</div>
+      </div>
+      <div class="pc-nums">
+        <div class="pn"><div class="pn-v s">${p.stock}</div><div class="pn-l">Stock</div></div>
+        <div class="pn"><div class="pn-v b">${p.box}</div><div class="pn-l">Box</div></div>
+        <div class="pn"><div class="pn-v ${low?'r':'a'}">${rem}</div><div class="pn-l">Left</div></div>
+      </div>
+    </div>
+    <div class="pc-actions">
+      <button class="pa pa-add" onclick="openAddStock(${p.id})"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Stock</button>
+      <button class="pa pa-box" onclick="openBox(${p.id})"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/></svg>Box</button>
+      <button class="pa pa-sell" onclick="openSell(${p.id})"><svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>Sell</button>
+      <button class="pa pa-edit" onclick="editProd(${p.id})"><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Edit</button>
+      <button class="pa pa-del" onclick="deleteProd(${p.id})"><svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/></svg>Del</button>
+    </div>
+    <div class="pc-foot">
+      <div class="prog"><div class="prog-b ${pct>60?'hi':'norm'}" style="width:${pct}%"></div></div>
+      <div class="prog-meta"><span>${pct}% boxed</span><span>${low?'⚠️ Low Stock':rem+' available'}</span></div>
+    </div>
+  </div>`;
+}
+
+/* ── PRODUCT CRUD ── */
+function openAddProduct(){
+  editProdId=null;$('mProdTitle').textContent='Add Product';
+  ['pName','pType','pSize'].forEach(id=>$(id).value='');
+  $('pCat').value='Idols';$('pStock').value='';$('pErr').style.display='none';
+  openModal('modal-product');
+}
+function editProd(id){
+  const p=products.find(x=>x.id===id);if(!p)return;
+  editProdId=id;$('mProdTitle').textContent='Edit Product';
+  $('pName').value=p.name;$('pCat').value=p.category;$('pType').value=p.type;$('pSize').value=p.size;$('pStock').value=p.stock;
+  $('pErr').style.display='none';openModal('modal-product');
+}
+function saveProd(){
+  const name=$('pName').value.trim(),cat=$('pCat').value;
+  const type=$('pType').value.trim()||'Standard',size=$('pSize').value.trim()||'Standard';
+  const stock=parseInt($('pStock').value)||0;
+  const err=$('pErr');
+  if(!name){err.textContent='Product का नाम जरूरी है।';err.style.display='block';return;}
+  err.style.display='none';
+  if(editProdId){
+    const p=products.find(x=>x.id===editProdId);
+    if(stock!==p.stock)logs.push({id:nextId(logs),type:'add',productId:p.id,productName:`${name} (${type}, ${size})`,qty:Math.abs(stock-p.stock),note:'Stock adjusted',time:Date.now()});
+    Object.assign(p,{name,category:cat,type,size,stock});
+    if(p.box>p.stock)p.box=p.stock;
+    toast('Product update हो गया!');
+  }else{
+    const id=nextId(products);
+    products.push({id,name,category:cat,type,size,stock,box:0});
+    if(stock>0)logs.push({id:nextId(logs),type:'add',productId:id,productName:`${name} (${type}, ${size})`,qty:stock,note:'Initial stock',time:Date.now()});
+    toast('Product add हो गया!');
+  }
+  closeModal('modal-product');buildInvChips();renderInventory();renderDash();
+}
+function deleteProd(id){
+  const p=products.find(x=>x.id===id);if(!p)return;
+  deleteProdId=id;$('delName').textContent=`"${p.name} (${p.type}, ${p.size})"`;
+  openModal('modal-delete');
+}
+function confirmDelete(){
+  products=products.filter(x=>x.id!==deleteProdId);
+  logs=logs.filter(l=>l.productId!==deleteProdId);
+  closeModal('modal-delete');buildInvChips();renderInventory();renderDash();
+  toast('Product delete हो गया।','info');
+}
+
+/* ── ADD STOCK ── */
+function openAddStock(id){
+  const p=products.find(x=>x.id===id);if(!p)return;curItemId=id;
+  $('addstockInfo').innerHTML=`<div class="ib-name">${p.name}</div><div class="ib-sub">${p.type} · ${p.size}</div><div class="ib-nums"><span class="ibn">Current: <b>${p.stock}</b></span></div>`;
+  $('addstockQty').value='';$('addstockErr').style.display='none';openModal('modal-addstock');
+}
+function submitAddStock(){
+  const p=products.find(x=>x.id===curItemId),qty=parseInt($('addstockQty').value)||0,err=$('addstockErr');
+  if(qty<=0){err.textContent='Valid quantity डालें।';err.style.display='block';return;}
+  err.style.display='none';p.stock+=qty;
+  logs.push({id:nextId(logs),type:'add',productId:p.id,productName:`${p.name} (${p.type}, ${p.size})`,qty,note:'Stock added',time:Date.now()});
+  closeModal('modal-addstock');renderInventory();renderDash();toast(`${qty} items add हुए!`,'info');
+}
+
+/* ── BOX ── */
+function openBox(id){
+  const p=products.find(x=>x.id===id);if(!p)return;curItemId=id;
+  $('boxInfo').innerHTML=`<div class="ib-name">${p.name}</div><div class="ib-sub">${p.type} · ${p.size}</div>
+    <div class="ib-nums"><span class="ibn">Stock: <b>${p.stock}</b></span><span class="ibn">Box: <b style="color:var(--leaf)">${p.box}</b></span><span class="ibn">Available: <b style="color:var(--amber)">${p.stock-p.box}</b></span></div>`;
+  $('boxQty').value='';$('boxErr').style.display='none';openModal('modal-box');
+}
+function submitBox(){
+  const p=products.find(x=>x.id===curItemId),qty=parseInt($('boxQty').value)||0,err=$('boxErr');
+  if(qty<=0){err.textContent='Valid quantity डालें।';err.style.display='block';return;}
+  if(qty>p.stock-p.box){err.textContent=`सिर्फ ${p.stock-p.box} available हैं।`;err.style.display='block';return;}
+  err.style.display='none';p.box+=qty;
+  logs.push({id:nextId(logs),type:'box',productId:p.id,productName:`${p.name} (${p.type}, ${p.size})`,qty,note:'Moved to box',time:Date.now()});
+  closeModal('modal-box');renderInventory();renderDash();toast(`${qty} items box में! 📦`);
+}
+
+/* ── SELL ── */
+function openSell(id){
+  const p=products.find(x=>x.id===id);if(!p)return;curItemId=id;
+  $('sellInfo').innerHTML=`<div class="ib-name">${p.name}</div><div class="ib-sub">${p.type} · ${p.size}</div>
+    <div class="ib-nums"><span class="ibn">Box Ready: <b style="color:var(--leaf)">${p.box}</b></span></div>`;
+  $('sellQty').value='';$('sellErr').style.display='none';openModal('modal-sell');
+}
+function submitSell(){
+  const p=products.find(x=>x.id===curItemId),qty=parseInt($('sellQty').value)||0;
+  const platform=$('sellPlatform').value,err=$('sellErr');
+  if(qty<=0){err.textContent='Valid quantity डालें।';err.style.display='block';return;}
+  if(qty>p.box){err.textContent=`सिर्फ ${p.box} box-ready items हैं।`;err.style.display='block';return;}
+  err.style.display='none';p.box-=qty;p.stock-=qty;
+  logs.push({id:nextId(logs),type:'sell',productId:p.id,productName:`${p.name} (${p.type}, ${p.size})`,qty,platform,time:Date.now()});
+  closeModal('modal-sell');renderInventory();renderDash();toast(`${qty} items ${platform} से dispatch! 🛒`);
+}
+
+/* ═══ KHATA ═══ */
+function setKF(f){
+  kFilter=f;
+  ['all','add','box','sell'].forEach(x=>{const el=$('kf-'+x);if(el)el.classList.toggle('active',x===f);});
+  renderKhata();
+}
+function renderKhata(){
+  const q=($('khSearch')?.value||'').toLowerCase();
+  const list=[...logs].filter(l=>(kFilter==='all'||l.type===kFilter)&&(!q||(l.productName.toLowerCase().includes(q)||(l.platform||'').toLowerCase().includes(q)))).reverse();
+  const feed=$('khataFeed');
+  if(!list.length){
+    feed.innerHTML='<div class="empty"><div class="empty-ico">📒</div><div class="empty-title">No Entries</div><div class="empty-desc">Stock add करें, box move करें या dispatch करें।</div></div>';
+    return;
+  }
+  const groups={};
+  list.forEach(l=>{const dk=fmtDate(l.time);if(!groups[dk])groups[dk]=[];groups[dk].push(l);});
+  feed.innerHTML=Object.entries(groups).map(([date,entries])=>`
+    <div class="kh-day">
+      <div class="kh-date-lbl">${date}</div>
+      <div class="card" style="padding:10px 14px">${entries.map(l=>khataEntry(l)).join('')}</div>
+    </div>`).join('');
+}
+function khataEntry(l){
+  let txt='',badge='',qc='',sign='';
+  if(l.type==='add'){txt=`<b>${l.productName}</b>${l.note?` — ${l.note}`:''}`;badge='<span class="kh-badge kb-add">STOCK</span>';qc='add';sign='+';}
+  else if(l.type==='box'){txt=`<b>${l.productName}</b> — Box में move${l.note?` (${l.note})`:''}`;badge='<span class="kh-badge kb-box">BOX</span>';qc='box';sign='📦';}
+  else{txt=`<b>${l.productName}</b> — ${l.platform||'Walk-in'} से dispatch`;badge='<span class="kh-badge kb-sell">SOLD</span>';qc='sell';sign='−';}
+  return `<div class="kh-entry">
+    <div class="kh-dot ${qc}"></div>
+    <div class="kh-body"><div class="kh-txt">${txt}${badge}</div><div class="kh-time">${fmtTime(l.time)}</div></div>
+    <div class="kh-qty ${qc}">${sign}${l.qty}</div>
+  </div>`;
+}
+
+/* ═══ RTO ═══ */
+function buildRTOChips(){
+  const s=['all','transit','delivered','pending','lost'];
+  const lb={all:'All',transit:'🚚 Transit',delivered:'✅ Delivered',pending:'⏳ Pending',lost:'❌ Lost'};
+  $('rtoChips').innerHTML=s.map(x=>`<div class="chip${rtoStatusFilter===x?' active':''}" onclick="setRTOFilter('${x}')">${lb[x]}</div>`).join('');
+}
+function setRTOFilter(s){rtoStatusFilter=s;buildRTOChips();renderRTO();}
+function renderRTO(){
+  const q=($('rtoSearch')?.value||'').toLowerCase();
+  const list=rtoRecords.filter(r=>(rtoStatusFilter==='all'||r.status===rtoStatusFilter)&&(!q||(r.product.toLowerCase().includes(q)||r.company.toLowerCase().includes(q)||r.orderId.toLowerCase().includes(q))));
+  $('rtoCount').textContent=list.length;
+  const el=$('rtoList'),emp=$('rtoEmpty');
+  if(!list.length){el.innerHTML='';emp.style.display='block';return;}
+  emp.style.display='none';
+  el.innerHTML=list.map(r=>rtoCard(r)).join('');
+}
+function rtoCard(r){
+  const sc=STATUS_CLASS[r.status]||'rs-pending',sl=STATUS_LABEL[r.status]||r.status;
+  const sd={not_filed:'🔘',filed:'🔵',approved:'✅',rejected:'❌'}[r.safet]||'🔘';
+  return `<div class="rto-card">
+    <div class="rto-top">
+      <div class="rto-name">${r.product}</div>
+      <div class="rto-meta">${r.company} · ${r.orderId}</div>
+      <div class="rto-status-badge ${sc}">${sl}</div>
+    </div>
+    <div class="rto-grid">
+      <div class="rg-item"><div class="rg-lbl">Return Date</div><div class="rg-val">${r.returnDate||'—'}</div></div>
+      <div class="rg-item"><div class="rg-lbl">Delivered</div><div class="rg-val">${r.delivDate||'—'}</div></div>
+      <div class="rg-item"><div class="rg-lbl">Tracking ID</div><div class="rg-val">${r.trackId||'—'}</div></div>
+      <div class="rg-item"><div class="rg-lbl">Safe-T Claim</div><div class="rg-val">${sd} ${SAFET_LABEL[r.safet]||'—'}</div></div>
+    </div>
+    ${r.remark?`<div class="rto-remark">💬 ${r.remark}</div>`:''}
+    <div class="rto-actions">
+      <button class="btn btn-a" style="font-size:12px;padding:9px" onclick="editRTO(${r.id})"><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Edit</button>
+      <button class="btn btn-d" style="font-size:12px;padding:9px" onclick="deleteRTO(${r.id})"><svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/></svg>Delete</button>
+    </div>
+  </div>`;
+}
+function openAddRTO(){
+  editRTOId=null;$('mRTOTitle').textContent='Add RTO Entry';
+  ['rtoProduct','rtoOrderId','rtoTrackId','rtoReturnDate','rtoDelivDate','rtoRemark'].forEach(id=>$(id).value='');
+  $('rtoCompany').value='Amazon';$('rtoStatus').value='transit';$('rtoSafet').value='not_filed';
+  $('rtoErr').style.display='none';openModal('modal-rto');
+}
+function editRTO(id){
+  const r=rtoRecords.find(x=>x.id===id);if(!r)return;
+  editRTOId=id;$('mRTOTitle').textContent='Edit RTO Entry';
+  $('rtoProduct').value=r.product;$('rtoCompany').value=r.company;$('rtoOrderId').value=r.orderId;
+  $('rtoTrackId').value=r.trackId;$('rtoReturnDate').value=r.returnDate;$('rtoDelivDate').value=r.delivDate;
+  $('rtoStatus').value=r.status;$('rtoSafet').value=r.safet;$('rtoRemark').value=r.remark;
+  $('rtoErr').style.display='none';openModal('modal-rto');
+}
+function saveRTO(){
+  const product=$('rtoProduct').value.trim(),err=$('rtoErr');
+  if(!product){err.textContent='Product का नाम जरूरी है।';err.style.display='block';return;}
+  err.style.display='none';
+  const data={product,company:$('rtoCompany').value,orderId:$('rtoOrderId').value.trim(),trackId:$('rtoTrackId').value.trim(),returnDate:$('rtoReturnDate').value,delivDate:$('rtoDelivDate').value,status:$('rtoStatus').value,safet:$('rtoSafet').value,remark:$('rtoRemark').value.trim()};
+  if(editRTOId){Object.assign(rtoRecords.find(x=>x.id===editRTOId),data);toast('RTO update हो गई!');}
+  else{rtoRecords.push({id:nextId(rtoRecords),...data});toast('RTO add हो गई!');}
+  closeModal('modal-rto');buildRTOChips();renderRTO();
+}
+function deleteRTO(id){deleteRTOId=id;openModal('modal-delrto');}
+function confirmDelRTO(){
+  rtoRecords=rtoRecords.filter(x=>x.id!==deleteRTOId);
+  closeModal('modal-delrto');buildRTOChips();renderRTO();toast('RTO delete हो गई।','info');
+}
+
+/* ═══ REPORT ═══ */
+function renderReport(){
+  $('repDate').textContent='As of '+new Date().toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});
+  const ts=todayDispatched();
+  const todayBox=logs.filter(l=>l.type==='box'&&new Date(l.time).toDateString()===new Date().toDateString()).reduce((s,l)=>s+l.qty,0);
+  const totalSold=logs.filter(l=>l.type==='sell').reduce((s,l)=>s+l.qty,0);
+  $('repGrid').innerHTML=`
+    <div class="rc"><div class="rc-v" style="color:var(--clay)">${products.length}</div><div class="rc-l">Products</div></div>
+    <div class="rc"><div class="rc-v" style="color:var(--bark)">${products.reduce((a,p)=>a+p.stock,0)}</div><div class="rc-l">Stock</div></div>
+    <div class="rc"><div class="rc-v" style="color:var(--leaf)">${products.reduce((a,p)=>a+p.box,0)}</div><div class="rc-l">Box</div></div>
+    <div class="rc"><div class="rc-v" style="color:var(--red)">${totalSold}</div><div class="rc-l">Total Sold</div></div>
+    <div class="rc"><div class="rc-v" style="color:var(--amber)">${products.filter(p=>(p.stock-p.box)<5).length}</div><div class="rc-l">Low Stock</div></div>
+    <div class="rc"><div class="rc-v" style="color:var(--blue)">${rtoRecords.length}</div><div class="rc-l">RTO</div></div>`;
+  $('repToday').innerHTML=`<div style="display:flex;flex-direction:column;gap:11px">
+    <div style="display:flex;justify-content:space-between;font-size:13px"><span style="color:var(--bark-lt)">Dispatched Today</span><span style="font-weight:800;color:var(--red);font-size:18px">${ts}</span></div>
+    <div style="height:1px;background:var(--border)"></div>
+    <div style="display:flex;justify-content:space-between;font-size:13px"><span style="color:var(--bark-lt)">Boxed Today</span><span style="font-weight:800;color:var(--leaf);font-size:18px">${todayBox}</span></div>
+    <div style="height:1px;background:var(--border)"></div>
+    <div style="display:flex;justify-content:space-between;font-size:13px"><span style="color:var(--bark-lt)">Total Khata Entries</span><span style="font-weight:800;color:var(--bark);font-size:18px">${logs.length}</span></div>
+  </div>`;
+  const top=[...products].sort((a,b)=>b.stock-a.stock).slice(0,5);
+  $('repTop').innerHTML=top.map((p,i)=>`<div class="top-row">
+    <div class="top-num">${i+1}</div>
+    <div style="flex:1"><div style="font-size:12.5px;font-weight:600;color:var(--bark)">${p.name}</div><div style="font-size:10px;color:var(--bark-lt)">${p.type} · ${p.size}</div></div>
+    <div style="text-align:right"><div style="font-size:17px;font-weight:800;font-family:var(--fd);color:var(--clay)">${p.stock}</div><div style="font-size:9.5px;color:var(--bark-lt)">${p.box} boxed</div></div>
+  </div>`).join('');
+  const cats={};
+  products.forEach(p=>{if(!cats[p.category])cats[p.category]={stock:0,box:0,count:0};cats[p.category].stock+=p.stock;cats[p.category].box+=p.box;cats[p.category].count++;});
+  $('repCats').innerHTML=Object.entries(cats).map(([cat,d])=>{
+    const pct=d.stock>0?Math.round(d.box/d.stock*100):0;
+    return `<div style="margin-bottom:13px">
+      <div style="display:flex;justify-content:space-between;margin-bottom:5px">
+        <span style="font-size:13px;font-weight:700;color:var(--bark)">${emoji(cat)} ${cat}</span>
+        <span style="font-size:10.5px;color:var(--bark-lt)">${d.count} products · ${d.stock} units</span>
+      </div>
+      <div class="prog"><div class="prog-b ${pct>60?'hi':'norm'}" style="width:${pct}%"></div></div>
+      <div class="prog-meta" style="margin-top:4px"><span>${d.box} boxed</span><span>${pct}%</span></div>
+    </div>`;
+  }).join('');
+}
+</script>
+</body>
+</html>
