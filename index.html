@@ -449,7 +449,7 @@ body{height:100%;overflow:hidden;background:var(--bg);font-family:'DM Sans',sans
   <div class="screen" id="screen-profile">
     <div class="prof-hero">
       <div class="prof-av">RK</div>
-      <div style="font-size:19px;font-weight:700;color:#fff;font-family:'Fraunces',serif;position:relative;z-index:1">Rohit Kumar</div>
+      <div style="font-size:19px;font-weight:700;color:#fff;font-family:'Fraunces',serif;position:relative;z-index:1">Kamal </div>
       <div style="font-size:11.5px;color:rgba(255,255,255,.6);margin-top:3px;position:relative;z-index:1">Inventory Manager · Jaipur</div>
       <div style="display:inline-block;margin-top:9px;padding:3px 14px;background:rgba(255,255,255,.2);border-radius:20px;font-size:11px;font-weight:700;color:#fff;position:relative;z-index:1">🏅 Admin</div>
     </div>
@@ -691,7 +691,7 @@ async function pushKhata(a) {
     action: 'addKhata',
     type: a.type, productId: a.productId||'',
     productName: a.productName, qty: a.qty,
-    user: a.user||'Rohit', note: a.note||''
+    user: a.user||'Kamal', note: a.note||''
   });
 }
 
@@ -744,7 +744,7 @@ function toast(msg, type='info', dur=2800) {
    INIT GREETING
 ══════════════════════════════════════════════════ */
 const _d=new Date(), _h=_d.getHours();
-$('dashGreet').textContent=(_h<12?'Namaste 🙏':_h<17?'Kem Cho ☀️':'Ram Ram 🌙')+', Rohit';
+$('dashGreet').textContent=(_h<12?'Namaste 🙏':_h<17?'Kem Cho ☀️':'Ram Ram 🌙')+', Kamal';
 $('dateLbl').textContent=_d.toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
 
 /* ══════════════════════════════════════════════════
@@ -880,7 +880,7 @@ async function saveProd(){
     products.push(p);
   }
 
-  const act={type:'add',productId:id,productName:name,qty:stock,user:'Rohit',time:Date.now(),note:editId?'edited':'added'};
+  const act={type:'add',productId:id,productName:name,qty:stock,user:'Kamal',time:Date.now(),note:editId?'edited':'added'};
   activities.push(act);
   saveLocal();
 
@@ -927,7 +927,7 @@ async function saveStockAdj(){
   if(val<p.packed){err.textContent=`Can't be less than box ready (${p.packed}).`;err.style.display='block';return;}
   err.style.display='none';
   const diff=val-p.total;
-  const act={type:'add',productId:p.id,productName:p.name,qty:Math.abs(diff),user:'Rohit',time:Date.now(),note:diff>=0?'stock added':'stock reduced'};
+  const act={type:'add',productId:p.id,productName:p.name,qty:Math.abs(diff),user:'Kamal',time:Date.now(),note:diff>=0?'stock added':'stock reduced'};
   activities.push(act);p.total=val;
   saveLocal();
   setSS('busy','Saving…');
@@ -964,7 +964,7 @@ async function submitQuick(){
   if(quickType==='sale'&&qty>p.packed){err.textContent=`Only ${p.packed} box items available.`;err.style.display='block';return;}
   err.style.display='none';
   if(quickType==='pack'){p.packed+=qty;}else{p.packed-=qty;p.total-=qty;}
-  const act={type:quickType,productId:p.id,productName:p.name,qty,user:'Rohit',time:Date.now()};
+  const act={type:quickType,productId:p.id,productName:p.name,qty,user:'Kamal',time:Date.now()};
   activities.push(act);
   saveLocal();
   setSS('busy','Saving…');
@@ -1005,7 +1005,7 @@ async function submitEntry(){
   if(entType==='sale'&&qty>p.packed){err.textContent=`Only ${p.packed} box items available.`;err.style.display='block';return;}
   err.style.display='none';
   if(entType==='pack'){p.packed+=qty;}else{p.packed-=qty;p.total-=qty;}
-  const act={type:entType,productId:p.id,productName:p.name,qty,user:'Rohit',time:Date.now()};
+  const act={type:entType,productId:p.id,productName:p.name,qty,user:'Kamal',time:Date.now()};
   activities.push(act);
   saveLocal();
   setSS('busy','Saving…');
@@ -1026,7 +1026,7 @@ function renderTodayLog(){
   if(!ta.length){el.innerHTML='<div style="font-size:12px;color:var(--bark-lt);text-align:center;padding:8px">No entries today</div>';return;}
   el.innerHTML=ta.map(a=>`<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--brd)">
     <div style="width:34px;height:34px;border-radius:50%;background:${a.type==='pack'?'var(--leaf-l)':'var(--red-l)'};display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:${a.type==='pack'?'var(--leaf)':'var(--red)'};">${(a.user||'R')[0]}</div>
-    <div style="flex:1;min-width:0"><div style="font-size:12.5px;font-weight:600;color:var(--bark)">${a.user||'Rohit'}</div><div style="font-size:10.5px;color:var(--bark-lt);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${a.productName} · ${fT(a.time)}</div></div>
+    <div style="flex:1;min-width:0"><div style="font-size:12.5px;font-weight:600;color:var(--bark)">${a.user||'Kamal'}</div><div style="font-size:10.5px;color:var(--bark-lt);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${a.productName} · ${fT(a.time)}</div></div>
     <div style="font-size:16px;font-weight:700;font-family:'Fraunces',serif;color:${a.type==='pack'?'var(--leaf)':'var(--red)'};">${a.type==='pack'?'+':'-'}${a.qty}</div>
   </div>`).join('');
 }
@@ -1051,7 +1051,7 @@ function renderKhata(){
     const label=new Date(date).toDateString()===new Date().toDateString()?'Today':new Date(date).toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long'});
     html+=`<div class="kh-day">${label}</div>`;
     entries.forEach(a=>{
-      html+=`<div class="kh-entry"><div class="kh-dot" style="background:${colors[a.type]||'var(--clay)'}"></div><div style="flex:1;min-width:0"><div class="kh-type" style="background:${tbg[a.type]};color:${colors[a.type]}">${tlbl[a.type]||a.type}</div><div class="kh-product">${a.productName}</div><div class="kh-detail">${a.user||'Rohit'} · ${fT(a.time)}${a.note?' · '+a.note:''}</div></div><div class="kh-qty" style="color:${colors[a.type]||'var(--clay)'}">${a.type==='sale'?'-':'+'}${a.qty}</div></div>`;
+      html+=`<div class="kh-entry"><div class="kh-dot" style="background:${colors[a.type]||'var(--clay)'}"></div><div style="flex:1;min-width:0"><div class="kh-type" style="background:${tbg[a.type]};color:${colors[a.type]}">${tlbl[a.type]||a.type}</div><div class="kh-product">${a.productName}</div><div class="kh-detail">${a.user||'Kamal'} · ${fT(a.time)}${a.note?' · '+a.note:''}</div></div><div class="kh-qty" style="color:${colors[a.type]||'var(--clay)'}">${a.type==='sale'?'-':'+'}${a.qty}</div></div>`;
     });
   });
   feed.innerHTML=html;
@@ -1129,9 +1129,9 @@ async function deleteRTO(){
 function tlItem(a,i,total){
   const isLast=i===total-1;
   let txt='',dc='add';
-  if(a.type==='pack'){dc='pack';txt=`<b>${a.user||'Rohit'}</b> moved <b>${a.qty}</b> to box — ${a.productName}`;}
-  else if(a.type==='sale'){dc='sold';txt=`<b>${a.user||'Rohit'}</b> dispatched <b>${a.qty}</b> — ${a.productName}`;}
-  else{txt=`<b>${a.user||'Rohit'}</b> ${a.note||'added stock'} — ${a.productName} (${a.qty})`;}
+  if(a.type==='pack'){dc='pack';txt=`<b>${a.user||'Kamal'}</b> moved <b>${a.qty}</b> to box — ${a.productName}`;}
+  else if(a.type==='sale'){dc='sold';txt=`<b>${a.user||'Kamal'}</b> dispatched <b>${a.qty}</b> — ${a.productName}`;}
+  else{txt=`<b>${a.user||'Kamal'}</b> ${a.note||'added stock'} — ${a.productName} (${a.qty})`;}
   const tag=a.type==='sale'?'<span class="tl-tag sold">DISPATCH</span>':a.type==='pack'?'<span class="tl-tag pack">BOX</span>':'<span class="tl-tag add">STOCK</span>';
   return `<div class="tl-item">${!isLast?'<div class="tl-line"></div>':''}
     <div class="tl-dot ${dc}"></div>
