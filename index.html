@@ -1,491 +1,406 @@
+
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 <title>Handicraft Bazaar</title>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 :root{
   --hdr:60px;--nav:68px;
   --clay:#B85C2A;--clay-l:#F2E4D8;--clay-d:#8A3D18;--clay-xl:#FDF6F0;
   --leaf:#1E7A4A;--leaf-l:#DCF2E8;--leaf-d:#145235;
-  --amber:#B8720A;--amber-l:#FEF0C0;
+  --amber:#B8720A;--amber-l:#FEF0C0;--amber-d:#7A4A05;
   --red:#C02828;--red-l:#FDEAEA;--red-d:#8C1F1F;
-  --blue:#1A5FAD;--blue-l:#DAEAF8;
+  --blue:#1A5FAD;--blue-l:#DAEAF8;--blue-d:#0E3D72;
   --bark:#221A12;--bark-lt:#9A8878;
-  --bg:#F8F4EE;--surf:#FFF;--surf2:#FDFAF6;--surf3:#F0EAE0;
-  --brd:#E6D8C8;
+  --bg:#F8F4EE;--surf:#FFF;--surf2:#FDFAF6;--surf3:#F0EAE0;--brd:#E6D8C8;
   --sh:0 1px 6px rgba(34,26,18,.06),0 3px 16px rgba(34,26,18,.05);
-  --sh-md:0 4px 20px rgba(34,26,18,.10);
+  --sh-md:0 4px 24px rgba(34,26,18,.12);
+  --r:14px;--rl:20px;--rs:9px;
 }
 [data-theme="dark"]{
   --bg:#181210;--surf:#231A14;--surf2:#2A2018;--surf3:#332820;--brd:#3C2E22;
   --bark:#F0E8DC;--bark-lt:#6A5848;
   --clay:#D07040;--clay-l:#3A2018;--clay-d:#E89060;--clay-xl:#2C180E;
   --leaf:#30B060;--leaf-l:#142814;--leaf-d:#50C88A;
-  --amber:#D09020;--amber-l:#2C2008;
+  --amber:#D09020;--amber-l:#2C2008;--amber-d:#F0B040;
   --red:#E04040;--red-l:#2C1010;--red-d:#F06060;
-  --blue:#4A90D8;--blue-l:#101C30;
+  --blue:#4A90D8;--blue-l:#101C30;--blue-d:#8AB8F0;
   --sh:0 1px 6px rgba(0,0,0,.25),0 3px 16px rgba(0,0,0,.2);
-  --sh-md:0 4px 20px rgba(0,0,0,.35);
+  --sh-md:0 4px 24px rgba(0,0,0,.38);
 }
-
-/* ── BASE ── */
-html{height:100%;overflow:hidden}
-body{height:100%;overflow:hidden;background:var(--bg);font-family:'DM Sans',sans-serif;color:var(--bark);display:flex;flex-direction:column;transition:background .3s,color .3s}
-
-/* ── HEADER ── */
-.hdr{flex:0 0 var(--hdr);height:var(--hdr);background:var(--surf);border-bottom:1px solid var(--brd);display:flex;align-items:center;justify-content:space-between;padding:0 14px;box-shadow:0 1px 10px rgba(34,26,18,.07);z-index:50;transition:background .3s,border-color .3s}
-.logo-wrap{display:flex;align-items:center;gap:9px;min-width:0}
-.logo-box{width:34px;height:34px;background:linear-gradient(135deg,var(--clay),var(--clay-d));border-radius:10px;flex-shrink:0;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 8px rgba(184,92,42,.35)}
-.logo-box svg{width:17px;height:17px}
-.brand{font-family:'Fraunces',serif;font-size:14.5px;font-weight:700;color:var(--bark);line-height:1.1;letter-spacing:-.3px}
-.brand-s{font-size:8.5px;color:var(--bark-lt);letter-spacing:.8px;text-transform:uppercase}
+html,body{height:100%;overflow:hidden}
+body{background:var(--bg);font-family:"DM Sans",sans-serif;color:var(--bark);display:flex;flex-direction:column;transition:background .3s,color .3s}
+.hdr{flex:0 0 var(--hdr);height:var(--hdr);background:var(--surf);border-bottom:1px solid var(--brd);display:flex;align-items:center;padding:0 14px;z-index:60;gap:8px}
+.logo-wrap{display:flex;align-items:center;gap:9px;min-width:0;flex:1}
+.logo-box{width:36px;height:36px;background:linear-gradient(135deg,var(--clay),var(--clay-d));border-radius:11px;flex-shrink:0;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(184,92,42,.3)}
+.logo-box svg{width:18px;height:18px}
+.brand{font-family:"Fraunces",serif;font-size:14.5px;font-weight:700;color:var(--bark);line-height:1.1}
+.brand-s{font-size:8px;color:var(--bark-lt);letter-spacing:.9px;text-transform:uppercase}
 .hdr-r{display:flex;align-items:center;gap:5px;flex-shrink:0}
-.hdr-btn{width:32px;height:32px;border-radius:50%;background:var(--clay-l);border:none;display:flex;align-items:center;justify-content:center;font-size:13px;cursor:pointer;transition:transform .15s;flex-shrink:0}
+.hdr-btn{width:34px;height:34px;border-radius:50%;background:var(--clay-l);border:none;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;transition:transform .15s;color:var(--bark)}
 .hdr-btn:active{transform:scale(.85)}
-
-/* ── SYNC PILL ── */
-.sync-pill{display:flex;align-items:center;gap:4px;padding:4px 9px;border-radius:20px;font-size:10px;font-weight:700;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;white-space:nowrap;flex-shrink:0}
-.sync-pill.ok{background:var(--leaf-l);color:var(--leaf)}
-.sync-pill.busy{background:var(--amber-l);color:var(--amber)}
-.sync-pill.err{background:var(--red-l);color:var(--red)}
+.alert-bell{position:relative}
+.bell-badge{position:absolute;top:-3px;right:-3px;min-width:16px;height:16px;background:var(--red);border-radius:8px;border:2px solid var(--surf);font-size:9px;font-weight:800;color:#fff;display:flex;align-items:center;justify-content:center;padding:0 3px;pointer-events:none}
+.sync-pill{display:flex;align-items:center;gap:4px;padding:4px 9px;border-radius:20px;font-size:10px;font-weight:700;border:none;cursor:pointer;font-family:"DM Sans",sans-serif;transition:all .2s;white-space:nowrap;flex-shrink:0}
+.sync-pill.ok{background:var(--leaf-l);color:var(--leaf)}.sync-pill.busy{background:var(--amber-l);color:var(--amber)}.sync-pill.err{background:var(--red-l);color:var(--red)}
 .sdot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
 .sdot.ok{background:var(--leaf)}.sdot.busy{background:var(--amber);animation:blink 1s infinite}.sdot.err{background:var(--red)}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
-
-/* ── SCROLL ── */
-.scroll-wrap{flex:1 1 0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch}
-.scroll-wrap::-webkit-scrollbar{width:0}
-
-/* ── SCREENS ── */
-.screen{display:none;padding:14px 0 24px;animation:fadeUp .2s ease}.screen.active{display:block}
-@keyframes fadeUp{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
-
-/* ── BOTTOM NAV ── */
-.nav{flex:0 0 var(--nav);height:var(--nav);background:var(--surf);border-top:1px solid var(--brd);display:flex;align-items:flex-start;padding:7px 2px 0;box-shadow:0 -1px 10px rgba(34,26,18,.07);z-index:50;transition:background .3s,border-color .3s}
+.scroll-wrap{flex:1 1 0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.scroll-wrap::-webkit-scrollbar{display:none}
+.screen{display:none;padding:14px 0 90px;animation:fadeUp .22s ease}.screen.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.nav{flex:0 0 var(--nav);height:var(--nav);background:var(--surf);border-top:1px solid var(--brd);display:flex;align-items:flex-start;padding:7px 2px 0;z-index:60}
 .ni{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 2px;cursor:pointer;border-radius:12px;transition:all .18s;border:none;background:none;min-width:0}
 .ni-ico{width:22px;height:22px;display:flex;align-items:center;justify-content:center}
 .ni-ico svg{width:20px;height:20px;stroke:var(--bark-lt);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;transition:stroke .18s}
 .ni-lbl{font-size:9px;color:var(--bark-lt);font-weight:600;white-space:nowrap}
 .ni.active{background:var(--clay-l)}.ni.active .ni-ico svg{stroke:var(--clay)}.ni.active .ni-lbl{color:var(--clay);font-weight:700}
-
-/* ── FAB ── FIXED POSITION */
-.fab{
-  position:fixed;
-  /* Nav height + spacing */
-  bottom:calc(var(--nav) + 12px);
-  right:16px;
-  width:50px;height:50px;
-  border-radius:50%;
-  background:linear-gradient(135deg,var(--clay),var(--clay-d));
-  box-shadow:0 4px 18px rgba(184,92,42,.5);
-  border:none;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-  z-index:49; /* below nav z-index but above content */
-  transition:transform .18s,box-shadow .18s;
-}
-.fab:active{transform:scale(.88);box-shadow:0 2px 8px rgba(184,92,42,.4)}
-.fab svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
-
-/* ── TOAST ── */
+.fab{position:fixed;bottom:calc(var(--nav)+14px);right:16px;width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--clay),var(--clay-d));border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:55;box-shadow:0 4px 18px rgba(184,92,42,.45);transition:transform .18s}
+.fab:active{transform:scale(.88)}
+.fab svg{width:21px;height:21px;stroke:#fff;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
 .toast-wrap{position:fixed;top:calc(var(--hdr)+8px);left:50%;transform:translateX(-50%);z-index:200;display:flex;flex-direction:column;gap:7px;pointer-events:none;width:calc(100% - 28px);max-width:360px}
-.toast{background:var(--bark);color:#fff;padding:11px 15px;border-radius:13px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:9px;box-shadow:var(--sh-md);animation:tIn .26s cubic-bezier(.34,1.56,.64,1);pointer-events:auto}
+.toast{background:var(--bark);color:#fff;padding:11px 15px;border-radius:14px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:9px;box-shadow:var(--sh-md);animation:tIn .26s cubic-bezier(.34,1.56,.64,1);pointer-events:auto}
 .toast.ok{background:var(--leaf)}.toast.err{background:var(--red)}.toast.info{background:var(--clay)}.toast.warn{background:var(--amber)}
-@keyframes tIn{from{opacity:0;transform:translateY(-12px) scale(.94)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes tIn{from{opacity:0;transform:translateY(-12px) scale(.94)}to{opacity:1;transform:none}}
 .toast-out{animation:tOut .2s ease forwards}
 @keyframes tOut{to{opacity:0;transform:translateY(-8px) scale(.96)}}
-
-/* ── CARDS ── */
-.card{background:var(--surf);border-radius:18px;padding:15px;box-shadow:var(--sh);border:1px solid var(--brd);margin-bottom:11px;transition:background .3s,border-color .3s}
-.px{padding-left:15px;padding-right:15px}
-.sec-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
-.sec-title{font-size:10px;font-weight:700;color:var(--bark-lt);text-transform:uppercase;letter-spacing:1px}
-.sec-link{font-size:11.5px;font-weight:700;color:var(--clay);cursor:pointer}
-
-/* ── STAT GRID ── */
-.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;padding:0 15px;margin-bottom:13px}
-.sc{background:var(--surf);border-radius:18px;padding:14px;border:1px solid var(--brd);box-shadow:var(--sh);transition:background .3s}
-.sc-ico{width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;margin-bottom:9px}
-.sc-ico svg{width:13px;height:13px;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;fill:none}
-.ic-clay{background:var(--clay-l)}.ic-clay svg{stroke:var(--clay)}.ic-leaf{background:var(--leaf-l)}.ic-leaf svg{stroke:var(--leaf)}.ic-amb{background:var(--amber-l)}.ic-amb svg{stroke:var(--amber)}.ic-red{background:var(--red-l)}.ic-red svg{stroke:var(--red)}
-.sc-val{font-size:28px;font-weight:700;font-family:'Fraunces',serif;color:var(--bark);line-height:1}
-.sc-lbl{font-size:10px;color:var(--bark-lt);margin-top:3px;font-weight:500}
-
-/* ── SOLD BANNER ── */
-.sold-banner{margin:0 15px 13px;background:linear-gradient(135deg,var(--clay),var(--clay-d));border-radius:18px;padding:15px 18px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 5px 18px rgba(184,92,42,.26)}
-.sold-label{font-size:10.5px;font-weight:700;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:.7px}
-.sold-sub{font-size:10px;color:rgba(255,255,255,.5);margin-top:2px}
-.sold-num{font-size:40px;font-weight:700;font-family:'Fraunces',serif;color:#fff;line-height:1}
-
-/* ── SEARCH ── */
-.srch-box{display:flex;align-items:center;gap:8px;background:var(--surf);border:1.5px solid var(--brd);border-radius:13px;padding:10px 13px;margin:0 15px 11px;transition:border-color .2s,box-shadow .2s}
+/* COMMON */
+.card{background:var(--surf);border-radius:var(--rl);padding:15px;box-shadow:var(--sh);border:1px solid var(--brd);margin-bottom:11px}
+.dvd{height:1px;background:var(--brd);margin:9px 0}
+.count-badge{display:inline-flex;align-items:center;justify-content:center;min-width:19px;height:19px;padding:0 5px;border-radius:10px;background:var(--clay);color:#fff;font-size:9.5px;font-weight:700;margin-left:5px}
+.sec-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;padding:0 15px}
+.sec-title{font-size:10px;font-weight:700;color:var(--bark-lt);text-transform:uppercase;letter-spacing:1px;margin:0}
+.sec-link{font-size:11.5px;font-weight:700;color:var(--clay);cursor:pointer;border:none;background:none;font-family:"DM Sans",sans-serif}
+.srch-box{display:flex;align-items:center;gap:8px;background:var(--surf);border:1.5px solid var(--brd);border-radius:var(--r);padding:10px 13px;margin:0 15px 11px;transition:border-color .2s,box-shadow .2s}
 .srch-box:focus-within{border-color:var(--clay);box-shadow:0 0 0 3px var(--clay-l)}
 .srch-box svg{width:14px;height:14px;stroke:var(--bark-lt);fill:none;stroke-width:2;stroke-linecap:round;flex-shrink:0}
-.srch-box input{border:none;background:none;font-family:'DM Sans',sans-serif;font-size:13.5px;color:var(--bark);outline:none;width:100%}
+.srch-box input{border:none;background:none;font-family:"DM Sans",sans-serif;font-size:13.5px;color:var(--bark);outline:none;width:100%}
 .srch-box input::placeholder{color:var(--bark-lt)}
-
-/* ── CHIPS ── */
-.chips{display:flex;gap:6px;overflow-x:auto;padding:0 15px 3px;margin-bottom:11px;scrollbar-width:none}.chips::-webkit-scrollbar{display:none}
-.chip{flex-shrink:0;padding:5px 13px;border-radius:20px;font-size:11px;font-weight:600;cursor:pointer;border:1.5px solid var(--brd);background:var(--surf);color:var(--bark-lt);transition:all .17s;white-space:nowrap}
-.chip.active{background:var(--clay);color:#fff;border-color:var(--clay);box-shadow:0 2px 7px rgba(184,92,42,.27)}
-
-/* ── SORT ── */
-.sort-bar{display:flex;align-items:center;justify-content:space-between;padding:0 15px;margin-bottom:11px}
-.sort-sel{font-size:11.5px;font-weight:700;color:var(--clay);border:none;background:none;font-family:'DM Sans',sans-serif;cursor:pointer;outline:none}
-
-/* ── PRODUCT CARD ── */
-.pc{background:var(--surf);border-radius:18px;padding:14px 15px;border:1px solid var(--brd);box-shadow:var(--sh);margin-bottom:10px;cursor:pointer;transition:transform .12s;position:relative}
-.pc:active{transform:scale(.982)}.pc.low{border-left:4px solid var(--red)}
-.pc-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px}
-.pc-emoji{width:40px;height:40px;border-radius:12px;background:var(--clay-xl);display:flex;align-items:center;justify-content:center;font-size:21px;flex-shrink:0}
-.pc-cat{display:inline-block;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;background:var(--clay-l);color:var(--clay-d);text-transform:uppercase;letter-spacing:.4px}
-.pc-name{font-size:14px;font-weight:700;color:var(--bark);margin-top:3px;font-family:'Fraunces',serif;line-height:1.3}
-.pc-size{font-size:11px;color:var(--bark-lt);margin-top:2px}
-.stock-row{display:grid;grid-template-columns:1fr 1fr 1fr;border:1px solid var(--brd);border-radius:10px;overflow:hidden;margin-bottom:9px}
-.sk{padding:8px 4px;text-align:center;border-right:1px solid var(--brd)}.sk:last-child{border-right:none}
-.sk-val{font-size:16px;font-weight:700;font-family:'Fraunces',serif;color:var(--bark)}.sk-val.g{color:var(--leaf)}.sk-val.a{color:var(--amber)}.sk-val.r{color:var(--red)}
-.sk-key{font-size:9px;color:var(--bark-lt);text-transform:uppercase;letter-spacing:.4px;margin-top:1px;font-weight:700}
-.prog{height:5px;background:var(--surf3);border-radius:5px;overflow:hidden}
-.prog-b{height:100%;border-radius:5px;background:linear-gradient(90deg,#f4b48a,var(--clay));transition:width .6s cubic-bezier(.34,1.56,.64,1)}
-.prog-b.hi{background:linear-gradient(90deg,#80d4a0,var(--leaf))}
+.cat-tabs{display:flex;overflow-x:auto;padding:0 15px;margin-bottom:0;border-bottom:1.5px solid var(--brd);scrollbar-width:none}
+.cat-tabs::-webkit-scrollbar{display:none}
+.cat-tab{flex-shrink:0;padding:9px 15px;font-size:11.5px;font-weight:700;cursor:pointer;border:none;background:none;color:var(--bark-lt);font-family:"DM Sans",sans-serif;border-bottom:2.5px solid transparent;transition:all .18s;white-space:nowrap;margin-bottom:-1.5px}
+.cat-tab.active{color:var(--clay);border-bottom-color:var(--clay)}
+.filter-row{display:flex;gap:7px;overflow-x:auto;padding:11px 15px;scrollbar-width:none}
+.filter-row::-webkit-scrollbar{display:none}
+.fchip{flex-shrink:0;display:flex;align-items:center;gap:5px;padding:5px 11px;border-radius:20px;font-size:10.5px;font-weight:600;cursor:pointer;border:1.5px solid var(--brd);background:var(--surf);color:var(--bark-lt);transition:all .17s;white-space:nowrap}
+.fchip.active{background:var(--clay);color:#fff;border-color:var(--clay)}
+.fchip-low{border-color:rgba(192,40,40,.4);color:var(--red)}
+.fchip-low.active{background:var(--red);border-color:var(--red);color:#fff}
+/* STAT GRID */
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;padding:0 15px;margin-bottom:13px}
+.sc{background:var(--surf);border-radius:var(--rl);padding:14px;border:1px solid var(--brd);box-shadow:var(--sh)}
+.sc-ico{width:32px;height:32px;border-radius:9px;display:flex;align-items:center;justify-content:center;margin-bottom:9px}
+.sc-ico svg{width:14px;height:14px;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;fill:none}
+.ic-clay{background:var(--clay-l)}.ic-clay svg{stroke:var(--clay)}
+.ic-leaf{background:var(--leaf-l)}.ic-leaf svg{stroke:var(--leaf)}
+.ic-amb{background:var(--amber-l)}.ic-amb svg{stroke:var(--amber)}
+.ic-red{background:var(--red-l)}.ic-red svg{stroke:var(--red)}
+.sc-val{font-size:30px;font-weight:700;font-family:"Fraunces",serif;color:var(--bark);line-height:1}
+.sc-lbl{font-size:10px;color:var(--bark-lt);margin-top:3px;font-weight:500}
+.sold-banner{margin:0 15px 13px;background:linear-gradient(135deg,var(--clay),var(--clay-d));border-radius:var(--rl);padding:16px 18px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 4px 16px rgba(184,92,42,.25)}
+.sold-label{font-size:10.5px;font-weight:700;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:.7px}
+.sold-sub{font-size:10px;color:rgba(255,255,255,.5);margin-top:2px}
+.sold-num{font-size:44px;font-weight:700;font-family:"Fraunces",serif;color:#fff;line-height:1}
+/* CAT STOCK */
+.cat-stock-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;padding:0 15px;margin-bottom:13px}
+.cs-card{background:var(--surf);border-radius:var(--rl);padding:13px;border:1px solid var(--brd);box-shadow:var(--sh);cursor:pointer;transition:transform .15s}
+.cs-card:active{transform:scale(.97)}
+.cs-top{display:flex;align-items:center;gap:9px;margin-bottom:8px}
+.cs-emoji{width:38px;height:38px;background:var(--clay-xl);border-radius:var(--rs);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;border:1px solid var(--brd)}
+.cs-name{font-size:10.5px;font-weight:700;color:var(--bark-lt);text-transform:uppercase;letter-spacing:.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cs-num{font-size:26px;font-weight:700;font-family:"Fraunces",serif;color:var(--bark);line-height:1}
+.cs-bar{height:4px;background:var(--surf3);border-radius:4px;overflow:hidden;margin-top:7px}
+.cs-bar-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,#f4b48a,var(--clay))}
+.cs-sub{font-size:9.5px;color:var(--bark-lt);margin-top:4px}
+/* PRODUCT CARD — expandable */
+.pcard{background:var(--surf);border-radius:var(--rl);border:1px solid var(--brd);box-shadow:var(--sh);margin-bottom:11px;overflow:hidden;transition:box-shadow .2s}
+.pcard.expanded{box-shadow:var(--sh-md)}
+.pcard-head{display:flex;align-items:center;gap:12px;padding:15px;cursor:pointer;user-select:none;transition:background .15s}
+.pcard-head:active{background:var(--surf2)}
+.pcard-emoji{width:50px;height:50px;border-radius:var(--r);background:var(--clay-xl);display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;border:1px solid var(--brd)}
+.pcard-info{flex:1;min-width:0}
+.pcard-cat{font-size:9px;font-weight:700;color:var(--clay-d);background:var(--clay-l);padding:2px 8px;border-radius:20px;display:inline-block;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.pcard-name{font-size:15px;font-weight:700;color:var(--bark);font-family:"Fraunces",serif;line-height:1.2}
+.pcard-meta{font-size:10.5px;color:var(--bark-lt);margin-top:3px}
+.pcard-right{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0}
+.pcard-stock{font-size:26px;font-weight:700;font-family:"Fraunces",serif;color:var(--bark);line-height:1}
+.pcard-stlbl{font-size:9px;color:var(--bark-lt)}
+.expand-ico{width:22px;height:22px;border-radius:50%;background:var(--surf3);display:flex;align-items:center;justify-content:center;transition:transform .28s,background .2s}
+.expand-ico svg{width:12px;height:12px;stroke:var(--bark-lt);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.pcard.expanded .expand-ico{transform:rotate(180deg);background:var(--clay-l)}
+.pcard.expanded .expand-ico svg{stroke:var(--clay)}
+.var-wrap{display:none;border-top:1px solid var(--brd);background:var(--surf2)}
+.pcard.expanded .var-wrap{display:block}
+/* VARIANT CARD — card style matching photo */
+.vcard{margin:10px 14px;background:var(--surf);border-radius:var(--r);border:1px solid var(--brd);overflow:hidden;box-shadow:var(--sh);cursor:pointer;transition:box-shadow .18s}
+.vcard:last-child{margin-bottom:14px}
+.vcard:hover{box-shadow:var(--sh-md)}
+.vcard.low-stock{border-left:3px solid var(--red)}
+/* Category label on variant */
+.vcard-type{font-size:9px;font-weight:800;padding:5px 14px;background:var(--clay-l);color:var(--clay-d);text-transform:uppercase;letter-spacing:.6px;border-bottom:1px solid var(--brd);display:flex;align-items:center;justify-content:space-between}
+.vcard-type-badge{display:inline-flex;align-items:center;gap:5px}
+.vcard-body{padding:13px 15px}
+/* Variant name — big and clear */
+.vcard-name{font-size:17px;font-weight:700;color:var(--bark);font-family:"Fraunces",serif;line-height:1.2}
+.vcard-size{font-size:10.5px;color:var(--bark-lt);margin-top:2px}
+.vcard-today{font-size:10px;font-weight:700;color:var(--red);margin-top:2px}
+/* Stock grid — matching second photo */
+.vcard-stats{display:grid;grid-template-columns:1fr 1fr 1fr;border:1px solid var(--brd);border-radius:10px;overflow:hidden;margin:11px 0 10px}
+.vs-cell{padding:10px 5px;text-align:center}
+.vs-cell+.vs-cell{border-left:1px solid var(--brd)}
+.vs-num{font-size:22px;font-weight:700;font-family:"Fraunces",serif;line-height:1}
+.vs-lbl{font-size:9px;font-weight:700;color:var(--bark-lt);text-transform:uppercase;letter-spacing:.5px;margin-top:3px}
+.vs-stock{color:var(--bark)}
+.vs-box{color:var(--leaf)}
+.vs-left{color:var(--amber)}
+.vs-left.warn{color:var(--amber)}.vs-left.crit{color:var(--red)}
+/* Progress bar */
+.vcard-prog{margin-bottom:10px}
+.prog-bar{height:5px;background:var(--surf3);border-radius:5px;overflow:hidden}
+.prog-fill{height:100%;border-radius:5px;background:linear-gradient(90deg,#f4b48a,var(--clay));transition:width .5s}
+.prog-fill.hi{background:linear-gradient(90deg,#80d4a0,var(--leaf))}
 .prog-meta{display:flex;justify-content:space-between;font-size:10px;color:var(--bark-lt);margin-top:3px}
-
-/* ── DETAIL HERO ── */
-.det-hero{background:linear-gradient(140deg,var(--clay),var(--clay-d));padding:18px 15px 26px;position:relative;overflow:hidden}
-.det-hero::before{content:'';position:absolute;top:-70px;right:-50px;width:190px;height:190px;background:rgba(255,255,255,.07);border-radius:50%}
-.det-name{font-size:20px;font-weight:700;color:#fff;font-family:'Fraunces',serif;line-height:1.25;position:relative;z-index:1}
-.det-sub{font-size:11px;color:rgba(255,255,255,.6);text-transform:uppercase;letter-spacing:.8px;margin-top:3px;position:relative;z-index:1}
-.back-btn{background:rgba(255,255,255,.2);border:none;border-radius:9px;padding:6px 11px;color:#fff;font-family:'DM Sans',sans-serif;font-weight:700;font-size:11.5px;cursor:pointer;display:inline-flex;align-items:center;gap:4px}
-.back-btn svg{width:11px;height:11px;stroke:#fff;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
-.sbd{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--brd);border-radius:18px;overflow:hidden;margin:0 15px 15px;margin-top:-13px;box-shadow:var(--sh)}
-.sbd-i{background:var(--surf);padding:13px 8px;text-align:center;transition:background .3s}
-.sbd-n{font-size:24px;font-weight:700;font-family:'Fraunces',serif}.sbd-n.t{color:var(--bark)}.sbd-n.p{color:var(--leaf)}.sbd-n.r{color:var(--amber)}
-.sbd-l{font-size:9px;color:var(--bark-lt);text-transform:uppercase;letter-spacing:.6px;font-weight:700;margin-top:2px}
-
-/* ── ACTION ROW ── */
-.act-row{display:flex;gap:7px;margin-bottom:15px}
-.act-b{flex:1;padding:11px 5px;border-radius:11px;border:1.5px solid transparent;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:700;font-size:11px;display:flex;align-items:center;justify-content:center;gap:4px;transition:transform .13s}
-.act-b svg{width:12px;height:12px;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round;fill:none}
-.act-b:active{transform:scale(.9)}
-.ab-pack{background:var(--leaf-l);color:var(--leaf);border-color:rgba(30,122,74,.2)}.ab-pack svg{stroke:var(--leaf)}
-.ab-sale{background:var(--red-l);color:var(--red);border-color:rgba(192,40,40,.2)}.ab-sale svg{stroke:var(--red)}
-.ab-add{background:var(--amber-l);color:var(--amber);border-color:rgba(184,114,10,.2)}.ab-add svg{stroke:var(--amber)}
-
-/* ── TOGGLE ── */
-.tg-grp{display:flex;background:var(--surf3);border-radius:11px;padding:3px;gap:2px;margin-bottom:13px}
-.tg-opt{flex:1;padding:8px 4px;text-align:center;border-radius:9px;font-size:11.5px;font-weight:600;cursor:pointer;transition:all .17s;color:var(--bark-lt);border:none;background:none;font-family:'DM Sans',sans-serif;white-space:nowrap}
-.tg-opt.active{background:var(--surf);color:var(--bark);box-shadow:var(--sh)}
-.tg-opt.active.sale{color:var(--red)}.tg-opt.active.pack{color:var(--leaf)}
-
-/* ── TIMELINE ── */
-.tl-item{display:flex;gap:10px;padding:8px 0;position:relative}
-.tl-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:5px}
-.tl-dot.sold{background:var(--red)}.tl-dot.pack{background:var(--leaf)}.tl-dot.add{background:var(--clay)}
-.tl-line{position:absolute;left:3px;top:16px;bottom:-4px;width:2px;background:var(--brd)}
-.tl-text{font-size:12px;color:var(--bark);line-height:1.5}
-.tl-time{font-size:10px;color:var(--bark-lt);margin-top:2px}
-.tl-tag{display:inline-block;font-size:9px;padding:2px 6px;border-radius:20px;font-weight:700;margin-left:4px;vertical-align:middle}
-.tl-tag.sold{background:var(--red-l);color:var(--red)}.tl-tag.pack{background:var(--leaf-l);color:var(--leaf)}.tl-tag.add{background:var(--clay-l);color:var(--clay-d)}
-
-/* ── FORMS ── */
-.ff{margin-bottom:13px}
-.fl{font-size:10px;font-weight:700;color:var(--bark-lt);text-transform:uppercase;letter-spacing:.7px;margin-bottom:5px;display:block}
-.fi{width:100%;padding:11px 13px;border:1.5px solid var(--brd);border-radius:11px;font-family:'DM Sans',sans-serif;font-size:13.5px;color:var(--bark);background:var(--surf2);outline:none;transition:border-color .2s,box-shadow .2s;-webkit-appearance:none}
-.fi:focus{border-color:var(--clay);box-shadow:0 0 0 3px var(--clay-l)}
-.fsel{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%239A8878' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center}
-.adj-row{display:flex;align-items:center;gap:7px;margin-top:5px}
-.adj-btn{width:36px;height:36px;border-radius:10px;border:1.5px solid var(--brd);background:var(--surf);font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--bark);transition:all .12s;flex-shrink:0}
-.adj-btn:active{background:var(--clay-l);border-color:var(--clay);transform:scale(.88)}
-.adj-inp{flex:1;text-align:center;font-size:22px;font-weight:700;font-family:'Fraunces',serif;border:1.5px solid var(--brd);border-radius:10px;padding:8px;background:var(--surf2);color:var(--bark);outline:none;transition:border-color .2s}
-.adj-inp:focus{border-color:var(--clay)}
-.qbs{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
-.qb{padding:6px 12px;border-radius:9px;background:var(--clay-l);color:var(--clay-d);font-weight:700;font-size:12px;border:none;cursor:pointer;transition:all .12s;font-family:'DM Sans',sans-serif}
-.qb:active{transform:scale(.9);background:var(--clay);color:#fff}
-
-/* ── BUTTONS ── */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:12px 18px;border-radius:11px;font-family:'DM Sans',sans-serif;font-size:13.5px;font-weight:700;border:none;cursor:pointer;transition:all .17s;width:100%}
-.btn-p{background:linear-gradient(135deg,var(--clay),var(--clay-d));color:#fff;box-shadow:0 4px 14px rgba(184,92,42,.28)}
-.btn-p:active{transform:scale(.97)}.btn-s{background:var(--surf2);color:var(--bark);border:1.5px solid var(--brd)}
-.btn-d{background:var(--red-l);color:var(--red);border:1.5px solid rgba(192,40,40,.2)}
-.btn-g{background:var(--leaf-l);color:var(--leaf);border:1.5px solid rgba(30,122,74,.2)}
-.btn-a{background:var(--amber-l);color:var(--amber);border:1.5px solid rgba(184,114,10,.2)}
-
-/* ── MODALS ── */
-.overlay{position:fixed;inset:0;background:rgba(20,12,6,.6);z-index:100;display:none;align-items:flex-end;backdrop-filter:blur(4px)}
-.overlay.open{display:flex;animation:ovIn .14s}
-@keyframes ovIn{from{opacity:0}to{opacity:1}}
-.sheet{background:var(--surf2);border-radius:24px 24px 0 0;padding:18px 16px 50px;width:100%;max-height:92vh;overflow-y:auto;animation:shUp .24s cubic-bezier(.34,1.3,.64,1);transition:background .3s}
-.sheet::-webkit-scrollbar{width:0}
-@keyframes shUp{from{transform:translateY(38px)}to{transform:translateY(0)}}
-.sh-handle{width:36px;height:4px;background:var(--brd);border-radius:4px;margin:0 auto 16px}
-.sh-title{font-size:18px;font-weight:700;color:var(--bark);font-family:'Fraunces',serif;margin-bottom:14px}
-.confirm-box{background:var(--surf2);border-radius:24px 24px 0 0;padding:22px 16px 50px;width:100%;animation:shUp .24s cubic-bezier(.34,1.3,.64,1)}
-.confirm-icon{width:56px;height:56px;border-radius:18px;background:var(--red-l);display:flex;align-items:center;justify-content:center;margin:0 auto 13px}
-.confirm-icon svg{width:26px;height:26px;stroke:var(--red);fill:none;stroke-width:2;stroke-linecap:round}
-
-/* ── KHATA ── */
+/* Threshold chip */
+.thresh-badge{display:inline-flex;align-items:center;gap:3px;font-size:9.5px;font-weight:700;padding:3px 8px;border-radius:6px;background:var(--amber-l);color:var(--amber-d)}
+.low-badge{background:var(--red-l);color:var(--red-d)}
+/* Action buttons */
+.vcard-actions{display:flex;gap:7px;margin-top:10px}
+.vact{flex:1;padding:8px 4px;border-radius:9px;font-size:11px;font-weight:700;border:none;cursor:pointer;font-family:"DM Sans",sans-serif;transition:transform .12s;display:flex;align-items:center;justify-content:center;gap:5px}
+.vact:active{transform:scale(.9)}
+.vact-pack{background:var(--leaf-l);color:var(--leaf-d)}
+.vact-sale{background:var(--red-l);color:var(--red-d)}
+.vact-edit{background:var(--amber-l);color:var(--amber-d)}
+/* LOW STOCK DRAWER */
+.ls-item{background:var(--surf);border-radius:var(--r);padding:12px 13px;margin-bottom:8px;border:1px solid var(--brd);display:flex;align-items:center;gap:11px;border-left:3px solid var(--red)}
+.ls-info{flex:1;min-width:0}
+.ls-prod{font-size:13.5px;font-weight:700;color:var(--bark);font-family:"Fraunces",serif}
+.ls-detail{font-size:10.5px;color:var(--bark-lt);margin-top:2px}
+.ls-qty{text-align:right;flex-shrink:0}
+.ls-qty .num{font-size:24px;font-weight:700;font-family:"Fraunces",serif;color:var(--red);line-height:1}
+.ls-qty .lbl{font-size:9px;color:var(--bark-lt)}
+/* RTO */
+.rto-card{background:var(--surf);border-radius:var(--rl);border:1px solid var(--brd);margin-bottom:11px;box-shadow:var(--sh)}
+.rto-body{padding:13px 14px}
+.rto-name{font-size:14px;font-weight:700;color:var(--bark);font-family:"Fraunces",serif}
+.rto-order{font-size:10px;color:var(--bark-lt);margin-top:2px}
+.s-badge{display:inline-flex;align-items:center;padding:3px 9px;border-radius:20px;font-size:10px;font-weight:700}
+.s-transit{background:var(--amber-l);color:var(--amber)}.s-delivered{background:var(--leaf-l);color:var(--leaf)}.s-returned{background:var(--red-l);color:var(--red)}.s-pending{background:var(--blue-l);color:var(--blue)}
+.rto-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+.rto-mi{font-size:10.5px;color:var(--bark-lt)}.rto-mi span{font-weight:600;color:var(--bark)}
+.claim-pill{display:inline-flex;align-items:center;padding:3px 9px;border-radius:20px;font-size:9.5px;font-weight:700}
+.cp-yes{background:var(--leaf-l);color:var(--leaf)}.cp-no{background:var(--red-l);color:var(--red)}.cp-pending{background:var(--amber-l);color:var(--amber)}
+.rto-acts{display:flex;gap:6px}
+.rto-act{padding:5px 11px;border-radius:8px;font-size:11px;font-weight:700;border:1.5px solid var(--brd);cursor:pointer;font-family:"DM Sans",sans-serif;transition:transform .12s}
+.rto-act:active{transform:scale(.9)}
+.rto-remark{font-size:10.5px;color:var(--bark-lt);margin-top:7px;padding:6px 9px;background:var(--bg);border-radius:8px}
+/* KHATA */
 .kh-day{font-size:11px;font-weight:700;color:var(--clay);text-transform:uppercase;letter-spacing:.7px;padding:13px 0 7px;display:flex;align-items:center;gap:9px}
-.kh-day::after{content:'';flex:1;height:1px;background:var(--brd)}
-.kh-entry{background:var(--surf);border-radius:13px;padding:12px 13px;margin-bottom:7px;border:1px solid var(--brd);display:flex;align-items:flex-start;gap:10px;transition:background .3s}
+.kh-day::after{content:"";flex:1;height:1px;background:var(--brd)}
+.kh-entry{background:var(--surf);border-radius:13px;padding:12px 13px;margin-bottom:7px;border:1px solid var(--brd);display:flex;align-items:flex-start;gap:10px}
 .kh-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:5px}
 .kh-type{font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;display:inline-block;margin-bottom:3px}
 .kh-product{font-size:13px;font-weight:600;color:var(--bark)}
 .kh-detail{font-size:10.5px;color:var(--bark-lt);margin-top:2px}
-.kh-qty{font-size:18px;font-weight:700;font-family:'Fraunces',serif;flex-shrink:0;text-align:right;min-width:42px}
-
-/* ── RTO ── */
-.rto-card{background:var(--surf);border-radius:18px;border:1px solid var(--brd);overflow:hidden;margin-bottom:11px;box-shadow:var(--sh);transition:background .3s}
-.rto-row{padding:13px 14px}
-.rto-name{font-size:14px;font-weight:700;color:var(--bark);font-family:'Fraunces',serif}
-.rto-order{font-size:10px;color:var(--bark-lt);margin-top:2px}
-.s-badge{display:inline-flex;align-items:center;padding:3px 9px;border-radius:20px;font-size:10px;font-weight:700;flex-shrink:0}
-.s-transit{background:var(--amber-l);color:var(--amber)}.s-delivered{background:var(--leaf-l);color:var(--leaf)}.s-returned{background:var(--red-l);color:var(--red)}.s-pending{background:var(--blue-l);color:var(--blue)}
-.rto-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
-.rto-meta-item{font-size:10.5px;color:var(--bark-lt)}.rto-meta-item span{font-weight:600;color:var(--bark)}
-.claim-pill{display:inline-flex;align-items:center;padding:3px 8px;border-radius:20px;font-size:9.5px;font-weight:700;margin-top:6px}
-.cp-yes{background:var(--leaf-l);color:var(--leaf)}.cp-no{background:var(--red-l);color:var(--red)}.cp-pending{background:var(--amber-l);color:var(--amber)}
-.rto-acts{display:flex;gap:6px;margin-top:9px}
-.rto-act{padding:5px 11px;border-radius:8px;font-size:11px;font-weight:700;border:1.5px solid var(--brd);cursor:pointer;font-family:'DM Sans',sans-serif;transition:transform .12s}
-.rto-act:active{transform:scale(.9)}.rto-remark{font-size:10.5px;color:var(--bark-lt);margin-top:7px;padding:6px 9px;background:var(--bg);border-radius:8px}
-
-/* ── REPORT ── */
-.rep-hero{background:linear-gradient(135deg,#2C1E14,#3C2820);padding:20px 15px 28px;position:relative;overflow:hidden}
-[data-theme="dark"] .rep-hero{background:linear-gradient(135deg,var(--surf3),var(--surf2))}
-.rep-hero::before{content:'';position:absolute;top:-50px;right:-30px;width:140px;height:140px;background:rgba(255,255,255,.05);border-radius:50%}
-.rep-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px}
-.rpt-c{background:var(--surf);border-radius:14px;padding:12px 7px;text-align:center;border:1px solid var(--brd);box-shadow:var(--sh);transition:background .3s}
-.rpt-v{font-size:22px;font-weight:700;font-family:'Fraunces',serif;color:var(--bark)}
-.rpt-l{font-size:8.5px;color:var(--bark-lt);font-weight:700;text-transform:uppercase;letter-spacing:.4px;margin-top:2px}
-.top-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--brd)}.top-row:last-child{border-bottom:none}
-.top-num{width:22px;height:22px;border-radius:7px;background:var(--clay-l);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:var(--clay-d);flex-shrink:0}
-
-/* ── PROFILE ── */
+.kh-qty{font-size:18px;font-weight:700;font-family:"Fraunces",serif;flex-shrink:0;text-align:right;min-width:42px}
+/* OVERLAYS */
+.overlay{position:fixed;inset:0;background:rgba(20,12,6,.6);z-index:100;display:none;align-items:flex-end;backdrop-filter:blur(4px)}
+.overlay.open{display:flex;animation:ovIn .14s}
+@keyframes ovIn{from{opacity:0}to{opacity:1}}
+.sheet{background:var(--surf2);border-radius:24px 24px 0 0;padding:18px 16px 50px;width:100%;max-height:92vh;overflow-y:auto;animation:shUp .24s cubic-bezier(.34,1.3,.64,1);scrollbar-width:none}
+.sheet::-webkit-scrollbar{display:none}
+@keyframes shUp{from{transform:translateY(38px)}to{transform:none}}
+.sh-handle{width:36px;height:4px;background:var(--brd);border-radius:4px;margin:0 auto 16px}
+.sh-title{font-size:18px;font-weight:700;color:var(--bark);font-family:"Fraunces",serif;margin-bottom:14px}
+.confirm-box{background:var(--surf2);border-radius:24px 24px 0 0;padding:22px 16px 50px;width:100%;animation:shUp .24s cubic-bezier(.34,1.3,.64,1)}
+.confirm-icon{width:56px;height:56px;border-radius:18px;background:var(--red-l);display:flex;align-items:center;justify-content:center;margin:0 auto 13px}
+.confirm-icon svg{width:26px;height:26px;stroke:var(--red);fill:none;stroke-width:2;stroke-linecap:round}
+/* FORMS */
+.ff{margin-bottom:13px}
+.fl{font-size:10px;font-weight:700;color:var(--bark-lt);text-transform:uppercase;letter-spacing:.7px;margin-bottom:5px;display:block}
+.fi{width:100%;padding:11px 13px;border:1.5px solid var(--brd);border-radius:11px;font-family:"DM Sans",sans-serif;font-size:13.5px;color:var(--bark);background:var(--surf2);outline:none;transition:border-color .2s,box-shadow .2s;-webkit-appearance:none}
+.fi:focus{border-color:var(--clay);box-shadow:0 0 0 3px var(--clay-l)}
+.fsel{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%239A8878' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center}
+.adj-row{display:flex;align-items:center;gap:7px;margin-top:5px}
+.adj-btn{width:38px;height:38px;border-radius:10px;border:1.5px solid var(--brd);background:var(--surf);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--bark);transition:all .12s;flex-shrink:0}
+.adj-btn:active{background:var(--clay-l);border-color:var(--clay);transform:scale(.88)}
+.adj-inp{flex:1;text-align:center;font-size:22px;font-weight:700;font-family:"Fraunces",serif;border:1.5px solid var(--brd);border-radius:10px;padding:8px;background:var(--surf2);color:var(--bark);outline:none}
+.adj-inp:focus{border-color:var(--clay)}
+.qbs{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+.qb{padding:6px 12px;border-radius:9px;background:var(--clay-l);color:var(--clay-d);font-weight:700;font-size:12px;border:none;cursor:pointer;transition:all .12s;font-family:"DM Sans",sans-serif}
+.qb:active{transform:scale(.9);background:var(--clay);color:#fff}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:12px 18px;border-radius:11px;font-family:"DM Sans",sans-serif;font-size:13.5px;font-weight:700;border:none;cursor:pointer;transition:all .17s;width:100%}
+.btn-p{background:linear-gradient(135deg,var(--clay),var(--clay-d));color:#fff}
+.btn-p:active{transform:scale(.97)}
+.btn-s{background:var(--surf2);color:var(--bark);border:1.5px solid var(--brd)}
+.btn-d{background:var(--red-l);color:var(--red);border:1.5px solid rgba(192,40,40,.2)}
+.btn-g{background:var(--leaf-l);color:var(--leaf);border:1.5px solid rgba(30,122,74,.2)}
+.btn-b{background:var(--blue-l);color:var(--blue-d);border:1.5px solid rgba(26,95,173,.2)}
+.err-box{font-size:11.5px;color:var(--red);margin-bottom:11px;display:none;padding:8px 11px;background:var(--red-l);border-radius:9px;font-weight:600}
+.info-box{font-size:11.5px;color:var(--bark-lt);margin-bottom:11px;display:none;padding:9px 12px;background:var(--bg);border-radius:9px;border:1px solid var(--brd);line-height:1.7}
+/* VARIANT BUILDER */
+.var-builder{background:var(--bg);border-radius:var(--r);border:1px solid var(--brd);padding:11px;margin-bottom:13px}
+.vrow{border-bottom:1px solid var(--brd);padding:10px 0}
+.vrow:last-child{border-bottom:none;padding-bottom:0}
+.vrow-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;flex:1}
+.vrow-del{width:30px;height:30px;border-radius:8px;background:var(--red-l);border:none;cursor:pointer;color:var(--red);font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.vrow-del:active{transform:scale(.88)}
+.tg-grp{display:flex;background:var(--surf3);border-radius:11px;padding:3px;gap:2px;margin-bottom:13px}
+.tg-opt{flex:1;padding:8px 4px;text-align:center;border-radius:9px;font-size:11px;font-weight:600;cursor:pointer;transition:all .17s;color:var(--bark-lt);border:none;background:none;font-family:"DM Sans",sans-serif;white-space:nowrap}
+.tg-opt.active{background:var(--surf);color:var(--bark);box-shadow:var(--sh)}
+.tg-opt.active.sale{color:var(--red)}.tg-opt.active.pack{color:var(--leaf)}
 .prof-hero{background:linear-gradient(135deg,var(--clay),var(--clay-d));padding:28px 15px 36px;text-align:center;position:relative;overflow:hidden}
-.prof-hero::before{content:'';position:absolute;top:-70px;right:-50px;width:190px;height:190px;background:rgba(255,255,255,.07);border-radius:50%}
-.prof-av{width:70px;height:70px;border-radius:50%;background:rgba(255,255,255,.2);border:3px solid rgba(255,255,255,.5);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;color:#fff;margin:0 auto 11px;font-family:'Fraunces',serif;position:relative;z-index:1}
-
-/* ── COUNT BADGE ── */
-.count-badge{display:inline-flex;align-items:center;justify-content:center;min-width:19px;height:19px;padding:0 5px;border-radius:10px;background:var(--clay);color:#fff;font-size:9.5px;font-weight:700;margin-left:5px}
-
-/* ── MISC ── */
-.dvd{height:1px;background:var(--brd);margin:9px 0}
+.prof-hero::before{content:"";position:absolute;top:-60px;right:-40px;width:160px;height:160px;background:rgba(255,255,255,.07);border-radius:50%}
+.prof-av{width:70px;height:70px;border-radius:50%;background:rgba(255,255,255,.2);border:3px solid rgba(255,255,255,.5);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;color:#fff;margin:0 auto 11px;font-family:"Fraunces",serif;position:relative;z-index:1}
 .empty{text-align:center;padding:44px 18px}
 .empty-ico{width:60px;height:60px;border-radius:18px;background:var(--clay-l);display:flex;align-items:center;justify-content:center;margin:0 auto 13px}
 .empty-ico svg{width:26px;height:26px;stroke:var(--clay);fill:none;stroke-width:1.8}
-.empty-title{font-size:16px;font-weight:700;color:var(--bark);font-family:'Fraunces',serif;margin-bottom:5px}
+.empty-title{font-size:16px;font-weight:700;color:var(--bark);font-family:"Fraunces",serif;margin-bottom:5px}
 .empty-desc{font-size:11.5px;color:var(--bark-lt);line-height:1.6}
-.err-box{font-size:11.5px;color:var(--red);margin-bottom:11px;display:none;padding:8px 11px;background:var(--red-l);border-radius:9px;font-weight:600}
-.info-box{font-size:11.5px;color:var(--bark-lt);margin-bottom:12px;padding:9px 12px;background:var(--bg);border-radius:9px;display:none;border:1px solid var(--brd);line-height:1.6}
-::-webkit-scrollbar{width:0}
 </style>
 </head>
 <body>
-
 <div class="toast-wrap" id="toastWrap"></div>
-
-<!-- ═══ HEADER ═══ -->
 <header class="hdr">
   <div class="logo-wrap">
-    <div class="logo-box">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L3 7v10l9 5 9-5V7z"/><path d="M12 22V12M3 7l9 5M21 7l-9 5"/></svg>
-    </div>
+    <div class="logo-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L3 7v10l9 5 9-5V7z"/><path d="M12 22V12M3 7l9 5M21 7l-9 5"/></svg></div>
     <div><div class="brand">Handicraft Bazaar</div><div class="brand-s">Inventory</div></div>
   </div>
   <div class="hdr-r">
-    <button class="sync-pill busy" id="syncPill" onclick="syncNow()">
-      <div class="sdot busy" id="sdot"></div>
-      <span id="syncTxt">Connecting…</span>
-    </button>
+    <button class="sync-pill busy" id="syncPill" onclick="syncNow()"><div class="sdot busy" id="sdot"></div><span id="syncTxt">Sync…</span></button>
+    <button class="hdr-btn alert-bell" onclick="showLowStock()">🔔<span class="bell-badge" id="bellBadge" style="display:none">0</span></button>
     <button class="hdr-btn" id="darkBtn" onclick="toggleDark()">🌙</button>
-    <button class="hdr-btn" onclick="go('report')" title="Report">📊</button>
   </div>
 </header>
 
-<!-- ═══ SCROLL AREA ═══ -->
 <div class="scroll-wrap" id="sw">
 
-  <!-- DASHBOARD -->
-  <div class="screen active" id="screen-dashboard">
-    <div style="padding:16px 15px 2px">
-      <div style="font-size:22px;font-weight:700;font-family:'Fraunces',serif;color:var(--bark)" id="dashGreet">Namaste 🙏</div>
-      <div style="font-size:11.5px;color:var(--bark-lt);margin-top:2px" id="dateLbl"></div>
-    </div>
-    <div style="padding:9px 15px 0" id="alertSec"></div>
-    <div class="stat-grid">
-      <div class="sc"><div class="sc-ico ic-clay"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><div class="sc-val" id="d-total">—</div><div class="sc-lbl">Products</div></div>
-      <div class="sc"><div class="sc-ico ic-leaf"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/></svg></div><div class="sc-val" id="d-stock">—</div><div class="sc-lbl">Total Stock</div></div>
-      <div class="sc"><div class="sc-ico ic-amb"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg></div><div class="sc-val" id="d-packed">—</div><div class="sc-lbl">Box Ready</div></div>
-      <div class="sc"><div class="sc-ico ic-red"><svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg></div><div class="sc-val" id="d-low">—</div><div class="sc-lbl">Low Stock</div></div>
-    </div>
-    <div class="sold-banner"><div><div class="sold-label">Dispatched Today</div><div class="sold-sub" id="d-today-sub">Loading…</div></div><div class="sold-num" id="d-today-sold">—</div></div>
-    <div style="padding:0 15px">
-      <div class="sec-hdr"><div class="sec-title">Recent Activity</div><div class="sec-link" onclick="go('khata')">See all</div></div>
-      <div class="card" style="padding:11px 13px" id="d-activity"><div style="text-align:center;padding:8px;color:var(--bark-lt);font-size:12px">Loading…</div></div>
-      <div class="sec-hdr" style="margin-top:4px"><div class="sec-title">Products</div><div class="sec-link" onclick="go('products')">See all</div></div>
-      <div id="d-products"><div style="text-align:center;padding:18px;color:var(--bark-lt);font-size:12px">Syncing from Google Sheets…</div></div>
-    </div>
+<!-- DASHBOARD -->
+<div class="screen active" id="screen-dashboard">
+  <div style="padding:16px 15px 4px">
+    <div style="font-size:22px;font-weight:700;font-family:Fraunces,serif;color:var(--bark)" id="dashGreet">Namaste 🙏</div>
+    <div style="font-size:11.5px;color:var(--bark-lt);margin-top:2px" id="dateLbl"></div>
   </div>
-
-  <!-- INVENTORY -->
-  <div class="screen" id="screen-products">
-    <div class="srch-box"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" id="searchInput" placeholder="Search products, type, size…" oninput="renderProds()"/></div>
-    <div class="chips" id="catChips"></div>
-    <div class="sort-bar"><span style="font-size:11px;color:var(--bark-lt);font-weight:600">Sort:</span><select class="sort-sel" id="sortSel" onchange="renderProds()"><option value="name">Name A–Z</option><option value="stock">Stock ↓</option><option value="low">Low First</option><option value="packed">Most Packed</option></select></div>
-    <div style="padding:0 15px">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:11px">
-        <div style="display:flex;align-items:center"><div class="sec-title">All Products</div><span class="count-badge" id="prodCount">0</span></div>
-        <button class="qb" onclick="openAddProduct()">+ Add</button>
-      </div>
-      <div id="productList"></div>
-      <div id="productEmpty" style="display:none"><div class="empty"><div class="empty-ico"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8"/></svg></div><div class="empty-title">No Products</div><div class="empty-desc">Add your first product.</div></div></div>
-    </div>
+  <div class="stat-grid" style="margin-top:13px">
+    <div class="sc"><div class="sc-ico ic-clay"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><div class="sc-val" id="d-total">0</div><div class="sc-lbl">Products</div></div>
+    <div class="sc"><div class="sc-ico ic-leaf"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/></svg></div><div class="sc-val" id="d-stock">0</div><div class="sc-lbl">Total Stock</div></div>
+    <div class="sc"><div class="sc-ico ic-amb"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg></div><div class="sc-val" id="d-boxready">0</div><div class="sc-lbl">Box Ready</div></div>
+    <div class="sc"><div class="sc-ico ic-red"><svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg></div><div class="sc-val" id="d-low">0</div><div class="sc-lbl">Low Stock</div></div>
   </div>
+  <div class="sold-banner"><div><div class="sold-label">Dispatched Today</div><div class="sold-sub" id="d-today-sub">—</div></div><div class="sold-num" id="d-today-sold">0</div></div>
+  <div class="sec-hdr"><div class="sec-title">Stock by Category</div></div>
+  <div class="cat-stock-grid" id="catStockGrid"></div>
+  <div class="sec-hdr"><div class="sec-title">Recent Activity</div><button class="sec-link" onclick="go('khata')">See all</button></div>
+  <div style="padding:0 15px"><div class="card" style="padding:11px 13px" id="d-activity"></div></div>
+</div>
 
-  <!-- DETAIL -->
-  <div class="screen" id="screen-detail">
-    <div class="det-hero">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;position:relative;z-index:1">
-        <button class="back-btn" onclick="go('products')"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back</button>
-        <div style="display:flex;gap:6px"><button class="back-btn" onclick="editCurrentProduct()">✏️ Edit</button><button class="back-btn" onclick="confirmDelete()" style="background:rgba(192,40,40,.35)">🗑</button></div>
-      </div>
-      <div style="font-size:36px;margin-bottom:7px;position:relative;z-index:1" id="detEmoji">🪨</div>
-      <div class="det-name" id="detName">—</div><div class="det-sub" id="detCat">—</div>
+<!-- INVENTORY -->
+<div class="screen" id="screen-products">
+  <div class="srch-box"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" id="searchInput" placeholder="Search name, size, category…" oninput="renderProds()"/></div>
+  <div class="cat-tabs" id="catTabs"></div>
+  <div class="filter-row" id="filterRow"></div>
+  <div style="padding:0 15px">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:11px">
+      <div style="display:flex;align-items:center"><div class="sec-title" style="margin:0">Products</div><span class="count-badge" id="prodCount">0</span></div>
+      <button class="qb" onclick="openAddProduct()">+ Add</button>
     </div>
-    <div class="sbd">
-      <div class="sbd-i"><div class="sbd-n t" id="detTotal">0</div><div class="sbd-l">Stock</div></div>
-      <div class="sbd-i"><div class="sbd-n p" id="detPacked">0</div><div class="sbd-l">Box Ready</div></div>
-      <div class="sbd-i"><div class="sbd-n r" id="detRemaining">0</div><div class="sbd-l">Remaining</div></div>
-    </div>
-    <div style="padding:0 15px">
-      <div id="detTodayWrap"></div>
-      <div class="card" style="padding:13px">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><span style="font-size:12px;font-weight:700;color:var(--bark)">Packing Progress</span><span style="font-size:11.5px;color:var(--bark-lt)" id="detPct">0%</span></div>
-        <div class="prog" style="height:6px"><div class="prog-b" id="detBar" style="width:0%"></div></div>
-        <div class="prog-meta"><span id="detPackedLbl">0 packed</span><span id="detTotalLbl">of 0</span></div>
-      </div>
-      <div class="sec-title" style="margin-bottom:9px">Quick Actions</div>
-      <div class="act-row">
-        <button class="act-b ab-pack" onclick="openQuick('pack')"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/></svg>Box</button>
-        <button class="act-b ab-sale" onclick="openQuick('sale')"><svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>Dispatch</button>
-        <button class="act-b ab-add" onclick="openStockAdjust()"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>+Stock</button>
-      </div>
-      <div class="sec-title" style="margin-top:16px;margin-bottom:9px">Activity Log</div>
-      <div class="card" style="padding:11px 13px"><div id="detActivity"></div></div>
-    </div>
+    <div id="productList"></div>
+    <div id="productEmpty" style="display:none"><div class="empty"><div class="empty-ico"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8"/></svg></div><div class="empty-title">No Products Found</div><div class="empty-desc">Sync from Sheet or add a product.</div></div></div>
   </div>
+</div>
 
-  <!-- KHATA -->
-  <div class="screen" id="screen-khata">
-    <div style="padding:0 15px">
-      <div class="srch-box" style="margin:0 0 11px"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" id="khataSearch" placeholder="Search entries…" oninput="renderKhata()"/></div>
-      <div class="tg-grp">
-        <button class="tg-opt active" id="kh-all" onclick="setKhF('all')">All</button>
-        <button class="tg-opt pack" id="kh-pack" onclick="setKhF('pack')">📦 Box</button>
-        <button class="tg-opt sale" id="kh-sale" onclick="setKhF('sale')">🛒 Dispatch</button>
-        <button class="tg-opt" id="kh-add" onclick="setKhF('add')">➕ Stock</button>
-      </div>
-      <div id="khataFeed"></div>
+<!-- KHATA -->
+<div class="screen" id="screen-khata">
+  <div style="padding:0 15px">
+    <div class="srch-box" style="margin:0 0 11px"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" id="khataSearch" placeholder="Search entries…" oninput="renderKhata()"/></div>
+    <div class="tg-grp">
+      <button class="tg-opt active" id="kh-all" onclick="setKhF('all')">All</button>
+      <button class="tg-opt pack" id="kh-pack" onclick="setKhF('pack')">📦 Box</button>
+      <button class="tg-opt sale" id="kh-sale" onclick="setKhF('sale')">🛒 Dispatch</button>
+      <button class="tg-opt" id="kh-add" onclick="setKhF('add')">➕ Stock</button>
     </div>
+    <div id="khataFeed"></div>
   </div>
+</div>
 
-  <!-- RTO -->
-  <div class="screen" id="screen-rto">
-    <div class="srch-box"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" id="rtoSearch" placeholder="Search order ID, product…" oninput="renderRTO()"/></div>
-    <div class="chips" id="rtoChips"></div>
-    <div style="padding:0 15px">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:11px">
-        <div style="display:flex;align-items:center"><div class="sec-title">RTO &amp; Returns</div><span class="count-badge" id="rtoCount">0</span></div>
-        <button class="qb" onclick="openAddRTO()">+ Add</button>
-      </div>
-      <div id="rtoList"></div>
-      <div id="rtoEmpty" style="display:none"><div class="empty"><div class="empty-ico"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="empty-title">No RTO Records</div><div class="empty-desc">No returns found.</div></div></div>
+<!-- ENTRY -->
+<div class="screen" id="screen-entry">
+  <div style="padding:0 15px">
+    <div class="sec-title" style="margin-bottom:13px">Daily Entry</div>
+    <div class="tg-grp">
+      <button class="tg-opt pack active" id="togPack" onclick="setET('pack')">📦 Move to Box</button>
+      <button class="tg-opt sale" id="togSale" onclick="setET('sale')">🛒 Dispatch</button>
     </div>
+    <div class="card" style="padding:14px">
+      <div class="ff"><label class="fl">Select Product</label><select class="fi fsel" id="entProd" onchange="updateEntVariants()"></select></div>
+      <div class="ff"><label class="fl">Select Variant</label><select class="fi fsel" id="entVar" onchange="updateES()"></select></div>
+      <div id="packFields"><div class="ff"><label class="fl">Qty to Box</label><div class="adj-row"><button class="adj-btn" onclick="adjQ(-1,'packQty')">−</button><input type="number" class="adj-inp" id="packQty" placeholder="0" min="1"/><button class="adj-btn" onclick="adjQ(1,'packQty')">+</button></div><div class="qbs"><button class="qb" onclick="addToQ('packQty',5)">+5</button><button class="qb" onclick="addToQ('packQty',10)">+10</button><button class="qb" onclick="addToQ('packQty',25)">+25</button><button class="qb" onclick="addToQ('packQty',50)">+50</button></div></div></div>
+      <div id="saleFields" style="display:none"><div class="ff"><label class="fl">Qty to Dispatch</label><div class="adj-row"><button class="adj-btn" onclick="adjQ(-1,'saleQty')">−</button><input type="number" class="adj-inp" id="saleQty" placeholder="0" min="1"/><button class="adj-btn" onclick="adjQ(1,'saleQty')">+</button></div><div class="qbs"><button class="qb" onclick="addToQ('saleQty',1)">+1</button><button class="qb" onclick="addToQ('saleQty',5)">+5</button><button class="qb" onclick="addToQ('saleQty',10)">+10</button></div></div></div>
+      <div class="info-box" id="entInfo"></div>
+      <div class="err-box" id="entError"></div>
+      <button class="btn btn-p" id="entBtn" onclick="submitEntry()"><svg style="width:14px;height:14px;stroke:#fff;fill:none;stroke-width:2.3;stroke-linecap:round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Confirm Entry</button>
+    </div>
+    <div class="sec-title" style="margin-bottom:9px">Today's Entries</div>
+    <div class="card" style="padding:11px 13px" id="todayLog"></div>
   </div>
+</div>
 
-  <!-- ENTRY -->
-  <div class="screen" id="screen-entry">
-    <div style="padding:0 15px">
-      <div class="sec-title" style="margin-bottom:13px">Daily Entry</div>
-      <div class="tg-grp">
-        <button class="tg-opt pack active" id="togPack" onclick="setET('pack')">📦 Move to Box</button>
-        <button class="tg-opt sale" id="togSale" onclick="setET('sale')">🛒 Dispatch</button>
-      </div>
-      <div class="card" style="padding:14px">
-        <div class="ff"><label class="fl">Select Product</label><select class="fi fsel" id="entProd" onchange="updateES()"></select></div>
-        <div id="packFields"><div class="ff"><label class="fl">Qty to Box</label><div class="adj-row"><button class="adj-btn" onclick="adjStock(-1,'packQty')">−</button><input type="number" class="adj-inp" id="packQty" placeholder="0" min="1"/><button class="adj-btn" onclick="adjStock(1,'packQty')">+</button></div><div class="qbs"><button class="qb" onclick="addQ('packQty',5)">+5</button><button class="qb" onclick="addQ('packQty',10)">+10</button><button class="qb" onclick="addQ('packQty',25)">+25</button><button class="qb" onclick="addQ('packQty',50)">+50</button></div></div></div>
-        <div id="saleFields" style="display:none"><div class="ff"><label class="fl">Qty to Dispatch</label><div class="adj-row"><button class="adj-btn" onclick="adjStock(-1,'saleQty')">−</button><input type="number" class="adj-inp" id="saleQty" placeholder="0" min="1"/><button class="adj-btn" onclick="adjStock(1,'saleQty')">+</button></div><div class="qbs"><button class="qb" onclick="addQ('saleQty',1)">+1</button><button class="qb" onclick="addQ('saleQty',5)">+5</button><button class="qb" onclick="addQ('saleQty',10)">+10</button><button class="qb" onclick="addQ('saleQty',25)">+25</button></div></div></div>
-        <div id="entError" class="err-box"></div>
-        <div id="entStock" class="info-box"></div>
-        <button class="btn btn-p" id="entBtn" onclick="submitEntry()"><svg style="width:14px;height:14px;stroke:#fff;fill:none;stroke-width:2.3;stroke-linecap:round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Confirm Entry</button>
-      </div>
-      <div class="sec-title" style="margin-bottom:9px">Today's Entries</div>
-      <div class="card" style="padding:11px 13px" id="todayLog"><div style="font-size:12px;color:var(--bark-lt);text-align:center;padding:8px">No entries today</div></div>
+<!-- RTO -->
+<div class="screen" id="screen-rto">
+  <div class="srch-box"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" id="rtoSearch" placeholder="Search product, order ID, platform…" oninput="renderRTO()"/></div>
+  <div class="filter-row" id="rtoChips"></div>
+  <div style="padding:0 15px">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:11px">
+      <div style="display:flex;align-items:center"><div class="sec-title" style="margin:0">RTO &amp; Returns</div><span class="count-badge" id="rtoCount">0</span></div>
+      <button class="qb" onclick="openAddRTO()">+ Add</button>
     </div>
+    <div id="rtoList"></div>
+    <div id="rtoEmpty" style="display:none"><div class="empty"><div class="empty-ico"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="empty-title">No RTO Records</div><div class="empty-desc">No returns found.</div></div></div>
   </div>
+</div>
 
-  <!-- REPORT -->
-  <div class="screen" id="screen-report">
-    <div class="rep-hero">
-      <div style="margin-bottom:13px"><button class="back-btn" onclick="go('dashboard')"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back</button></div>
-      <div style="font-size:21px;font-weight:700;color:#fff;font-family:'Fraunces',serif">Business Report</div>
-      <div style="font-size:10px;color:rgba(255,255,255,.5);margin-top:3px;text-transform:uppercase;letter-spacing:.8px" id="repDate"></div>
-    </div>
-    <div style="padding:16px 15px 0">
-      <div class="sec-title" style="margin-bottom:10px">Overview</div>
-      <div class="rep-grid" id="repOverview"></div>
-      <div class="sec-title" style="margin-bottom:10px">Today's Summary</div>
-      <div class="card" id="repToday" style="padding:13px"></div>
-      <div class="sec-title" style="margin-bottom:10px">Top by Stock</div>
-      <div class="card" style="padding:12px 13px" id="repTop"></div>
-      <div class="sec-title" style="margin-bottom:10px">Type Breakdown</div>
-      <div class="card" id="repCats" style="padding:13px"></div>
-    </div>
+<!-- PROFILE -->
+<div class="screen" id="screen-profile">
+  <div class="prof-hero">
+    <div class="prof-av">RK</div>
+    <div style="font-size:19px;font-weight:700;color:#fff;font-family:Fraunces,serif;position:relative;z-index:1">Kamal</div>
+    <div style="font-size:11.5px;color:rgba(255,255,255,.6);margin-top:3px;position:relative;z-index:1">Inventory Manager · Jodhpur</div>
+    <div style="display:inline-block;margin-top:9px;padding:3px 14px;background:rgba(255,255,255,.2);border-radius:20px;font-size:11px;font-weight:700;color:#fff;position:relative;z-index:1">🏅 Admin</div>
   </div>
-
-  <!-- PROFILE -->
-  <div class="screen" id="screen-profile">
-    <div class="prof-hero">
-      <div class="prof-av">RK</div>
-      <div style="font-size:19px;font-weight:700;color:#fff;font-family:'Fraunces',serif;position:relative;z-index:1">Kamal </div>
-      <div style="font-size:11.5px;color:rgba(255,255,255,.6);margin-top:3px;position:relative;z-index:1">Inventory Manager · Jaipur</div>
-      <div style="display:inline-block;margin-top:9px;padding:3px 14px;background:rgba(255,255,255,.2);border-radius:20px;font-size:11px;font-weight:700;color:#fff;position:relative;z-index:1">🏅 Admin</div>
-    </div>
-    <div style="padding:15px">
-      <div class="card" style="padding:13px;margin-bottom:11px">
-        <div style="font-size:13px;font-weight:700;color:var(--bark);margin-bottom:9px">🔗 Google Sheets Sync</div>
-        <div style="font-size:11px;color:var(--bark-lt);margin-bottom:10px" id="lastSyncTxt">Connecting…</div>
-        <div style="display:flex;gap:8px">
-          <button class="btn btn-p" style="padding:10px" onclick="syncNow()">⚡ Sync Now</button>
-          <button class="btn btn-s" style="padding:10px" onclick="clearLocalAndSync()">🔄 Full Reset</button>
-        </div>
-      </div>
-      <div class="card">
-        <div style="font-size:13px;font-weight:700;color:var(--bark);margin-bottom:11px">Stats</div>
-        <div style="display:flex;flex-direction:column;gap:9px">
-          <div style="display:flex;justify-content:space-between;font-size:13px"><span style="color:var(--bark-lt)">Products</span><b id="prof-total">0</b></div>
-          <div class="dvd"></div>
-          <div style="display:flex;justify-content:space-between;font-size:13px"><span style="color:var(--bark-lt)">Total Dispatched</span><b style="color:var(--red)" id="prof-sales">0</b></div>
-          <div class="dvd"></div>
-          <div style="display:flex;justify-content:space-between;font-size:13px"><span style="color:var(--bark-lt)">Box Entries</span><b style="color:var(--leaf)" id="prof-packs">0</b></div>
-          <div class="dvd"></div>
-          <div style="display:flex;justify-content:space-between;font-size:13px"><span style="color:var(--bark-lt)">Dispatched Today</span><b style="color:var(--red)" id="prof-today">0</b></div>
-          <div class="dvd"></div>
-          <div style="display:flex;justify-content:space-between;font-size:13px"><span style="color:var(--bark-lt)">RTO Records</span><b style="color:var(--blue)" id="prof-rto">0</b></div>
-        </div>
-      </div>
-      <div class="card" style="padding:13px">
-        <div style="font-size:11.5px;color:var(--bark-lt);line-height:1.7">Handicraft Bazaar · Google Sheets Sync · v4.3</div>
-        <div style="font-size:10px;color:var(--bark-lt);text-align:center;margin-top:7px;font-style:italic">Made with ❤️ for Marble Craftsmen of Rajasthan</div>
+  <div style="padding:15px">
+    <div class="card" style="padding:13px;margin-bottom:11px">
+      <div style="font-size:13px;font-weight:700;color:var(--bark);margin-bottom:6px">🔗 Google Sheets Sync</div>
+      <div style="font-size:11px;color:var(--amber-d);background:var(--amber-l);padding:8px 11px;border-radius:9px;margin-bottom:10px;border:1px solid rgba(184,114,10,.2)">⚙️ Set <b>LowThreshold</b> per row in Sheet Column K. Row turns red when Stock &lt; Threshold.</div>
+      <div style="font-size:11px;color:var(--bark-lt);margin-bottom:10px" id="lastSyncTxt">Connecting…</div>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-p" style="padding:10px" onclick="syncNow()">⚡ Sync Now</button>
+        <button class="btn btn-s" style="padding:10px" onclick="clearLocalAndSync()">🔄 Full Reset</button>
       </div>
     </div>
+    <div class="card">
+      <div style="font-size:13px;font-weight:700;color:var(--bark);margin-bottom:11px">Stats</div>
+      <div style="display:flex;flex-direction:column;gap:9px">
+        <div style="display:flex;justify-content:space-between;font-size:13px"><span style="color:var(--bark-lt)">Products</span><b id="prof-total">0</b></div>
+        <div class="dvd"></div>
+        <div style="display:flex;justify-content:space-between;font-size:13px"><span style="color:var(--bark-lt)">Total Variants</span><b id="prof-vars">0</b></div>
+        <div class="dvd"></div>
+        <div style="display:flex;justify-content:space-between;font-size:13px"><span style="color:var(--bark-lt)">Total Stock</span><b id="prof-stock">0</b></div>
+        <div class="dvd"></div>
+        <div style="display:flex;justify-content:space-between;font-size:13px"><span style="color:var(--bark-lt)">Dispatched Today</span><b style="color:var(--red)" id="prof-today">0</b></div>
+        <div class="dvd"></div>
+        <div style="display:flex;justify-content:space-between;font-size:13px"><span style="color:var(--bark-lt)">RTO Records</span><b style="color:var(--blue)" id="prof-rto">0</b></div>
+      </div>
+    </div>
+    <div class="card" style="padding:13px"><div style="font-size:10px;color:var(--bark-lt);text-align:center;font-style:italic">Handicraft Bazaar · Flat Sheet Sync</div></div>
   </div>
+</div>
 
-</div><!-- /scroll-wrap -->
+</div><!-- /scroll -->
 
-<!-- ═══ BOTTOM NAV ═══ -->
 <nav class="nav">
   <button class="ni active" id="nav-dashboard" onclick="go('dashboard')"><div class="ni-ico"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div><span class="ni-lbl">Home</span></button>
   <button class="ni" id="nav-products" onclick="go('products')"><div class="ni-ico"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/></svg></div><span class="ni-lbl">Inventory</span></button>
@@ -493,691 +408,702 @@ body{height:100%;overflow:hidden;background:var(--bg);font-family:'DM Sans',sans
   <button class="ni" id="nav-khata" onclick="go('khata')"><div class="ni-ico"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div><span class="ni-lbl">Khata</span></button>
   <button class="ni" id="nav-rto" onclick="go('rto')"><div class="ni-ico"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg></div><span class="ni-lbl">RTO</span></button>
 </nav>
+<button class="fab" onclick="openModal('m-fab')"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
 
-<!-- FAB - FIXED BOTTOM RIGHT ABOVE NAV -->
-<button class="fab" onclick="openModal('m-fab')">
-  <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-</button>
+<!-- LOW STOCK DRAWER -->
+<div class="overlay" id="m-lowstock">
+  <div class="sheet">
+    <div class="sh-handle"></div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+      <div class="sh-title" style="margin:0">🔔 Low Stock Alert</div>
+      <button class="qb" onclick="closeModal('m-lowstock')">Close</button>
+    </div>
+    <div style="background:var(--amber-l);border-radius:9px;padding:8px 12px;margin-bottom:12px;font-size:11px;color:var(--amber-d);border:1px solid rgba(184,114,10,.2)">⚙️ Set threshold in Sheet Column K (LowThreshold) per row. Default = 10.</div>
+    <div id="lowStockList"></div>
+  </div>
+</div>
 
-<!-- ═══ MODALS ═══ -->
-<div class="overlay" id="m-product"><div class="sheet"><div class="sh-handle"></div><div class="sh-title" id="mProdTitle">Add Product</div><div class="ff"><label class="fl">Product Name</label><input type="text" class="fi" id="pName" placeholder="e.g. Makrana Marble Ganesh"/></div><div class="ff"><label class="fl">Type</label><select class="fi fsel" id="pType"><option>Idol</option><option>Kitchen Item</option><option>Tulsi Pot</option><option>Tissue Box</option><option>Decorative</option><option>Other</option></select></div><div class="ff"><label class="fl">Size / Variant</label><input type="text" class="fi" id="pSize" placeholder="e.g. 12 inch, 3 ft, Small"/></div><div class="ff"><label class="fl">Stock Quantity</label><div class="adj-row"><button class="adj-btn" onclick="adjStock(-10,'pStock')">−10</button><button class="adj-btn" onclick="adjStock(-1,'pStock')">−</button><input type="number" class="adj-inp" id="pStock" placeholder="0" min="0"/><button class="adj-btn" onclick="adjStock(1,'pStock')">+</button><button class="adj-btn" onclick="adjStock(10,'pStock')">+10</button></div></div><div class="ff"><label class="fl">Box Ready</label><div class="adj-row"><button class="adj-btn" onclick="adjStock(-1,'pPacked')">−</button><input type="number" class="adj-inp" id="pPacked" placeholder="0" min="0"/><button class="adj-btn" onclick="adjStock(1,'pPacked')">+</button></div></div><div id="pErr" class="err-box"></div><div style="display:flex;gap:8px"><button class="btn btn-s" onclick="closeModal('m-product')" style="flex:.6">Cancel</button><button class="btn btn-p" onclick="saveProd()">Save Product</button></div></div></div>
+<!-- ADD/EDIT PRODUCT -->
+<div class="overlay" id="m-product">
+  <div class="sheet">
+    <div class="sh-handle"></div>
+    <div class="sh-title" id="mProdTitle">Add Product</div>
+    <div class="ff"><label class="fl">Category</label>
+      <select class="fi fsel" id="pCat"><option>Kitchen</option><option>Bathroom</option><option>Tulsi Pot</option><option>Decorative</option><option>Marble Items</option><option>Other</option></select>
+    </div>
+    <div class="ff"><label class="fl">Base Product Name</label><input type="text" class="fi" id="pName" placeholder="e.g. Kundi, Ganesh Idol…"/></div>
+    <div class="ff"><label class="fl">Emoji</label><input type="text" class="fi" id="pEmoji" placeholder="e.g. 🏺 🪴 🗿" maxlength="4"/></div>
+    <div style="font-size:10px;font-weight:700;color:var(--bark-lt);text-transform:uppercase;letter-spacing:.7px;margin-bottom:9px">Variants (Color + Size each = 1 row in Sheet)</div>
+    <div class="var-builder" id="varBuilder"></div>
+    <button class="btn btn-s" style="margin-bottom:13px;padding:9px" onclick="addVarRow()">+ Add Variant</button>
+    <div class="err-box" id="pErr"></div>
+    <div style="display:flex;gap:8px"><button class="btn btn-s" onclick="closeModal('m-product')" style="flex:.6">Cancel</button><button class="btn btn-p" onclick="saveProd()">Save</button></div>
+  </div>
+</div>
 
-<div class="overlay" id="m-quick"><div class="sheet"><div class="sh-handle"></div><div class="sh-title" id="mQuickTitle">Move to Box</div><div style="background:var(--bg);border-radius:13px;padding:12px 13px;margin-bottom:13px;border:1px solid var(--brd)"><div style="font-size:10px;font-weight:700;color:var(--bark-lt);text-transform:uppercase;letter-spacing:.5px">Product</div><div style="font-size:14.5px;font-weight:700;color:var(--bark);margin-top:2px;font-family:'Fraunces',serif" id="qProdName">—</div><div style="display:flex;gap:13px;margin-top:7px"><span style="font-size:11px;color:var(--bark-lt)">Stock: <b id="qTotal" style="color:var(--bark)">0</b></span><span style="font-size:11px;color:var(--bark-lt)">Box: <b id="qPacked" style="color:var(--leaf)">0</b></span><span style="font-size:11px;color:var(--bark-lt)">Left: <b id="qRemain" style="color:var(--amber)">0</b></span></div></div><div class="ff"><label class="fl" id="qQtyLbl">Quantity</label><div class="adj-row"><button class="adj-btn" onclick="adjStock(-5,'quickQty')">−5</button><button class="adj-btn" onclick="adjStock(-1,'quickQty')">−</button><input type="number" class="adj-inp" id="quickQty" placeholder="0" min="1"/><button class="adj-btn" onclick="adjStock(1,'quickQty')">+</button><button class="adj-btn" onclick="adjStock(5,'quickQty')">+5</button></div><div class="qbs" id="qBtns"></div></div><div id="qErr" class="err-box"></div><button class="btn btn-p" id="qSubmit" onclick="submitQuick()">Confirm</button></div></div>
+<!-- QUICK BOX / DISPATCH -->
+<div class="overlay" id="m-quick">
+  <div class="sheet">
+    <div class="sh-handle"></div>
+    <div class="sh-title" id="mQuickTitle">Move to Box</div>
+    <div style="background:var(--bg);border-radius:13px;padding:12px 13px;margin-bottom:13px;border:1px solid var(--brd)">
+      <div style="font-size:10px;font-weight:700;color:var(--bark-lt);text-transform:uppercase;letter-spacing:.5px">Variant</div>
+      <div style="font-size:15px;font-weight:700;color:var(--bark);margin-top:3px;font-family:Fraunces,serif" id="qVarName">—</div>
+      <div style="display:flex;gap:14px;margin-top:7px">
+        <span style="font-size:11px;color:var(--bark-lt)">Stock:<b id="qStock" style="color:var(--bark)"> 0</b></span>
+        <span style="font-size:11px;color:var(--bark-lt)">Box:<b id="qPacked" style="color:var(--leaf)"> 0</b></span>
+        <span style="font-size:11px;color:var(--bark-lt)">Left:<b id="qRemain" style="color:var(--amber)"> 0</b></span>
+      </div>
+    </div>
+    <div class="ff"><label class="fl" id="qQtyLbl">Quantity</label>
+      <div class="adj-row"><button class="adj-btn" onclick="adjQ(-5,'quickQty')">−5</button><button class="adj-btn" onclick="adjQ(-1,'quickQty')">−</button><input type="number" class="adj-inp" id="quickQty" placeholder="0" min="1"/><button class="adj-btn" onclick="adjQ(1,'quickQty')">+</button><button class="adj-btn" onclick="adjQ(5,'quickQty')">+5</button></div>
+      <div class="qbs" id="qBtns"></div>
+    </div>
+    <div class="err-box" id="qErr"></div>
+    <button class="btn btn-p" id="qSubmit" onclick="submitQuick()">Confirm</button>
+  </div>
+</div>
 
-<div class="overlay" id="m-stock"><div class="sheet"><div class="sh-handle"></div><div class="sh-title">Adjust Stock</div><div style="background:var(--bg);border-radius:13px;padding:11px 13px;margin-bottom:13px;border:1px solid var(--brd)"><div style="font-size:11px;color:var(--bark-lt)">For: <b id="adjName" style="color:var(--bark)">—</b></div><div style="display:flex;gap:13px;margin-top:6px"><span style="font-size:11px;color:var(--bark-lt)">Current: <b id="adjTotal" style="color:var(--bark)">0</b></span><span style="font-size:11px;color:var(--bark-lt)">Box: <b id="adjPacked" style="color:var(--leaf)">0</b></span></div></div><div class="ff"><label class="fl">New Total Stock</label><div class="adj-row"><button class="adj-btn" onclick="adjStock(-10,'adjVal')">−10</button><button class="adj-btn" onclick="adjStock(-1,'adjVal')">−</button><input type="number" class="adj-inp" id="adjVal" placeholder="0" min="0"/><button class="adj-btn" onclick="adjStock(1,'adjVal')">+</button><button class="adj-btn" onclick="adjStock(10,'adjVal')">+10</button></div></div><div id="adjErr" class="err-box"></div><div style="display:flex;gap:8px"><button class="btn btn-s" onclick="closeModal('m-stock')" style="flex:.6">Cancel</button><button class="btn btn-p" onclick="saveStockAdj()">Update</button></div></div></div>
+<!-- EDIT VARIANT -->
+<div class="overlay" id="m-edit-variant">
+  <div class="sheet">
+    <div class="sh-handle"></div>
+    <div class="sh-title" id="mEditVarTitle">Edit Variant</div>
+    <div style="background:var(--blue-l);border-radius:9px;padding:8px 12px;margin-bottom:13px;font-size:11px;color:var(--blue-d);border:1px solid rgba(26,95,173,.15)">
+      📊 LowThreshold is set from Google Sheet (Column K). Change it there — syncs automatically.
+    </div>
+    <div class="ff"><label class="fl">Color / Name Prefix</label><input type="text" class="fi" id="evColor" placeholder="e.g. Green, Maroon, White…"/></div>
+    <div class="ff"><label class="fl">Size</label><input type="text" class="fi" id="evSize" placeholder="e.g. 4 inch, Small, 2.5 Feet…"/></div>
+    <div class="ff"><label class="fl">SKU</label><input type="text" class="fi" id="evSku" placeholder="Auto-generated if blank"/></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+      <div class="ff"><label class="fl">Stock</label><input type="number" class="fi" id="evStock" placeholder="0" min="0"/></div>
+      <div class="ff"><label class="fl">Box Ready</label><input type="number" class="fi" id="evPacked" placeholder="0" min="0"/></div>
+    </div>
+    <div class="ff"><label class="fl">Price ₹</label><input type="number" class="fi" id="evPrice" placeholder="0" min="0"/></div>
+    <div class="err-box" id="evErr"></div>
+    <div style="display:flex;gap:8px">
+      <button class="btn btn-s" onclick="closeModal('m-edit-variant')" style="flex:.6">Cancel</button>
+      <button class="btn btn-p" onclick="saveEditVariant()">Save to Sheet</button>
+    </div>
+  </div>
+</div>
 
-<div class="overlay" id="m-rto"><div class="sheet"><div class="sh-handle"></div><div class="sh-title" id="mRtoTitle">Add RTO / Return</div><div class="ff"><label class="fl">Product Name</label><input type="text" class="fi" id="rtoProd" placeholder="e.g. Marble Ganesh 12 inch"/></div><div class="ff"><label class="fl">Platform</label><select class="fi fsel" id="rtoCompany"><option>Amazon</option><option>Cargo</option><option>Meesho</option><option>Myntra</option><option>Direct</option><option>Other</option></select></div><div class="ff"><label class="fl">Order ID</label><input type="text" class="fi" id="rtoOrder" placeholder="e.g. 403-XXXXXX-XXXXXXX"/></div><div class="ff"><label class="fl">Tracking ID</label><input type="text" class="fi" id="rtoTrack" placeholder="Tracking number"/></div><div class="ff"><label class="fl">RTO Date</label><input type="date" class="fi" id="rtoRetDate"/></div><div class="ff"><label class="fl">Delivered Date</label><input type="date" class="fi" id="rtoDelDate"/></div><div class="ff"><label class="fl">Status</label><select class="fi fsel" id="rtoStatus"><option value="transit">In Transit</option><option value="delivered">Delivered</option><option value="returned">Returned</option><option value="pending">Pending</option></select></div><div class="ff"><label class="fl">Safe-T Claim</label><select class="fi fsel" id="rtoClaim"><option value="pending">Pending</option><option value="yes">Filed & Approved</option><option value="no">Not Filed</option></select></div><div class="ff"><label class="fl">Remark</label><input type="text" class="fi" id="rtoRemark" placeholder="Any notes…"/></div><div id="rtoErr" class="err-box"></div><div style="display:flex;gap:8px"><button class="btn btn-s" onclick="closeModal('m-rto')" style="flex:.6">Cancel</button><button class="btn btn-p" onclick="saveRTO()">Save RTO</button></div></div></div>
+<!-- DELETE -->
+<div class="overlay" id="m-del">
+  <div class="confirm-box">
+    <div class="sh-handle" style="margin-bottom:14px"></div>
+    <div class="confirm-icon"><svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg></div>
+    <div style="text-align:center;margin-bottom:18px">
+      <div style="font-size:17px;font-weight:700;color:var(--bark);font-family:Fraunces,serif;margin-bottom:6px">Delete Product?</div>
+      <div style="font-size:12px;color:var(--bark-lt)">Remove <b id="delName" style="color:var(--bark)">this product</b> and all its variants from Sheet.</div>
+    </div>
+    <div style="display:flex;gap:8px"><button class="btn btn-s" onclick="closeModal('m-del')" style="flex:1">Cancel</button><button class="btn btn-d" onclick="deleteProduct()" style="flex:1">Delete</button></div>
+  </div>
+</div>
 
-<div class="overlay" id="m-del"><div class="confirm-box"><div class="sh-handle" style="margin-bottom:14px"></div><div class="confirm-icon"><svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg></div><div style="text-align:center;margin-bottom:18px"><div style="font-size:17px;font-weight:700;color:var(--bark);font-family:'Fraunces',serif;margin-bottom:6px">Delete Product?</div><div style="font-size:12px;color:var(--bark-lt);line-height:1.65">Remove <b id="delName" style="color:var(--bark)">this product</b>. Cannot be undone.</div></div><div style="display:flex;gap:8px"><button class="btn btn-s" onclick="closeModal('m-del')" style="flex:1">Cancel</button><button class="btn btn-d" onclick="deleteProduct()" style="flex:1">Delete</button></div></div></div>
+<!-- RTO MODAL -->
+<div class="overlay" id="m-rto">
+  <div class="sheet">
+    <div class="sh-handle"></div>
+    <div class="sh-title" id="mRtoTitle">Add RTO</div>
+    <div class="ff"><label class="fl">Product Name</label><input type="text" class="fi" id="rtoProd" placeholder="e.g. 2.5 Feet White Kundi"/></div>
+    <div class="ff"><label class="fl">Platform</label><select class="fi fsel" id="rtoCompany"><option>Amazon</option><option>Meesho</option><option>Myntra</option><option>Flipkart</option><option>Cargo</option><option>Direct</option><option>Other</option></select></div>
+    <div class="ff"><label class="fl">Order ID</label><input type="text" class="fi" id="rtoOrder" placeholder="e.g. 403-XXXXXX-XXXXXXX"/></div>
+    <div class="ff"><label class="fl">Tracking ID</label><input type="text" class="fi" id="rtoTrack" placeholder="Tracking number"/></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+      <div class="ff"><label class="fl">RTO Date</label><input type="date" class="fi" id="rtoRetDate"/></div>
+      <div class="ff"><label class="fl">Delivered Date</label><input type="date" class="fi" id="rtoDelDate"/></div>
+    </div>
+    <div class="ff"><label class="fl">Status</label><select class="fi fsel" id="rtoStatus"><option value="transit">In Transit</option><option value="delivered">Delivered</option><option value="returned">Returned</option><option value="pending">Pending</option></select></div>
+    <div class="ff"><label class="fl">Safe-T Claim</label><select class="fi fsel" id="rtoClaim"><option value="pending">Pending</option><option value="yes">Filed &amp; Approved</option><option value="no">Not Filed</option></select></div>
+    <div class="ff"><label class="fl">Remark</label><input type="text" class="fi" id="rtoRemark" placeholder="Any notes…"/></div>
+    <div class="err-box" id="rtoErr"></div>
+    <div style="display:flex;gap:8px"><button class="btn btn-s" onclick="closeModal('m-rto')" style="flex:.6">Cancel</button><button class="btn btn-p" onclick="saveRTO()">Save</button></div>
+  </div>
+</div>
 
-<div class="overlay" id="m-del-rto"><div class="confirm-box"><div class="sh-handle" style="margin-bottom:14px"></div><div class="confirm-icon"><svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/></svg></div><div style="text-align:center;margin-bottom:18px"><div style="font-size:17px;font-weight:700;color:var(--bark);font-family:'Fraunces',serif;margin-bottom:6px">Delete RTO?</div><div style="font-size:12px;color:var(--bark-lt)">This entry will be permanently removed.</div></div><div style="display:flex;gap:8px"><button class="btn btn-s" onclick="closeModal('m-del-rto')" style="flex:1">Cancel</button><button class="btn btn-d" onclick="deleteRTO()" style="flex:1">Delete</button></div></div></div>
+<!-- DEL RTO -->
+<div class="overlay" id="m-del-rto">
+  <div class="confirm-box">
+    <div class="sh-handle" style="margin-bottom:14px"></div>
+    <div class="confirm-icon"><svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/></svg></div>
+    <div style="text-align:center;margin-bottom:18px">
+      <div style="font-size:17px;font-weight:700;color:var(--bark);font-family:Fraunces,serif;margin-bottom:6px">Delete RTO?</div>
+      <div style="font-size:12px;color:var(--bark-lt)">This will be permanently removed.</div>
+    </div>
+    <div style="display:flex;gap:8px"><button class="btn btn-s" onclick="closeModal('m-del-rto')" style="flex:1">Cancel</button><button class="btn btn-d" onclick="deleteRTO()" style="flex:1">Delete</button></div>
+  </div>
+</div>
 
-<div class="overlay" id="m-fab" onclick="closeModal('m-fab')"><div class="sheet" onclick="e=>e.stopPropagation()"><div class="sh-handle"></div><div class="sh-title">Quick Action</div><div style="display:flex;flex-direction:column;gap:8px"><button class="btn btn-p" onclick="closeModal('m-fab');openAddProduct()"><svg style="width:14px;height:14px;stroke:#fff;fill:none;stroke-width:2.2;stroke-linecap:round" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Add New Product</button><button class="btn btn-g" onclick="closeModal('m-fab');go('entry');setET('pack')">📦 Move to Box</button><button class="btn btn-d" onclick="closeModal('m-fab');go('entry');setET('sale')">🛒 Dispatch Entry</button><button class="btn btn-a" onclick="closeModal('m-fab');go('rto');openAddRTO()">🔁 Add RTO / Return</button><button class="btn btn-s" onclick="closeModal('m-fab');syncNow()">🔄 Sync Sheets Now</button></div></div></div>
+<!-- FAB -->
+<div class="overlay" id="m-fab">
+  <div class="sheet">
+    <div class="sh-handle"></div>
+    <div class="sh-title">Quick Action</div>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <button class="btn btn-p" onclick="closeModal('m-fab');openAddProduct()">➕ Add New Product</button>
+      <button class="btn btn-g" onclick="closeModal('m-fab');go('entry');setET('pack')">📦 Move to Box</button>
+      <button class="btn btn-d" onclick="closeModal('m-fab');go('entry');setET('sale')">🛒 Dispatch Entry</button>
+      <button class="btn btn-b" onclick="closeModal('m-fab');go('rto');openAddRTO()">🔁 Add RTO / Return</button>
+      <button class="btn btn-s" onclick="closeModal('m-fab');syncNow()">🔄 Sync Sheets Now</button>
+    </div>
+  </div>
+</div>
 
 <script>
-/* ══════════════════════════════════════════════════
-   GOOGLE SHEETS — GET-ONLY API (No CORS issues)
-══════════════════════════════════════════════════ */
-const GS = 'https://script.google.com/macros/s/AKfycbyyZosKH76HSCyil2Jx4hTMuLPOEBxiSscgE9B6EhhqDG0eSWnoWUCbclP7WztlYBOL/exec';
+// ═══════════════════════════════════════════
+// HANDICRAFT BAZAAR
+// Flat sheet: 1 row per variant
+// Product cards with Stock/Box/Left display
+// Click variant to edit inline
+// LowThreshold from Sheet only
+// ═══════════════════════════════════════════
 
-async function gsCall(params) {
-  const url = GS + '?' + new URLSearchParams(params).toString();
-  try {
-    const res = await fetch(url, { method: 'GET', mode: 'cors' });
-    const text = await res.text();
-    // Clean response (sometimes has BOM or extra chars)
-    const clean = text.trim().replace(/^\uFEFF/, '');
-    return JSON.parse(clean);
-  } catch(e) {
-    console.error('gsCall failed:', params.action, e);
-    return { error: e.message };
-  }
+// ⚠️ REPLACE with your Web App URL after deploying GAS:
+var GS = 'https://script.google.com/macros/s/AKfycbycmmPaPC0gIOU5GLXhtff5e9eccZ9OmfpHxMZ8l-3g1FW4VBsGxUtQ_n_q_rKOkunt/exec';
+
+var DEFAULT_LOW = 10;
+var CAT_EMOJI   = {Kitchen:'🍳',Bathroom:'🚿','Tulsi Pot':'🌿',Decorative:'✨','Marble Items':'🗿',Other:'📦'};
+var CATEGORIES  = ['Kitchen','Bathroom','Tulsi Pot','Decorative','Marble Items','Other'];
+
+var products   = []; // [{id, name, category, emoji, variants:[{id,color,size,sku,stock,packed,price,lowThreshold}]}]
+var activities = [];
+var rtos       = [];
+var varRows    = [];
+var editProdId = null, delProdId = null, editRTOId = null;
+var editVarData = null; // {product, variant}
+var quickData  = {type:'pack', pid:'', vid:''};
+var catFilter  = 'all', sizeFilter = 'all', lowOnly = false;
+var rtoFilter  = 'all', entType = 'pack', khFilter = 'all';
+
+function eid(i){return document.getElementById(i);}
+function toast(msg,type,dur){
+  type=type||'info';dur=dur||2800;
+  var icons={ok:'✅',err:'❌',info:'📝',warn:'⚠️'};
+  var el=document.createElement('div');el.className='toast '+type;
+  el.innerHTML='<span>'+(icons[type]||'📝')+'</span><span>'+msg+'</span>';
+  eid('toastWrap').appendChild(el);
+  setTimeout(function(){el.classList.add('toast-out');setTimeout(function(){el.remove();},250);},dur);
 }
+function openModal(id){eid(id).classList.add('open');}
+function closeModal(id){eid(id).classList.remove('open');}
+function toggleDark(){var h=document.documentElement,d=h.getAttribute('data-theme')==='dark';h.setAttribute('data-theme',d?'light':'dark');eid('darkBtn').textContent=d?'🌙':'☀️';}
+function adjQ(n,id){var el=eid(id);el.value=Math.max(0,(parseInt(el.value)||0)+n);}
+function addToQ(id,n){var el=eid(id);el.value=Math.max(0,(parseInt(el.value)||0)+n);}
+function fT(ts){return new Date(ts).toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});}
+function fD(ts){var d=new Date(ts),t=new Date();return d.toDateString()===t.toDateString()?'Today':d.toLocaleDateString('en-IN',{day:'numeric',month:'short'});}
+function fShort(s){return s?new Date(s).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'}):'—';}
+function varThresh(v){return Number(v.lowThreshold)||DEFAULT_LOW;}
+function isLow(v){return v.stock<=varThresh(v);}
+function totalStock(p){return p.variants.reduce(function(s,v){return s+v.stock;},0);}
+function totalPacked(p){return p.variants.reduce(function(s,v){return s+v.packed;},0);}
+function allVariants(){var o=[];products.forEach(function(p){p.variants.forEach(function(v){o.push(Object.assign({},v,{productId:p.id,productName:p.name,category:p.category,emoji:p.emoji}));});});return o;}
+function lowVars(){return allVariants().filter(function(v){return isLow(v);});}
+function todaySale(){var t=new Date().toDateString();return activities.filter(function(a){return a.type==='sale'&&new Date(a.time).toDateString()===t;}).reduce(function(s,a){return s+a.qty;},0);}
+function vDisplayName(v,p){return v.color+' '+(p?p.name:v.productName||'');}
+function showLowStock(){updateBell();openModal('m-lowstock');}
 
-/* ── SYNC STATUS ── */
-function setSS(state, txt) {
-  $('syncPill').className = `sync-pill ${state}`;
-  $('sdot').className     = `sdot ${state}`;
-  $('syncTxt').textContent= txt;
-  const lt = $('lastSyncTxt');
-  if (lt) lt.textContent  = txt;
+// ── LOCAL STORAGE ──
+var LS_P='hb7_p',LS_A='hb7_a',LS_R='hb7_r';
+function saveLocal(){try{localStorage.setItem(LS_P,JSON.stringify(products));localStorage.setItem(LS_A,JSON.stringify(activities.slice(-500)));localStorage.setItem(LS_R,JSON.stringify(rtos));}catch(e){}}
+function loadLocal(){try{var p=localStorage.getItem(LS_P),a=localStorage.getItem(LS_A),r=localStorage.getItem(LS_R);if(p)products=JSON.parse(p);if(a)activities=JSON.parse(a);if(r)rtos=JSON.parse(r);}catch(e){}}
+function clearLocalAndSync(){[LS_P,LS_A,LS_R].forEach(function(k){localStorage.removeItem(k);});products=[];activities=[];rtos=[];toast('Cleared. Syncing…','info');syncNow();}
+
+// ── SYNC ──
+function setSS(s,t){eid('syncPill').className='sync-pill '+s;eid('sdot').className='sdot '+s;eid('syncTxt').textContent=t;var l=eid('lastSyncTxt');if(l)l.textContent=t;}
+function gsCall(p){
+  var url=GS+'?'+new URLSearchParams(p).toString();
+  return fetch(url,{method:'GET',mode:'cors'}).then(function(r){return r.text();}).then(function(t){var c=t.trim();if(c.charCodeAt(0)===0xFEFF)c=c.slice(1);return JSON.parse(c);}).catch(function(e){return{error:e.message};});
 }
-
-/* ══════════════════════════════════════════════════
-   LOCAL STORAGE — Data reload ke baad bhi bani rahe
-══════════════════════════════════════════════════ */
-const LS_KEY_P = 'hb_products';
-const LS_KEY_R = 'hb_rtos';
-const LS_KEY_A = 'hb_activities';
-
-function saveLocal() {
-  try {
-    localStorage.setItem(LS_KEY_P, JSON.stringify(products));
-    localStorage.setItem(LS_KEY_R, JSON.stringify(rtos));
-    localStorage.setItem(LS_KEY_A, JSON.stringify(activities.slice(-300)));
-  } catch(e) { console.warn('LocalStorage save failed:', e); }
-}
-
-function loadLocal() {
-  try {
-    const p = localStorage.getItem(LS_KEY_P);
-    const r = localStorage.getItem(LS_KEY_R);
-    const a = localStorage.getItem(LS_KEY_A);
-    if (p) products    = JSON.parse(p);
-    if (r) rtos        = JSON.parse(r);
-    if (a) activities  = JSON.parse(a);
-  } catch(e) { console.warn('LocalStorage load failed:', e); }
-}
-
-function clearLocalAndSync() {
-  localStorage.removeItem(LS_KEY_P);
-  localStorage.removeItem(LS_KEY_R);
-  localStorage.removeItem(LS_KEY_A);
-  products = []; rtos = []; activities = [];
-  renderDash();
-  toast('Local data cleared. Syncing from Sheet…', 'info');
-  syncNow();
-}
-
-/* ══════════════════════════════════════════════════
-   SYNC: Pull from Sheet
-══════════════════════════════════════════════════ */
-async function syncNow() {
-  setSS('busy', 'Syncing…');
-  try {
-    const data = await gsCall({ action: 'getAll' });
-    if (data.error) throw new Error(data.error);
-
-    let changed = false;
-
-    // ── Merge Products ──
-    if (Array.isArray(data.products)) {
-      data.products.forEach(sp => {
-        sp.id     = String(sp.id);
-        sp.total  = Number(sp.total)  || 0;
-        sp.packed = Number(sp.packed) || 0;
-        const idx = products.findIndex(p => String(p.id) === sp.id);
-        if (idx === -1) { products.push(sp); changed = true; }
-        else {
-          const local = products[idx];
-          if (local.total !== sp.total || local.packed !== sp.packed || local.name !== sp.name) {
-            products[idx] = { ...local, ...sp }; changed = true;
-          }
-        }
-      });
-      if (data.products.length > 0) {
-        const ids = data.products.map(p => String(p.id));
-        const before = products.length;
-        products = products.filter(p => ids.includes(String(p.id)));
-        if (products.length !== before) changed = true;
-      }
-    }
-
-    // ── Merge RTOs ──
-    if (Array.isArray(data.rtos)) {
-      data.rtos.forEach(sr => {
-        sr.id = String(sr.id);
-        const idx = rtos.findIndex(r => String(r.id) === sr.id);
-        if (idx === -1) { rtos.push(sr); changed = true; }
-        else if (rtos[idx].status !== sr.status || rtos[idx].claim !== sr.claim) {
-          rtos[idx] = { ...rtos[idx], ...sr }; changed = true;
-        }
-      });
-      if (data.rtos.length > 0) {
-        const ids = data.rtos.map(r => String(r.id));
-        const before = rtos.length;
-        rtos = rtos.filter(r => ids.includes(String(r.id)));
-        if (rtos.length !== before) changed = true;
-      }
-    }
-
-    // ── Merge Activities ──
-    if (Array.isArray(data.activities)) {
-      const existing = new Set(activities.map(a => String(a.time)));
-      data.activities.forEach(a => {
-        a.time = Number(a.time) || Date.now();
-        if (!existing.has(String(a.time))) { activities.push(a); changed = true; }
+function syncNow(){
+  setSS('busy','Syncing…');
+  gsCall({action:'getAll'}).then(function(data){
+    if(data.error)throw new Error(data.error);
+    if(Array.isArray(data.products)){
+      // Sheet is source of truth — replace local with sheet data
+      // but keep pending local changes not yet in sheet
+      var sheetIds=new Set(data.products.map(function(p){return String(p.id);}));
+      products=data.products.map(function(sp){
+        sp.id=String(sp.id);
+        if(!sp.variants)sp.variants=[];
+        sp.variants.forEach(function(v){
+          v.id=String(v.id);
+          v.stock=Number(v.stock)||0;
+          v.packed=Number(v.packed)||0;
+          v.lowThreshold=Number(v.lowThreshold)||DEFAULT_LOW;
+        });
+        return sp;
       });
     }
-
+    if(Array.isArray(data.rtos)){
+      var rIds=new Set(data.rtos.map(function(r){return String(r.id);}));
+      var localOnly=rtos.filter(function(r){return !rIds.has(String(r.id));});
+      rtos=data.rtos.map(function(r){r.id=String(r.id);return r;}).concat(localOnly);
+    }
+    if(Array.isArray(data.activities)){
+      var ex=new Set(activities.map(function(a){return String(a.id||a.time);}));
+      data.activities.forEach(function(a){a.time=Number(a.time)||Date.now();if(!ex.has(String(a.id||a.time)))activities.push(a);});
+    }
     saveLocal();
-
-    const now = new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
-    setSS('ok', `✅ Synced ${now}`);
-
-    if (changed) {
-      renderDash(); buildCatChips(); renderProds(); renderKhata(); renderRTO();
-    }
-    toast('Google Sheets se sync ho gaya ✅', 'ok');
-
-  } catch(e) {
-    setSS('err', '❌ Failed');
-    toast('Sync error: ' + e.message, 'err');
-    console.error('Sync failed:', e);
-  }
+    var now=new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
+    setSS('ok','✅ '+now);
+    refreshAll();toast('Synced ✅','ok');
+  }).catch(function(e){setSS('err','❌ Failed');toast('Sync error: '+e.message,'err');});
 }
 
-/* ── Push: Product save to Sheet ── */
-async function pushProduct(p) {
-  const res = await gsCall({
-    action: 'saveProduct',
-    id: p.id, name: p.name, type: p.type, size: p.size,
-    total: p.total, packed: p.packed
+// Push variant (one row in sheet)
+function pushVariant(p,v){
+  return gsCall({action:'saveVariant',
+    productId:p.id, productName:p.name, category:p.category, emoji:p.emoji,
+    color:v.color, size:v.size, sku:v.sku||'',
+    stock:v.stock, boxReady:v.packed, price:v.price||'',
+    lowThreshold:v.lowThreshold||DEFAULT_LOW});
+}
+function pushDelVariant(p,v){return gsCall({action:'deleteVariant',productId:p.id,color:v.color,size:v.size});}
+function pushDelProduct(pid){return gsCall({action:'deleteVariant',productId:pid});}
+function pushRTO(r){return gsCall({action:'saveRTO',id:r.id,product:r.product,company:r.company,orderId:r.orderId||'',trackId:r.trackId||'',returnDate:r.returnDate||'',deliveredDate:r.deliveredDate||'',status:r.status,claim:r.claim,remark:r.remark||''});}
+function pushDelRTO(id){return gsCall({action:'deleteRTO',id:id});}
+function pushKhata(a){return gsCall({action:'addKhata',id:a.id||String(Date.now()),type:a.type,productId:a.productId||'',productName:a.productName,variantId:a.variantId||'',variantLabel:a.variantLabel||'',qty:a.qty,user:a.user||'Kamal',note:a.note||''});}
+
+// ── NAV ──
+function go(name){
+  document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
+  document.querySelectorAll('.ni').forEach(function(n){n.classList.remove('active');});
+  eid('screen-'+name).classList.add('active');eid('sw').scrollTop=0;
+  var nav=eid('nav-'+name);if(nav)nav.classList.add('active');
+  ({dashboard:renderDash,products:function(){buildTabs();buildFilters();renderProds();},khata:renderKhata,entry:populateEntSel,rto:function(){buildRTOChips();renderRTO();},profile:renderProfile}[name]||function(){})();
+}
+function refreshAll(){updateBell();renderDash();buildTabs();buildFilters();renderProds();renderKhata();renderRTO();}
+
+// ── BELL ──
+function updateBell(){
+  var low=lowVars();var b=eid('bellBadge');
+  if(low.length>0){b.textContent=low.length>99?'99+':low.length;b.style.display='flex';}else b.style.display='none';
+  var list=eid('lowStockList');if(!list)return;
+  if(!low.length){list.innerHTML='<div style="text-align:center;padding:28px;color:var(--bark-lt);font-size:13px">✅ All good! No low stock.</div>';return;}
+  var byCat={};
+  low.forEach(function(v){if(!byCat[v.category])byCat[v.category]=[];byCat[v.category].push(v);});
+  var html='';
+  Object.keys(byCat).forEach(function(cat){
+    html+='<div style="font-size:10px;font-weight:700;color:var(--clay);text-transform:uppercase;padding:10px 0 6px;display:flex;align-items:center;gap:8px">'+(CAT_EMOJI[cat]||'📦')+' '+cat+'<span style="flex:1;height:1px;background:var(--brd);display:block"></span></div>';
+    byCat[cat].forEach(function(v){
+      var thresh=varThresh(v);
+      html+='<div class="ls-item"><div style="font-size:22px;flex-shrink:0">'+(v.emoji||CAT_EMOJI[v.category]||'📦')+'</div>'+
+        '<div class="ls-info"><div class="ls-prod">'+vDisplayName(v,null)+'</div><div class="ls-detail">'+v.size+' · Threshold: '+thresh+'</div></div>'+
+        '<div class="ls-qty"><div class="num">'+v.stock+'</div><div class="lbl">left</div></div></div>';
+    });
   });
-  if (res?.error) console.warn('pushProduct error:', res.error);
-  return res;
+  list.innerHTML=html;
 }
 
-async function pushDeleteProduct(id) {
-  return await gsCall({ action: 'deleteProduct', id });
+// ── DASHBOARD ──
+function renderDash(){
+  var av=allVariants();
+  eid('d-total').textContent=products.length;
+  eid('d-stock').textContent=av.reduce(function(s,v){return s+v.stock;},0);
+  eid('d-boxready').textContent=av.reduce(function(s,v){return s+v.packed;},0);
+  eid('d-low').textContent=lowVars().length;
+  var ts=todaySale();eid('d-today-sold').textContent=ts;
+  var tp=new Set(activities.filter(function(a){return a.type==='sale'&&new Date(a.time).toDateString()===new Date().toDateString();}).map(function(a){return a.productName;}));
+  eid('d-today-sub').textContent='Across '+tp.size+' product(s)';
+  // Cat stock
+  var usedCats=CATEGORIES.filter(function(c){return products.some(function(p){return p.category===c;});});
+  var cg=eid('catStockGrid');
+  if(!usedCats.length){cg.innerHTML='<div style="grid-column:1/-1;text-align:center;font-size:12px;color:var(--bark-lt);padding:14px">No products yet. Sync from Sheet.</div>';return;}
+  cg.innerHTML=usedCats.map(function(cat){
+    var cp=products.filter(function(p){return p.category===cat;});
+    var cs=cp.reduce(function(s,p){return s+totalStock(p);},0);
+    var cbr=cp.reduce(function(s,p){return s+totalPacked(p);},0);
+    var cl=cp.flatMap?cp.flatMap(function(p){return p.variants;}).filter(function(v){return isLow(v);}).length:0;
+    var pct=cs>0?Math.round(cbr/cs*100):0;
+    return '<div class="cs-card" onclick="go(\'products\');setTimeout(function(){setCat(\''+cat+'\')},100)">'+
+      '<div class="cs-top"><div class="cs-emoji">'+(CAT_EMOJI[cat]||'📦')+'</div><div style="flex:1;min-width:0"><div class="cs-name">'+cat+'</div></div></div>'+
+      '<div class="cs-num">'+cs+'</div>'+
+      '<div class="cs-bar"><div class="cs-bar-fill" style="width:'+pct+'%"></div></div>'+
+      '<div class="cs-sub">'+cp.length+' items · '+cbr+' boxed'+(cl>0?' · <span style="color:var(--red);font-weight:700">⚠ '+cl+' low</span>':'')+'</div>'+
+    '</div>';
+  }).join('');
+  var rec=activities.slice().sort(function(a,b){return b.time-a.time;}).slice(0,5);
+  eid('d-activity').innerHTML=rec.length?rec.map(function(a,i){return tlHtml(a,i,rec.length);}).join(''):'<div style="text-align:center;padding:10px;color:var(--bark-lt);font-size:12px">No activity yet</div>';
+  updateBell();
 }
 
-async function pushRTO(r) {
-  return await gsCall({
-    action: 'saveRTO',
-    id: r.id, product: r.product, company: r.company,
-    orderId: r.orderId||'', trackId: r.trackId||'',
-    returnDate: r.returnDate||'', deliveredDate: r.deliveredDate||'',
-    status: r.status, claim: r.claim, remark: r.remark||''
-  });
+// ── TABS / FILTERS ──
+function buildTabs(){
+  var types=['all'].concat(CATEGORIES.filter(function(c){return products.some(function(p){return p.category===c;});}));
+  eid('catTabs').innerHTML=types.map(function(c){return '<button class="cat-tab'+(catFilter===c?' active':'')+'" onclick="setCat(\''+c+'\')">'+(c==='all'?'All':c)+'</button>';}).join('');
 }
-
-async function pushDeleteRTO(id) {
-  return await gsCall({ action: 'deleteRTO', id });
+function setCat(c){catFilter=c;buildTabs();buildFilters();renderProds();}
+function buildFilters(){
+  var src=catFilter==='all'?allVariants():allVariants().filter(function(v){var p=products.find(function(x){return String(x.id)===String(v.productId);});return p&&p.category===catFilter;});
+  var sizes=[];src.forEach(function(v){if(v.size&&sizes.indexOf(v.size)===-1)sizes.push(v.size);});sizes.sort();
+  var h='<div class="fchip'+(sizeFilter==='all'?' active':'')+'" onclick="setSize(\'all\')">All Sizes</div>';
+  sizes.forEach(function(s){h+='<div class="fchip'+(sizeFilter===s?' active':'')+'" onclick="setSize(\''+s+'\')">'+s+'</div>';});
+  h+='<div class="fchip fchip-low'+(lowOnly?' active':'')+'" onclick="toggleLow()">⚠ Low Stock</div>';
+  eid('filterRow').innerHTML=h;
 }
+function setSize(s){sizeFilter=s;buildFilters();renderProds();}
+function toggleLow(){lowOnly=!lowOnly;buildFilters();renderProds();}
 
-async function pushKhata(a) {
-  return await gsCall({
-    action: 'addKhata',
-    type: a.type, productId: a.productId||'',
-    productName: a.productName, qty: a.qty,
-    user: a.user||'Kamal', note: a.note||''
-  });
-}
-
-/* ══════════════════════════════════════════════════
-   DATA STATE
-══════════════════════════════════════════════════ */
-let products=[], activities=[], rtos=[];
-let curProd=null, editId=null, editRTOId=null;
-let quickType='pack', entType='pack', catF='all', khF='all', rtoF='all';
-
-const EM = { Idol:'🗿','Kitchen Item':'🫙','Tulsi Pot':'🌿','Tissue Box':'📦',Decorative:'✨',Other:'🪨' };
-const $  = id => document.getElementById(id);
-
-/* ══════════════════════════════════════════════════
-   UTILS
-══════════════════════════════════════════════════ */
-const fT = ts => new Date(ts).toLocaleTimeString('en-IN', { hour:'2-digit', minute:'2-digit' });
-const fD = ts => {
-  const d=new Date(ts), t=new Date();
-  return d.toDateString()===t.toDateString() ? 'Today' : d.toLocaleDateString('en-IN',{day:'numeric',month:'short'});
-};
-const fFull  = ts => new Date(ts).toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});
-const fShort = s  => s ? new Date(s).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'}) : '—';
-const em     = p  => EM[p.type] || '🪨';
-const todayS = (pid=null) => {
-  const t=new Date().toDateString();
-  return activities.filter(a=>a.type==='sale'&&new Date(a.time).toDateString()===t&&(pid===null||String(a.productId)===String(pid))).reduce((s,a)=>s+a.qty,0);
-};
-
-function addQ(id,n){const el=$(id);el.value=Math.max(0,(parseInt(el.value)||0)+n);}
-function adjStock(n,id){const el=$(id);el.value=Math.max(0,(parseInt(el.value)||0)+n);}
-function openModal(id){$(id).classList.add('open');}
-function closeModal(id){$(id).classList.remove('open');}
-function toggleDark(){
-  const h=document.documentElement,dark=h.getAttribute('data-theme')==='dark';
-  h.setAttribute('data-theme',dark?'light':'dark');
-  $('darkBtn').textContent=dark?'🌙':'☀️';
-}
-
-function toast(msg, type='info', dur=2800) {
-  const c=$('toastWrap'), t=document.createElement('div');
-  t.className=`toast ${type}`;
-  const icons={ok:'✅',err:'❌',info:'📝',warn:'⚠️'};
-  t.innerHTML=`<span>${icons[type]||'📝'}</span><span>${msg}</span>`;
-  c.appendChild(t);
-  setTimeout(()=>{t.classList.add('toast-out');setTimeout(()=>t.remove(),250);},dur);
-}
-
-/* ══════════════════════════════════════════════════
-   INIT GREETING
-══════════════════════════════════════════════════ */
-const _d=new Date(), _h=_d.getHours();
-$('dashGreet').textContent=(_h<12?'Namaste 🙏':_h<17?'Kem Cho ☀️':'Ram Ram 🌙')+', Kamal';
-$('dateLbl').textContent=_d.toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
-
-/* ══════════════════════════════════════════════════
-   NAVIGATION
-══════════════════════════════════════════════════ */
-function go(name) {
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.querySelectorAll('.ni').forEach(n=>n.classList.remove('active'));
-  $('screen-'+name).classList.add('active');
-  $('sw').scrollTop=0;
-  const nav=$('nav-'+name); if(nav) nav.classList.add('active');
-  ({
-    dashboard: renderDash,
-    products:  ()=>{buildCatChips();renderProds();},
-    khata:     renderKhata,
-    rto:       ()=>{buildRTOChips();renderRTO();},
-    entry:     populateEntSel,
-    profile:   renderProfile,
-    report:    renderReport
-  }[name]||function(){})();
-}
-
-/* ══════════════════════════════════════════════════
-   DASHBOARD
-══════════════════════════════════════════════════ */
-function renderDash() {
-  $('d-total').textContent  = products.length;
-  $('d-stock').textContent  = products.reduce((a,p)=>a+p.total,0);
-  $('d-packed').textContent = products.reduce((a,p)=>a+p.packed,0);
-  $('d-low').textContent    = products.filter(p=>(p.total-p.packed)<10).length;
-  const ts=todayS();
-  $('d-today-sold').textContent=ts;
-  const prods=new Set(activities.filter(a=>a.type==='sale'&&new Date(a.time).toDateString()===new Date().toDateString()).map(a=>a.productName));
-  $('d-today-sub').textContent=`Across ${prods.size} product(s)`;
-  $('alertSec').innerHTML=products.filter(p=>(p.total-p.packed)<10).map(p=>`
-    <div class="alert-bar" style="margin-bottom:8px">
-      <div class="al-ico"><svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg></div>
-      <div><div style="font-size:12px;font-weight:700;color:var(--red)">Low: ${p.name}</div><div style="font-size:10px;color:rgba(192,40,40,.65);margin-top:1px">${p.total-p.packed} items left</div></div>
-    </div>`).join('');
-
-  // Add alert-bar styles inline
-  document.querySelectorAll('.alert-bar').forEach(el=>{
-    el.style.cssText='background:var(--red-l);border:1px solid rgba(192,40,40,.15);border-radius:13px;padding:11px 12px;display:flex;align-items:center;gap:9px;margin-bottom:8px';
-  });
-  document.querySelectorAll('.al-ico').forEach(el=>{
-    el.style.cssText='width:28px;height:28px;border-radius:8px;background:var(--red);display:flex;align-items:center;justify-content:center;flex-shrink:0';
-  });
-  document.querySelectorAll('.al-ico svg').forEach(el=>{
-    el.style.cssText='width:13px;height:13px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round';
-  });
-
-  const rec=[...activities].sort((a,b)=>b.time-a.time).slice(0,4);
-  $('d-activity').innerHTML=rec.length?rec.map((a,i)=>tlItem(a,i,rec.length)).join(''):'<div style="font-size:12px;color:var(--bark-lt);text-align:center;padding:8px">No activity yet</div>';
-  $('d-products').innerHTML=products.length?products.slice(0,4).map(p=>prodCard(p)).join(''):'<div style="text-align:center;padding:18px;color:var(--bark-lt);font-size:12px">No products yet. Tap + to add.</div>';
-}
-
-/* ── PRODUCT CARD ── */
-function prodCard(p) {
-  const rem=p.total-p.packed, pct=p.total>0?Math.round(p.packed/p.total*100):0, low=rem<10, ts=todayS(p.id);
-  return `<div class="pc${low?' low':''}" onclick="openDetail('${p.id}')">
-    <div class="pc-top"><div style="flex:1;min-width:0"><div class="pc-cat">${p.type}</div><div class="pc-name">${p.name}</div><div class="pc-size">${p.size}${ts>0?` · <b style="color:var(--red)">${ts} dispatched today</b>`:''}</div></div><div class="pc-emoji">${em(p)}</div></div>
-    <div class="stock-row"><div class="sk"><div class="sk-val">${p.total}</div><div class="sk-key">Stock</div></div><div class="sk"><div class="sk-val g">${p.packed}</div><div class="sk-key">Box</div></div><div class="sk"><div class="sk-val ${low?'r':'a'}">${rem}</div><div class="sk-key">Left</div></div></div>
-    <div class="prog"><div class="prog-b${pct>70?' hi':''}" style="width:${pct}%"></div></div>
-    <div class="prog-meta"><span>${pct}% packed</span><span>${low?'⚠️ Low':'~'+rem+' left'}</span></div>
-  </div>`;
-}
-
-/* ── INVENTORY ── */
-function buildCatChips(){
-  const types=['all',...new Set(products.map(p=>p.type))];
-  $('catChips').innerHTML=types.map(c=>`<div class="chip${catF===c?' active':''}" onclick="setCat('${c}')">${c==='all'?'All Types':c}</div>`).join('');
-}
-function setCat(c){catF=c;buildCatChips();renderProds();}
+// ── RENDER PRODUCTS ──
 function renderProds(){
-  const q=($('searchInput')?.value||'').toLowerCase();
-  const sort=$('sortSel')?.value||'name';
-  let list=products.filter(p=>(!q||(p.name.toLowerCase().includes(q)||p.type.toLowerCase().includes(q)||p.size.toLowerCase().includes(q)))&&(catF==='all'||p.type===catF));
-  if(sort==='name')list.sort((a,b)=>a.name.localeCompare(b.name));
-  else if(sort==='stock')list.sort((a,b)=>b.total-a.total);
-  else if(sort==='low')list.sort((a,b)=>(a.total-a.packed)-(b.total-b.packed));
-  else if(sort==='packed')list.sort((a,b)=>(b.total?b.packed/b.total:0)-(a.total?a.packed/a.total:0));
-  const el=$('productList'),emp=$('productEmpty'),cnt=$('prodCount');
+  var q=(eid('searchInput')?eid('searchInput').value:'').toLowerCase().trim();
+  var list=products.filter(function(p){
+    if(catFilter!=='all'&&p.category!==catFilter)return false;
+    return p.variants.some(function(v){
+      if(sizeFilter!=='all'&&v.size!==sizeFilter)return false;
+      if(lowOnly&&!isLow(v))return false;
+      if(q){var h=[p.name,p.category,v.color,v.size,vDisplayName(v,p)].join(' ').toLowerCase();if(h.indexOf(q)===-1)return false;}
+      return true;
+    });
+  });
+  var el=eid('productList'),emp=eid('productEmpty'),cnt=eid('prodCount');
   if(cnt)cnt.textContent=list.length;
   if(!list.length){el.innerHTML='';emp.style.display='block';return;}
-  emp.style.display='none';el.innerHTML=list.map(p=>prodCard(p)).join('');
+  emp.style.display='none';
+  el.innerHTML=list.map(function(p){return prodCardHtml(p,q);}).join('');
 }
 
-/* ── DETAIL ── */
-function openDetail(id){curProd=String(id);renderDetail();go('detail');}
-function renderDetail(){
-  const p=products.find(x=>String(x.id)===String(curProd));if(!p)return;
-  const rem=p.total-p.packed,pct=p.total>0?Math.round(p.packed/p.total*100):0,ts=todayS(p.id);
-  $('detEmoji').textContent=em(p);$('detName').textContent=p.name;$('detCat').textContent=`${p.type} · ${p.size}`;
-  $('detTotal').textContent=p.total;$('detPacked').textContent=p.packed;$('detRemaining').textContent=rem;
-  $('detPct').textContent=pct+'%';$('detBar').style.width=pct+'%';
-  $('detPackedLbl').textContent=p.packed+' packed';$('detTotalLbl').textContent='of '+p.total;
-  $('detTodayWrap').innerHTML=ts>0?`<div class="sold-banner" style="margin-bottom:14px"><div><div class="sold-label">Dispatched Today</div><div class="sold-sub">This product</div></div><div class="sold-num">${ts}</div></div>`:'';
-  const acts=[...activities].filter(a=>String(a.productId)===String(p.id)).sort((a,b)=>b.time-a.time);
-  $('detActivity').innerHTML=acts.length?acts.map((a,i)=>tlItem(a,i,acts.length)).join(''):'<div style="font-size:12px;color:var(--bark-lt);text-align:center;padding:8px">No activity yet</div>';
+function prodCardHtml(p,q){
+  q=q||'';
+  var ts=totalStock(p),tbr=totalPacked(p),lowV=p.variants.filter(function(v){return isLow(v);}).length;
+  var fvars=p.variants.filter(function(v){
+    if(sizeFilter!=='all'&&v.size!==sizeFilter)return false;
+    if(lowOnly&&!isLow(v))return false;
+    if(q){var h=[p.name,p.category,v.color,v.size,vDisplayName(v,p)].join(' ').toLowerCase();if(h.indexOf(q)===-1)return false;}
+    return true;
+  });
+  return '<div class="pcard" id="pc-'+p.id+'">'+
+    '<div class="pcard-head" onclick="toggleCard(\'pc-'+p.id+'\')">'+
+      '<div class="pcard-emoji">'+(p.emoji||CAT_EMOJI[p.category]||'📦')+'</div>'+
+      '<div class="pcard-info">'+
+        '<div class="pcard-cat">'+p.category+'</div>'+
+        '<div class="pcard-name">'+p.name+'</div>'+
+        '<div class="pcard-meta">'+p.variants.length+' variant'+(p.variants.length!==1?'s':'')+(lowV>0?' · <span style="color:var(--red);font-weight:700">⚠ '+lowV+' low</span>':'')+'</div>'+
+      '</div>'+
+      '<div class="pcard-right">'+
+        '<div class="pcard-stock">'+ts+'</div>'+
+        '<div class="pcard-stlbl">stock</div>'+
+        '<div class="expand-ico"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>'+
+      '</div>'+
+    '</div>'+
+    '<div class="var-wrap">'+
+      '<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 15px 4px">'+
+        '<div style="font-size:10px;font-weight:700;color:var(--bark-lt);text-transform:uppercase;letter-spacing:.6px">'+fvars.length+' Variant'+(fvars.length!==1?'s':'')+'</div>'+
+        '<div style="display:flex;gap:6px">'+
+          '<button class="qb" style="font-size:10px;padding:4px 10px" onclick="openEditProd(\''+p.id+'\')">✏️ Edit</button>'+
+          '<button class="qb" style="font-size:10px;padding:4px 10px;background:var(--red-l);color:var(--red-d)" onclick="confirmDelProd(\''+p.id+'\')">🗑 Delete</button>'+
+        '</div>'+
+      '</div>'+
+      fvars.map(function(v){return variantCardHtml(v,p);}).join('')+
+    '</div>'+
+  '</div>';
 }
 
-/* ── ADD/EDIT PRODUCT ── */
-function openAddProduct(){
-  editId=null;$('mProdTitle').textContent='Add Product';
-  ['pName','pSize'].forEach(id=>$(id).value='');
-  $('pType').value='Idol';$('pStock').value='';$('pPacked').value='';$('pErr').style.display='none';
-  openModal('m-product');
+// Variant card matching the second photo style: Category tag + Name + Stats grid
+function variantCardHtml(v,p){
+  var thresh=varThresh(v);
+  var low=isLow(v);
+  var stock=v.stock, packed=v.packed, left=stock-packed;
+  var pct=stock>0?Math.round(packed/stock*100):0;
+  var leftCls=left<0?'crit':low?'warn':'';
+  var todayQty=activities.filter(function(a){return a.type==='sale'&&new Date(a.time).toDateString()===new Date().toDateString()&&String(a.productId)===String(p.id)&&(a.variantLabel||'').indexOf(v.size)!==-1;}).reduce(function(s,a){return s+a.qty;},0);
+  return '<div class="vcard'+(low?' low-stock':'')+'">'+
+    '<div class="vcard-type">'+
+      '<span class="vcard-type-badge">'+(p.emoji||CAT_EMOJI[p.category]||'📦')+' '+p.category+'</span>'+
+      '<span style="display:flex;gap:5px;align-items:center">'+
+        '<span class="thresh-badge'+(low?' low-badge':'')+'">⚠ '+thresh+'</span>'+
+        (low?'<span class="thresh-badge low-badge">🔴 Low</span>':'')+
+      '</span>'+
+    '</div>'+
+    '<div class="vcard-body">'+
+      '<div class="vcard-name">'+vDisplayName(v,p)+'</div>'+
+      '<div class="vcard-size">'+v.size+(v.sku?' · SKU: '+v.sku:'')+'</div>'+
+      (todayQty>0?'<div class="vcard-today">'+todayQty+' dispatched today</div>':'')+
+      '<div class="vcard-stats">'+
+        '<div class="vs-cell"><div class="vs-num vs-stock">'+stock+'</div><div class="vs-lbl">Stock</div></div>'+
+        '<div class="vs-cell"><div class="vs-num vs-box">'+packed+'</div><div class="vs-lbl">Box</div></div>'+
+        '<div class="vs-cell"><div class="vs-num vs-left '+leftCls+'">'+left+'</div><div class="vs-lbl">Left</div></div>'+
+      '</div>'+
+      '<div class="vcard-prog">'+
+        '<div class="prog-bar"><div class="prog-fill'+(pct>70?' hi':'')+'" style="width:'+pct+'%"></div></div>'+
+        '<div class="prog-meta"><span>'+pct+'% packed</span><span>'+(low?'⚠ Low stock':'~'+left+' remaining')+'</span></div>'+
+      '</div>'+
+      (v.price?'<div style="font-size:11px;font-weight:700;color:var(--clay);background:var(--clay-l);padding:2px 9px;border-radius:6px;display:inline-block;margin-bottom:8px">₹'+v.price+'</div>':'')+
+      '<div class="vcard-actions">'+
+        '<button class="vact vact-pack" onclick="openQuick(\'pack\',\''+p.id+'\',\''+v.id+'\')">📦 Box</button>'+
+        '<button class="vact vact-sale" onclick="openQuick(\'sale\',\''+p.id+'\',\''+v.id+'\')">🛒 Dispatch</button>'+
+        '<button class="vact vact-edit" onclick="openEditVariant(\''+p.id+'\',\''+v.id+'\')">✏️ Edit</button>'+
+      '</div>'+
+    '</div>'+
+  '</div>';
 }
-function editCurrentProduct(){
-  const p=products.find(x=>String(x.id)===String(curProd));if(!p)return;
-  editId=p.id;$('mProdTitle').textContent='Edit Product';
-  $('pName').value=p.name;$('pType').value=p.type;$('pSize').value=p.size;
-  $('pStock').value=p.total;$('pPacked').value=p.packed;$('pErr').style.display='none';
-  openModal('m-product');
+
+function toggleCard(id){var el=eid(id);if(el)el.classList.toggle('expanded');}
+
+// ── ADD / EDIT PRODUCT ──
+function openAddProduct(){editProdId=null;varRows=[];eid('mProdTitle').textContent='Add Product';eid('pName').value='';eid('pEmoji').value='';eid('pCat').value='Kitchen';eid('pErr').style.display='none';renderVarBuilder();addVarRow();openModal('m-product');}
+function openEditProd(id){var p=products.find(function(x){return String(x.id)===String(id);});if(!p)return;editProdId=String(id);eid('mProdTitle').textContent='Edit Product';eid('pName').value=p.name;eid('pEmoji').value=p.emoji||'';eid('pCat').value=p.category;varRows=p.variants.map(function(v){return Object.assign({},v);});eid('pErr').style.display='none';renderVarBuilder();openModal('m-product');}
+function addVarRow(){var id='v'+Date.now()+Math.floor(Math.random()*9999);varRows.push({id:id,color:'',size:'',sku:'',stock:0,packed:0,price:'',lowThreshold:DEFAULT_LOW});renderVarBuilder();setTimeout(function(){var s=eid('m-product').querySelector('.sheet');if(s)s.scrollTop=s.scrollHeight;},50);}
+function removeVarRow(id){varRows=varRows.filter(function(v){return v.id!==id;});renderVarBuilder();}
+function setVarField(id,field,val){var v=varRows.find(function(r){return r.id===id;});if(!v)return;if(['stock','packed','price','lowThreshold'].indexOf(field)!==-1)v[field]=Number(val)||0;else v[field]=val;}
+function renderVarBuilder(){
+  var b=eid('varBuilder');
+  if(!varRows.length){b.innerHTML='<div style="text-align:center;font-size:11.5px;color:var(--bark-lt);padding:10px">No variants. Click below to add.</div>';return;}
+  b.innerHTML=varRows.map(function(v){
+    return '<div class="vrow"><div style="display:flex;align-items:flex-start;gap:7px"><div class="vrow-grid">'+
+      '<div><label class="fl" style="font-size:9px">Color *</label><input class="fi" style="padding:8px 10px;font-size:12px" placeholder="e.g. Green, White, Inlay…" value="'+(v.color||'')+'" oninput="setVarField(\''+v.id+'\',\'color\',this.value)"/></div>'+
+      '<div><label class="fl" style="font-size:9px">Size *</label><input class="fi" style="padding:8px 10px;font-size:12px" placeholder="e.g. 4 inch, Small, 2.5 Feet…" value="'+(v.size||'')+'" oninput="setVarField(\''+v.id+'\',\'size\',this.value)"/></div>'+
+      '<div><label class="fl" style="font-size:9px">SKU (auto if blank)</label><input class="fi" style="padding:8px 10px;font-size:12px" placeholder="Auto-generated" value="'+(v.sku||'')+'" oninput="setVarField(\''+v.id+'\',\'sku\',this.value)"/></div>'+
+      '<div><label class="fl" style="font-size:9px">Price ₹</label><input class="fi" style="padding:8px 10px;font-size:12px" type="number" placeholder="0" min="0" value="'+(v.price||'')+'" oninput="setVarField(\''+v.id+'\',\'price\',this.value)"/></div>'+
+      '<div><label class="fl" style="font-size:9px">Stock</label><input class="fi" style="padding:8px 10px;font-size:12px" type="number" placeholder="0" min="0" value="'+(v.stock||'')+'" oninput="setVarField(\''+v.id+'\',\'stock\',this.value)"/></div>'+
+      '<div><label class="fl" style="font-size:9px">Box Ready</label><input class="fi" style="padding:8px 10px;font-size:12px" type="number" placeholder="0" min="0" value="'+(v.packed||'')+'" oninput="setVarField(\''+v.id+'\',\'packed\',this.value)"/></div>'+
+      '</div><button class="vrow-del" onclick="removeVarRow(\''+v.id+'\')">✕</button></div></div>';
+  }).join('');
 }
-async function saveProd(){
-  const name=$('pName').value.trim(),type=$('pType').value;
-  const size=$('pSize').value.trim()||'Standard';
-  const stock=parseInt($('pStock').value)||0,packed=parseInt($('pPacked').value)||0;
-  const err=$('pErr');
-  if(!name){err.textContent='Product name required.';err.style.display='block';return;}
-  if(packed>stock){err.textContent='Box ready cannot exceed total stock.';err.style.display='block';return;}
+
+function saveProd(){
+  var name=eid('pName').value.trim(),cat=eid('pCat').value,emoji=eid('pEmoji').value.trim()||CAT_EMOJI[cat]||'📦';
+  var err=eid('pErr');
+  if(!name){err.textContent='Name required.';err.style.display='block';return;}
+  if(!varRows.length){err.textContent='Add at least one variant.';err.style.display='block';return;}
+  if(varRows.find(function(v){return !v.color.trim()||!v.size.trim();})){err.textContent='Every variant needs Color and Size.';err.style.display='block';return;}
   err.style.display='none';
-
+  var id=editProdId||String(Date.now());
+  var p={id:id,name:name,category:cat,emoji:emoji,variants:varRows.map(function(v){
+    return {id:v.id,color:v.color.trim(),size:v.size.trim(),sku:v.sku.trim()||name.slice(0,3).toUpperCase()+'-'+v.color.slice(0,2).toUpperCase()+'-'+v.size.replace(/\s+/g,'').slice(0,4).toUpperCase(),stock:Number(v.stock)||0,packed:Number(v.packed)||0,price:v.price||'',lowThreshold:Number(v.lowThreshold)||DEFAULT_LOW};
+  })};
+  if(editProdId){var idx=products.findIndex(function(x){return String(x.id)===editProdId;});if(idx>=0)products[idx]=p;else products.push(p);}
+  else products.push(p);
+  var act={id:String(Date.now()),type:'add',productId:id,productName:name,variantId:'',variantLabel:'all',qty:p.variants.reduce(function(s,v){return s+v.stock;},0),user:'Kamal',time:Date.now(),note:editProdId?'edited':'added'};
+  activities.push(act);saveLocal();
   setSS('busy','Saving…');
-  const id = editId || String(Date.now());
-  const p = {id, name, type, size, total:stock, packed};
-
-  if(editId){
-    const idx=products.findIndex(x=>String(x.id)===String(editId));
-    if(idx>=0) products[idx]=p;
-  } else {
-    products.push(p);
-  }
-
-  const act={type:'add',productId:id,productName:name,qty:stock,user:'Kamal',time:Date.now(),note:editId?'edited':'added'};
-  activities.push(act);
-  saveLocal();
-
-  const r = await pushProduct(p);
-  await pushKhata(act);
-
-  if(r?.error){
-    setSS('err','Sheet Error');
-    toast('Sheet error: '+r.error,'err');
-  } else {
-    setSS('ok','✅ Saved to Sheet');
-    toast((editId?'Product updated':'Product added')+' → Sheet mein save ✅','ok');
-  }
-
-  closeModal('m-product');buildCatChips();renderProds();renderDash();
+  // Push all variants to sheet
+  var saves=p.variants.map(function(v){return pushVariant(p,v);});
+  Promise.all(saves).then(function(){return pushKhata(act);}).then(function(){setSS('ok','✅ Saved');toast((editProdId?'Updated':'Added')+' to Sheet ✅','ok');});
+  closeModal('m-product');refreshAll();
 }
 
-function confirmDelete(){
-  const p=products.find(x=>String(x.id)===String(curProd));if(!p)return;
-  $('delName').textContent=p.name;openModal('m-del');
-}
-async function deleteProduct(){
+function confirmDelProd(id){var p=products.find(function(x){return String(x.id)===String(id);});if(!p)return;delProdId=String(id);eid('delName').textContent=p.name;openModal('m-del');}
+function deleteProduct(){
   setSS('busy','Deleting…');
-  await pushDeleteProduct(curProd);
-  products=products.filter(x=>String(x.id)!==String(curProd));
-  activities=activities.filter(a=>String(a.productId)!==String(curProd));
-  saveLocal();
-  setSS('ok','✅ Deleted');
-  closeModal('m-del');buildCatChips();renderProds();renderDash();go('products');
-  toast('Product deleted from app & Sheet','err');
+  pushDelProduct(delProdId).then(function(){
+    products=products.filter(function(x){return String(x.id)!==delProdId;});
+    activities=activities.filter(function(a){return String(a.productId)!==delProdId;});
+    saveLocal();setSS('ok','Deleted');toast('Deleted ✅','err');closeModal('m-del');refreshAll();
+  });
 }
 
-function openStockAdjust(){
-  const p=products.find(x=>String(x.id)===String(curProd));if(!p)return;
-  $('adjName').textContent=p.name;$('adjTotal').textContent=p.total;
-  $('adjPacked').textContent=p.packed;$('adjVal').value=p.total;$('adjErr').style.display='none';
-  openModal('m-stock');
+// ── EDIT SINGLE VARIANT ──
+function openEditVariant(pid,vid){
+  var p=products.find(function(x){return String(x.id)===String(pid);});
+  var v=p&&p.variants.find(function(x){return String(x.id)===String(vid);});
+  if(!p||!v)return;
+  editVarData={product:p,variant:v};
+  eid('mEditVarTitle').textContent='Edit: '+vDisplayName(v,p);
+  eid('evColor').value=v.color;eid('evSize').value=v.size;eid('evSku').value=v.sku||'';
+  eid('evStock').value=v.stock;eid('evPacked').value=v.packed;eid('evPrice').value=v.price||'';
+  eid('evErr').style.display='none';
+  openModal('m-edit-variant');
 }
-async function saveStockAdj(){
-  const p=products.find(x=>String(x.id)===String(curProd));
-  const val=parseInt($('adjVal').value)||0;
-  const err=$('adjErr');
-  if(val<0){err.textContent='Cannot be negative.';err.style.display='block';return;}
-  if(val<p.packed){err.textContent=`Can't be less than box ready (${p.packed}).`;err.style.display='block';return;}
+function saveEditVariant(){
+  if(!editVarData)return;
+  var p=editVarData.product,v=editVarData.variant;
+  var color=eid('evColor').value.trim(),size=eid('evSize').value.trim();
+  var err=eid('evErr');
+  if(!color||!size){err.textContent='Color and Size required.';err.style.display='block';return;}
+  var stock=parseInt(eid('evStock').value)||0;
+  var packed=parseInt(eid('evPacked').value)||0;
+  if(packed>stock){err.textContent='Box Ready cannot exceed Stock.';err.style.display='block';return;}
   err.style.display='none';
-  const diff=val-p.total;
-  const act={type:'add',productId:p.id,productName:p.name,qty:Math.abs(diff),user:'Kamal',time:Date.now(),note:diff>=0?'stock added':'stock reduced'};
-  activities.push(act);p.total=val;
-  saveLocal();
-  setSS('busy','Saving…');
-  await pushProduct(p);await pushKhata(act);
-  setSS('ok','✅ Saved');
-  closeModal('m-stock');renderDetail();renderDash();
-  toast(`Stock → ${val} ✅ Sheet updated`,'ok');
+  // Update local
+  v.color=color;v.size=size;v.sku=eid('evSku').value.trim()||v.sku;
+  v.stock=stock;v.packed=packed;v.price=eid('evPrice').value||'';
+  saveLocal();setSS('busy','Saving…');
+  var act={id:String(Date.now()),type:'add',productId:p.id,productName:vDisplayName(v,p),variantId:v.id,variantLabel:v.size,qty:stock,user:'Kamal',time:Date.now(),note:'variant edited'};
+  activities.push(act);
+  pushVariant(p,v).then(function(){return pushKhata(act);}).then(function(){setSS('ok','✅ Saved');toast('Updated in Sheet ✅','ok');});
+  closeModal('m-edit-variant');refreshAll();
 }
 
-/* ── QUICK BOX / DISPATCH ── */
-function openQuick(type){
-  const p=products.find(x=>String(x.id)===String(curProd));if(!p)return;
-  quickType=type;
-  $('mQuickTitle').textContent=type==='pack'?'📦 Move to Box':'🛒 Dispatch';
-  $('qProdName').textContent=p.name;$('qTotal').textContent=p.total;
-  $('qPacked').textContent=p.packed;$('qRemain').textContent=p.total-p.packed;
-  $('qQtyLbl').textContent=type==='pack'?'Qty to Box':'Qty to Dispatch';
-  $('quickQty').value='';$('qErr').style.display='none';
-  const qs=$('qSubmit');
-  qs.textContent=type==='pack'?'Confirm Packing':'Confirm Dispatch';
-  qs.style.background=type==='pack'?'linear-gradient(135deg,var(--leaf),var(--leaf-d))':'linear-gradient(135deg,var(--red),var(--red-d))';
-  $('qBtns').innerHTML=type==='pack'
-    ?'<button class="qb" onclick="addQ(\'quickQty\',10)">+10</button><button class="qb" onclick="addQ(\'quickQty\',25)">+25</button><button class="qb" onclick="addQ(\'quickQty\',50)">+50</button>'
-    :'<button class="qb" onclick="addQ(\'quickQty\',1)">+1</button><button class="qb" onclick="addQ(\'quickQty\',5)">+5</button><button class="qb" onclick="addQ(\'quickQty\',10)">+10</button>';
+// ── QUICK ACTION ──
+function openQuick(type,pid,vid){
+  var p=products.find(function(x){return String(x.id)===String(pid);});
+  var v=p&&p.variants.find(function(x){return String(x.id)===String(vid);});
+  if(!p||!v)return;
+  quickData={type:type,pid:String(pid),vid:String(vid)};
+  eid('mQuickTitle').textContent=type==='pack'?'📦 Move to Box':'🛒 Dispatch';
+  eid('qVarName').textContent=vDisplayName(v,p)+' · '+v.size;
+  eid('qStock').textContent=v.stock;eid('qPacked').textContent=v.packed;eid('qRemain').textContent=v.stock-v.packed;
+  eid('qQtyLbl').textContent=type==='pack'?'Qty to Box':'Qty to Dispatch';
+  eid('quickQty').value='';eid('qErr').style.display='none';
+  var btn=eid('qSubmit');btn.textContent=type==='pack'?'Confirm Packing':'Confirm Dispatch';
+  btn.style.background=type==='pack'?'linear-gradient(135deg,var(--leaf),var(--leaf-d))':'linear-gradient(135deg,var(--red),var(--red-d))';
+  eid('qBtns').innerHTML=type==='pack'?'<button class="qb" onclick="addToQ(\'quickQty\',10)">+10</button><button class="qb" onclick="addToQ(\'quickQty\',25)">+25</button><button class="qb" onclick="addToQ(\'quickQty\',50)">+50</button>':'<button class="qb" onclick="addToQ(\'quickQty\',1)">+1</button><button class="qb" onclick="addToQ(\'quickQty\',5)">+5</button><button class="qb" onclick="addToQ(\'quickQty\',10)">+10</button>';
   openModal('m-quick');
 }
-async function submitQuick(){
-  const p=products.find(x=>String(x.id)===String(curProd));
-  const qty=parseInt($('quickQty').value)||0;
-  const err=$('qErr');
-  if(qty<=0){err.textContent='Enter a valid quantity.';err.style.display='block';return;}
-  const rem=p.total-p.packed;
-  if(quickType==='pack'&&qty>rem){err.textContent=`Only ${rem} items remaining.`;err.style.display='block';return;}
-  if(quickType==='sale'&&qty>p.packed){err.textContent=`Only ${p.packed} box items available.`;err.style.display='block';return;}
+function submitQuick(){
+  var p=products.find(function(x){return String(x.id)===quickData.pid;});
+  var v=p&&p.variants.find(function(x){return String(x.id)===quickData.vid;});
+  var qty=parseInt(eid('quickQty').value)||0,err=eid('qErr');
+  if(!p||!v){err.textContent='Not found.';err.style.display='block';return;}
+  if(qty<=0){err.textContent='Enter valid quantity.';err.style.display='block';return;}
+  if(quickData.type==='pack'&&qty>v.stock-v.packed){err.textContent='Only '+(v.stock-v.packed)+' remaining.';err.style.display='block';return;}
+  if(quickData.type==='sale'&&qty>v.packed){err.textContent='Only '+v.packed+' boxed.';err.style.display='block';return;}
   err.style.display='none';
-  if(quickType==='pack'){p.packed+=qty;}else{p.packed-=qty;p.total-=qty;}
-  const act={type:quickType,productId:p.id,productName:p.name,qty,user:'Kamal',time:Date.now()};
-  activities.push(act);
-  saveLocal();
-  setSS('busy','Saving…');
-  await pushProduct(p);await pushKhata(act);
-  setSS('ok','✅ Saved');
-  closeModal('m-quick');renderDetail();renderDash();
-  toast(quickType==='pack'?`${qty} → Box ✅ Sheet updated`:`${qty} dispatched ✅ Sheet updated`,'ok');
+  if(quickData.type==='pack')v.packed+=qty;else{v.packed-=qty;v.stock-=qty;}
+  var act={id:String(Date.now()),type:quickData.type,productId:p.id,productName:vDisplayName(v,p),variantId:v.id,variantLabel:v.size,qty:qty,user:'Kamal',time:Date.now()};
+  activities.push(act);saveLocal();setSS('busy','Saving…');
+  pushVariant(p,v).then(function(){return pushKhata(act);}).then(function(){setSS('ok','✅ Saved');toast(qty+(quickData.type==='pack'?' → Box ✅':' dispatched ✅'),'ok');});
+  closeModal('m-quick');refreshAll();
 }
 
-/* ── ENTRY SCREEN ── */
+// ── ENTRY SCREEN ──
 function populateEntSel(){
-  $('entProd').innerHTML=products.map(p=>`<option value="${p.id}">${p.name} (${p.size})</option>`).join('');
-  updateES();renderTodayLog();
+  eid('entProd').innerHTML=products.map(function(p){return '<option value="'+p.id+'">'+p.name+' ('+p.category+')</option>';}).join('');
+  updateEntVariants();renderTodayLog();
 }
-function setET(t){
-  entType=t;
-  $('togPack').classList.toggle('active',t==='pack');$('togSale').classList.toggle('active',t==='sale');
-  $('packFields').style.display=t==='pack'?'block':'none';$('saleFields').style.display=t==='sale'?'block':'none';
+function updateEntVariants(){
+  var sel=eid('entProd');if(!sel||!sel.value)return;
+  var p=products.find(function(x){return String(x.id)===sel.value;});
+  if(!p){eid('entVar').innerHTML='';return;}
+  eid('entVar').innerHTML=p.variants.map(function(v){return '<option value="'+v.id+'">'+vDisplayName(v,p)+' · '+v.size+' ('+v.stock+' stock)</option>';}).join('');
   updateES();
 }
+function setET(t){entType=t;eid('togPack').classList.toggle('active',t==='pack');eid('togSale').classList.toggle('active',t==='sale');eid('packFields').style.display=t==='pack'?'block':'none';eid('saleFields').style.display=t==='sale'?'block':'none';updateES();}
 function updateES(){
-  const sel=$('entProd');if(!sel||!sel.value)return;
-  const p=products.find(x=>String(x.id)===sel.value);
-  const es=$('entStock');
-  if(!p){es.style.display='none';return;}
-  es.style.display='block';
-  es.innerHTML=entType==='pack'?`📦 Available: <b>${p.total-p.packed}</b> &nbsp;·&nbsp; <b>${p.packed}</b> already in box`:`🛒 Box ready: <b>${p.packed}</b>`;
+  var pSel=eid('entProd'),vSel=eid('entVar');if(!pSel||!pSel.value||!vSel||!vSel.value)return;
+  var p=products.find(function(x){return String(x.id)===pSel.value;});
+  var v=p&&p.variants.find(function(x){return String(x.id)===vSel.value;});
+  var ie=eid('entInfo');if(!v){ie.style.display='none';return;}
+  ie.style.display='block';
+  ie.innerHTML=entType==='pack'?'📦 Available: <b>'+(v.stock-v.packed)+'</b> · <b>'+v.packed+'</b> already boxed':'🛒 Box ready: <b>'+v.packed+'</b> · Total stock: <b>'+v.stock+'</b>';
 }
-async function submitEntry(){
-  const sel=$('entProd');
-  const p=products.find(x=>String(x.id)===sel.value);
-  const err=$('entError');
-  if(!p){err.textContent='Select a product.';err.style.display='block';return;}
-  const qty=parseInt($(entType==='pack'?'packQty':'saleQty').value)||0;
-  if(qty<=0){err.textContent='Enter a valid quantity.';err.style.display='block';return;}
-  const rem=p.total-p.packed;
-  if(entType==='pack'&&qty>rem){err.textContent=`Only ${rem} items remaining.`;err.style.display='block';return;}
-  if(entType==='sale'&&qty>p.packed){err.textContent=`Only ${p.packed} box items available.`;err.style.display='block';return;}
+function submitEntry(){
+  var pSel=eid('entProd'),vSel=eid('entVar');
+  var p=products.find(function(x){return String(x.id)===pSel.value;});
+  var v=p&&p.variants.find(function(x){return String(x.id)===vSel.value;});
+  var err=eid('entError');
+  if(!p||!v){err.textContent='Select product and variant.';err.style.display='block';return;}
+  var qid=entType==='pack'?'packQty':'saleQty',qty=parseInt(eid(qid).value)||0;
+  if(qty<=0){err.textContent='Enter valid quantity.';err.style.display='block';return;}
+  if(entType==='pack'&&qty>v.stock-v.packed){err.textContent='Only '+(v.stock-v.packed)+' available.';err.style.display='block';return;}
+  if(entType==='sale'&&qty>v.packed){err.textContent='Only '+v.packed+' box items.';err.style.display='block';return;}
   err.style.display='none';
-  if(entType==='pack'){p.packed+=qty;}else{p.packed-=qty;p.total-=qty;}
-  const act={type:entType,productId:p.id,productName:p.name,qty,user:'Kamal',time:Date.now()};
-  activities.push(act);
-  saveLocal();
-  setSS('busy','Saving…');
-  await pushProduct(p);await pushKhata(act);
-  setSS('ok','✅ Saved');
-  $(entType==='pack'?'packQty':'saleQty').value='';
-  updateES();renderTodayLog();renderDash();
-  const btn=$('entBtn');const orig=btn.innerHTML;
-  btn.innerHTML='✅ Saved to Sheet!';btn.style.background='var(--leaf)';
-  setTimeout(()=>{btn.innerHTML=orig;btn.style.background='';},1600);
-  toast(entType==='pack'?`${qty} → Box ✅`:`${qty} dispatched ✅`,'ok');
+  if(entType==='pack')v.packed+=qty;else{v.packed-=qty;v.stock-=qty;}
+  var act={id:String(Date.now()),type:entType,productId:p.id,productName:vDisplayName(v,p),variantId:v.id,variantLabel:v.size,qty:qty,user:'Kamal',time:Date.now()};
+  activities.push(act);saveLocal();setSS('busy','Saving…');
+  pushVariant(p,v).then(function(){return pushKhata(act);}).then(function(){setSS('ok','✅ Saved');toast(qty+(entType==='pack'?' → Box ✅':' dispatched ✅'),'ok');});
+  eid(qid).value='';updateES();renderTodayLog();updateBell();renderDash();
+  var btn=eid('entBtn'),orig=btn.innerHTML;btn.innerHTML='✅ Saved!';btn.style.background='var(--leaf)';setTimeout(function(){btn.innerHTML=orig;btn.style.background='';},1600);
 }
-
 function renderTodayLog(){
-  const today=new Date().toDateString();
-  const ta=[...activities].filter(a=>new Date(a.time).toDateString()===today&&a.type!=='add').sort((a,b)=>b.time-a.time);
-  const el=$('todayLog');
-  if(!ta.length){el.innerHTML='<div style="font-size:12px;color:var(--bark-lt);text-align:center;padding:8px">No entries today</div>';return;}
-  el.innerHTML=ta.map(a=>`<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--brd)">
-    <div style="width:34px;height:34px;border-radius:50%;background:${a.type==='pack'?'var(--leaf-l)':'var(--red-l)'};display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:${a.type==='pack'?'var(--leaf)':'var(--red)'};">${(a.user||'R')[0]}</div>
-    <div style="flex:1;min-width:0"><div style="font-size:12.5px;font-weight:600;color:var(--bark)">${a.user||'Kamal'}</div><div style="font-size:10.5px;color:var(--bark-lt);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${a.productName} · ${fT(a.time)}</div></div>
-    <div style="font-size:16px;font-weight:700;font-family:'Fraunces',serif;color:${a.type==='pack'?'var(--leaf)':'var(--red)'};">${a.type==='pack'?'+':'-'}${a.qty}</div>
-  </div>`).join('');
+  var today=new Date().toDateString();
+  var ta=activities.filter(function(a){return new Date(a.time).toDateString()===today&&a.type!=='add';}).slice().sort(function(a,b){return b.time-a.time;});
+  var el=eid('todayLog');
+  if(!ta.length){el.innerHTML='<div style="font-size:12px;color:var(--bark-lt);text-align:center;padding:10px">No entries today</div>';return;}
+  el.innerHTML=ta.map(function(a){var isP=a.type==='pack';return '<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--brd)"><div style="width:34px;height:34px;border-radius:50%;background:'+(isP?'var(--leaf-l)':'var(--red-l)')+';display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:'+(isP?'var(--leaf)':'var(--red)')+';flex-shrink:0">'+(a.user||'K')[0]+'</div><div style="flex:1;min-width:0"><div style="font-size:12.5px;font-weight:600;color:var(--bark)">'+a.productName+'</div><div style="font-size:10.5px;color:var(--bark-lt);">'+(a.variantLabel||'')+' · '+fT(a.time)+'</div></div><div style="font-size:16px;font-weight:700;font-family:Fraunces,serif;color:'+(isP?'var(--leaf)':'var(--red)')+';">'+(isP?'+':'-')+a.qty+'</div></div>';}).join('');
 }
 
-/* ── KHATA ── */
-function setKhF(f){
-  khF=f;['all','pack','sale','add'].forEach(id=>{const el=$('kh-'+id);if(el)el.classList.remove('active');});
-  const el=$('kh-'+f);if(el)el.classList.add('active');renderKhata();
+// ── KHATA ──
+function setKhF(f){khFilter=f;['all','pack','sale','add'].forEach(function(id){var e=eid('kh-'+id);if(e)e.classList.remove('active');});var e=eid('kh-'+f);if(e)e.classList.add('active');renderKhata();}
+function tlHtml(a,i,total){
+  var isLast=i===total-1;
+  var C={pack:'var(--leaf)',sale:'var(--red)',add:'var(--clay)'};
+  var BG={pack:'var(--leaf-l)',sale:'var(--red-l)',add:'var(--clay-l)'};
+  var LBL={pack:'BOX',sale:'DISPATCH',add:'STOCK'};
+  var dc=a.type==='pack'?'pack':a.type==='sale'?'sale':'add';
+  var txt=a.type==='pack'?'<b>'+(a.user||'Kamal')+'</b> → Box <b>'+a.qty+'</b> · '+a.productName+(a.variantLabel?' ('+a.variantLabel+')':''):a.type==='sale'?'<b>'+(a.user||'Kamal')+'</b> dispatched <b>'+a.qty+'</b> · '+a.productName+(a.variantLabel?' ('+a.variantLabel+')':''):'<b>'+(a.user||'Kamal')+'</b> '+(a.note||'added')+' · '+a.productName;
+  return '<div style="display:flex;gap:10px;padding:8px 0;position:relative">'+(!isLast?'<div style="position:absolute;left:3px;top:16px;bottom:-4px;width:2px;background:var(--brd)"></div>':'')+
+    '<div style="width:8px;height:8px;border-radius:50%;background:'+(C[dc]||C.add)+';flex-shrink:0;margin-top:5px"></div>'+
+    '<div><div style="font-size:12px;color:var(--bark);line-height:1.5">'+txt+'<span style="display:inline-block;font-size:9px;padding:2px 6px;border-radius:20px;font-weight:700;margin-left:4px;background:'+(BG[dc]||BG.add)+';color:'+(C[dc]||C.add)+'">'+(LBL[dc]||'?')+'</span></div>'+
+    '<div style="font-size:10px;color:var(--bark-lt);margin-top:2px">'+fD(a.time)+' · '+fT(a.time)+'</div></div></div>';
 }
 function renderKhata(){
-  const q=($('khataSearch')?.value||'').toLowerCase();
-  let list=[...activities].sort((a,b)=>b.time-a.time).filter(a=>(khF==='all'||a.type===khF)&&(!q||(a.productName.toLowerCase().includes(q)||(a.user||'').toLowerCase().includes(q))));
-  const feed=$('khataFeed');
-  if(!list.length){feed.innerHTML='<div class="empty"><div class="empty-ico"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div class="empty-title">No Entries</div><div class="empty-desc">Try a different filter.</div></div>';return;}
-  const groups={};
-  list.forEach(a=>{const d=new Date(a.time).toDateString();if(!groups[d])groups[d]=[];groups[d].push(a);});
-  const colors={pack:'var(--leaf)',sale:'var(--red)',add:'var(--clay)'};
-  const tlbl={pack:'📦 Box',sale:'🛒 Dispatch',add:'➕ Stock'};
-  const tbg={pack:'var(--leaf-l)',sale:'var(--red-l)',add:'var(--clay-l)'};
-  let html='';
-  Object.entries(groups).forEach(([date,entries])=>{
-    const label=new Date(date).toDateString()===new Date().toDateString()?'Today':new Date(date).toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long'});
-    html+=`<div class="kh-day">${label}</div>`;
-    entries.forEach(a=>{
-      html+=`<div class="kh-entry"><div class="kh-dot" style="background:${colors[a.type]||'var(--clay)'}"></div><div style="flex:1;min-width:0"><div class="kh-type" style="background:${tbg[a.type]};color:${colors[a.type]}">${tlbl[a.type]||a.type}</div><div class="kh-product">${a.productName}</div><div class="kh-detail">${a.user||'Kamal'} · ${fT(a.time)}${a.note?' · '+a.note:''}</div></div><div class="kh-qty" style="color:${colors[a.type]||'var(--clay)'}">${a.type==='sale'?'-':'+'}${a.qty}</div></div>`;
+  var q=(eid('khataSearch')?eid('khataSearch').value:'').toLowerCase();
+  var list=activities.slice().sort(function(a,b){return b.time-a.time;}).filter(function(a){
+    if(khFilter!=='all'&&a.type!==khFilter)return false;
+    if(q&&a.productName.toLowerCase().indexOf(q)===-1&&(a.variantLabel||'').toLowerCase().indexOf(q)===-1)return false;
+    return true;
+  });
+  var feed=eid('khataFeed');
+  if(!list.length){feed.innerHTML='<div style="text-align:center;padding:44px;color:var(--bark-lt);font-size:12px">No entries found.</div>';return;}
+  var groups={};list.forEach(function(a){var d=new Date(a.time).toDateString();if(!groups[d])groups[d]=[];groups[d].push(a);});
+  var C={pack:'var(--leaf)',sale:'var(--red)',add:'var(--clay)'};
+  var BG={pack:'var(--leaf-l)',sale:'var(--red-l)',add:'var(--clay-l)'};
+  var LBL={pack:'📦 Box',sale:'🛒 Dispatch',add:'➕ Stock'};
+  var html='';
+  Object.keys(groups).forEach(function(date){
+    var entries=groups[date];
+    var label=new Date(date).toDateString()===new Date().toDateString()?'Today':new Date(date).toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long'});
+    html+='<div class="kh-day">'+label+'</div>';
+    entries.forEach(function(a){
+      html+='<div class="kh-entry"><div class="kh-dot" style="background:'+(C[a.type]||C.add)+'"></div>'+
+        '<div style="flex:1;min-width:0"><div class="kh-type" style="background:'+(BG[a.type]||BG.add)+';color:'+(C[a.type]||C.add)+'">'+(LBL[a.type]||a.type)+'</div>'+
+        '<div class="kh-product">'+a.productName+'</div>'+
+        '<div class="kh-detail">'+(a.variantLabel?a.variantLabel+' · ':'')+( a.user||'Kamal')+' · '+fT(a.time)+(a.note?' · '+a.note:'')+'</div></div>'+
+        '<div class="kh-qty" style="color:'+(C[a.type]||C.add)+'">'+(a.type==='sale'?'-':'+')+a.qty+'</div></div>';
     });
   });
   feed.innerHTML=html;
 }
 
-/* ── RTO ── */
+// ── RTO ──
 function buildRTOChips(){
-  const ss=['all','transit','delivered','returned','pending'];
-  const ll={all:'All',transit:'Transit',delivered:'Delivered',returned:'Returned',pending:'Pending'};
-  $('rtoChips').innerHTML=ss.map(s=>`<div class="chip${rtoF===s?' active':''}" onclick="setRTOF('${s}')">${ll[s]}</div>`).join('');
+  var ss=['all','transit','delivered','returned','pending'];
+  var ll={all:'All',transit:'🚚 Transit',delivered:'✅ Delivered',returned:'🔁 Returned',pending:'⏳ Pending'};
+  eid('rtoChips').innerHTML=ss.map(function(s){return '<div class="fchip'+(rtoFilter===s?' active':'')+'" onclick="setRTOF(\''+s+'\')">'+ll[s]+'</div>';}).join('');
 }
-function setRTOF(f){rtoF=f;buildRTOChips();renderRTO();}
+function setRTOF(f){rtoFilter=f;buildRTOChips();renderRTO();}
 function renderRTO(){
-  const q=($('rtoSearch')?.value||'').toLowerCase();
-  let list=rtos.filter(r=>(rtoF==='all'||r.status===rtoF)&&(!q||(r.product.toLowerCase().includes(q)||(r.orderId||'').toLowerCase().includes(q)||r.company.toLowerCase().includes(q))));
-  const el=$('rtoList'),emp=$('rtoEmpty'),cnt=$('rtoCount');
+  var q=(eid('rtoSearch')?eid('rtoSearch').value:'').toLowerCase();
+  var list=rtos.filter(function(r){if(rtoFilter!=='all'&&r.status!==rtoFilter)return false;if(q&&r.product.toLowerCase().indexOf(q)===-1&&(r.orderId||'').toLowerCase().indexOf(q)===-1&&r.company.toLowerCase().indexOf(q)===-1)return false;return true;});
+  var el=eid('rtoList'),emp=eid('rtoEmpty'),cnt=eid('rtoCount');
   if(cnt)cnt.textContent=rtos.length;
-  if(!list.length){el.innerHTML='';emp.style.display='block';return;}
-  emp.style.display='none';
-  const sc={transit:'s-transit',delivered:'s-delivered',returned:'s-returned',pending:'s-pending'};
-  const sl={transit:'🚚 In Transit',delivered:'✅ Delivered',returned:'🔁 Returned',pending:'⏳ Pending'};
-  const cc={yes:'cp-yes',no:'cp-no',pending:'cp-pending'};
-  const cl={yes:'✅ Approved',no:'❌ No Claim',pending:'🕐 Pending'};
-  el.innerHTML=list.map(r=>`<div class="rto-card"><div class="rto-row">
-    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:9px"><div style="flex:1;min-width:0"><div class="rto-name">${r.product}</div><div class="rto-order">${r.company} · #${r.orderId||'—'}</div></div><span class="s-badge ${sc[r.status]||''}">${sl[r.status]||r.status}</span></div>
-    <div class="rto-meta"><div class="rto-meta-item">RTO: <span>${fShort(r.returnDate)}</span></div>${r.deliveredDate?`<div class="rto-meta-item">Del: <span>${fShort(r.deliveredDate)}</span></div>`:''} ${r.trackId?`<div class="rto-meta-item">Track: <span>${r.trackId}</span></div>`:''}</div>
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px;flex-wrap:wrap;gap:6px"><span class="claim-pill ${cc[r.claim]||'cp-pending'}">${cl[r.claim]||r.claim}</span><div class="rto-acts"><button class="rto-act" style="background:var(--amber-l);color:var(--amber)" onclick="editRTO('${r.id}')">✏️ Edit</button><button class="rto-act" style="background:var(--red-l);color:var(--red)" onclick="confirmDelRTO('${r.id}')">🗑</button></div></div>
-    ${r.remark?`<div class="rto-remark">💬 ${r.remark}</div>`:''}
-  </div></div>`).join('');
+  if(!list.length){el.innerHTML='';emp.style.display='block';return;}emp.style.display='none';
+  var SC={transit:'s-transit',delivered:'s-delivered',returned:'s-returned',pending:'s-pending'};
+  var SL={transit:'🚚 In Transit',delivered:'✅ Delivered',returned:'🔁 Returned',pending:'⏳ Pending'};
+  var CC={yes:'cp-yes',no:'cp-no',pending:'cp-pending'};
+  var CL={yes:'✅ Approved',no:'❌ No Claim',pending:'🕐 Pending'};
+  el.innerHTML=list.map(function(r){return '<div class="rto-card"><div class="rto-body"><div style="display:flex;align-items:flex-start;justify-content:space-between;gap:9px"><div style="flex:1;min-width:0"><div class="rto-name">'+r.product+'</div><div class="rto-order">'+r.company+' · #'+(r.orderId||'—')+'</div></div><span class="s-badge '+(SC[r.status]||'')+'">'+(SL[r.status]||r.status)+'</span></div><div class="rto-meta"><div class="rto-mi">RTO: <span>'+fShort(r.returnDate)+'</span></div>'+(r.deliveredDate?'<div class="rto-mi">Del: <span>'+fShort(r.deliveredDate)+'</span></div>':'')+(r.trackId?'<div class="rto-mi">Track: <span>'+r.trackId+'</span></div>':'')+'</div><div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px;flex-wrap:wrap;gap:6px"><span class="claim-pill '+(CC[r.claim]||'cp-pending')+'">'+(CL[r.claim]||r.claim)+'</span><div class="rto-acts"><button class="rto-act" style="background:var(--amber-l);color:var(--amber-d)" onclick="editRTO(\''+r.id+'\')">✏️ Edit</button><button class="rto-act" style="background:var(--red-l);color:var(--red-d)" onclick="confirmDelRTO(\''+r.id+'\')">🗑</button></div></div>'+(r.remark?'<div class="rto-remark">💬 '+r.remark+'</div>':'')+  '</div></div>';}).join('');
 }
-function openAddRTO(){
-  editRTOId=null;$('mRtoTitle').textContent='Add RTO';
-  ['rtoProd','rtoOrder','rtoTrack','rtoRemark'].forEach(id=>$(id).value='');
-  $('rtoStatus').value='transit';$('rtoClaim').value='pending';
-  $('rtoRetDate').value='';$('rtoDelDate').value='';$('rtoErr').style.display='none';
-  openModal('m-rto');
-}
-function editRTO(id){
-  const r=rtos.find(x=>String(x.id)===String(id));if(!r)return;
-  editRTOId=String(r.id);$('mRtoTitle').textContent='Edit RTO';
-  $('rtoProd').value=r.product;$('rtoCompany').value=r.company;
-  $('rtoOrder').value=r.orderId||'';$('rtoTrack').value=r.trackId||'';
-  $('rtoRetDate').value=r.returnDate||'';$('rtoDelDate').value=r.deliveredDate||'';
-  $('rtoStatus').value=r.status;$('rtoClaim').value=r.claim;
-  $('rtoRemark').value=r.remark||'';$('rtoErr').style.display='none';
-  openModal('m-rto');
-}
-async function saveRTO(){
-  const product=$('rtoProd').value.trim(),err=$('rtoErr');
+function openAddRTO(){editRTOId=null;eid('mRtoTitle').textContent='Add RTO';['rtoProd','rtoOrder','rtoTrack','rtoRemark'].forEach(function(id){eid(id).value='';});eid('rtoStatus').value='transit';eid('rtoClaim').value='pending';eid('rtoRetDate').value='';eid('rtoDelDate').value='';eid('rtoErr').style.display='none';openModal('m-rto');}
+function editRTO(id){var r=rtos.find(function(x){return String(x.id)===String(id);});if(!r)return;editRTOId=String(r.id);eid('mRtoTitle').textContent='Edit RTO';eid('rtoProd').value=r.product;eid('rtoCompany').value=r.company;eid('rtoOrder').value=r.orderId||'';eid('rtoTrack').value=r.trackId||'';eid('rtoRetDate').value=r.returnDate||'';eid('rtoDelDate').value=r.deliveredDate||'';eid('rtoStatus').value=r.status;eid('rtoClaim').value=r.claim;eid('rtoRemark').value=r.remark||'';eid('rtoErr').style.display='none';openModal('m-rto');}
+function saveRTO(){
+  var product=eid('rtoProd').value.trim(),err=eid('rtoErr');
   if(!product){err.textContent='Product name required.';err.style.display='block';return;}
-  const id=editRTOId||String(Date.now());
-  const data={id,product,company:$('rtoCompany').value,orderId:$('rtoOrder').value.trim(),trackId:$('rtoTrack').value.trim(),returnDate:$('rtoRetDate').value,deliveredDate:$('rtoDelDate').value,status:$('rtoStatus').value,claim:$('rtoClaim').value,remark:$('rtoRemark').value.trim()};
+  var id=editRTOId||String(Date.now());
+  var data={id:id,product:product,company:eid('rtoCompany').value,orderId:eid('rtoOrder').value.trim(),trackId:eid('rtoTrack').value.trim(),returnDate:eid('rtoRetDate').value,deliveredDate:eid('rtoDelDate').value,status:eid('rtoStatus').value,claim:eid('rtoClaim').value,remark:eid('rtoRemark').value.trim()};
   err.style.display='none';
-  if(editRTOId){const idx=rtos.findIndex(x=>String(x.id)===editRTOId);if(idx>=0)rtos[idx]=data;}
-  else rtos.push(data);
-  saveLocal();
-  setSS('busy','Saving…');
-  const r=await pushRTO(data);
-  if(r?.error){setSS('err','Sheet Error');toast('Sheet error: '+r.error,'err');}
-  else{setSS('ok','✅ Saved');toast('RTO saved to Sheet ✅','ok');}
-  closeModal('m-rto');buildRTOChips();renderRTO();renderDash();
+  if(editRTOId){var idx=rtos.findIndex(function(x){return String(x.id)===editRTOId;});if(idx>=0)rtos[idx]=data;else rtos.push(data);}else rtos.push(data);
+  saveLocal();setSS('busy','Saving…');pushRTO(data).then(function(){setSS('ok','✅ Saved');toast('RTO saved ✅','ok');});closeModal('m-rto');buildRTOChips();renderRTO();
 }
 function confirmDelRTO(id){editRTOId=String(id);openModal('m-del-rto');}
-async function deleteRTO(){
-  setSS('busy','Deleting…');
-  await pushDeleteRTO(editRTOId);
-  rtos=rtos.filter(r=>String(r.id)!==editRTOId);
-  saveLocal();
-  setSS('ok','✅ Deleted');
-  closeModal('m-del-rto');renderRTO();
-  toast('RTO deleted from app & Sheet','err');
-}
+function deleteRTO(){setSS('busy','Deleting…');pushDelRTO(editRTOId).then(function(){rtos=rtos.filter(function(r){return String(r.id)!==editRTOId;});saveLocal();setSS('ok','Deleted');toast('RTO deleted ✅','err');closeModal('m-del-rto');renderRTO();});}
 
-/* ── TIMELINE ITEM ── */
-function tlItem(a,i,total){
-  const isLast=i===total-1;
-  let txt='',dc='add';
-  if(a.type==='pack'){dc='pack';txt=`<b>${a.user||'Kamal'}</b> moved <b>${a.qty}</b> to box — ${a.productName}`;}
-  else if(a.type==='sale'){dc='sold';txt=`<b>${a.user||'Kamal'}</b> dispatched <b>${a.qty}</b> — ${a.productName}`;}
-  else{txt=`<b>${a.user||'Kamal'}</b> ${a.note||'added stock'} — ${a.productName} (${a.qty})`;}
-  const tag=a.type==='sale'?'<span class="tl-tag sold">DISPATCH</span>':a.type==='pack'?'<span class="tl-tag pack">BOX</span>':'<span class="tl-tag add">STOCK</span>';
-  return `<div class="tl-item">${!isLast?'<div class="tl-line"></div>':''}
-    <div class="tl-dot ${dc}"></div>
-    <div style="min-width:0"><div class="tl-text">${txt}${tag}</div><div class="tl-time">${fD(a.time)} · ${fT(a.time)}</div></div>
-  </div>`;
-}
-
-/* ── REPORT ── */
-function renderReport(){
-  $('repDate').textContent='As of '+fFull(Date.now());
-  const ts=todayS();
-  const todayP=activities.filter(a=>a.type==='pack'&&new Date(a.time).toDateString()===new Date().toDateString()).reduce((s,a)=>s+a.qty,0);
-  const totalS=activities.filter(a=>a.type==='sale').reduce((s,a)=>s+a.qty,0);
-  $('repOverview').innerHTML=`<div class="rpt-c"><div class="rpt-v" style="color:var(--clay)">${products.length}</div><div class="rpt-l">Products</div></div><div class="rpt-c"><div class="rpt-v">${products.reduce((a,p)=>a+p.total,0)}</div><div class="rpt-l">Stock</div></div><div class="rpt-c"><div class="rpt-v" style="color:var(--leaf)">${products.reduce((a,p)=>a+p.packed,0)}</div><div class="rpt-l">Box Ready</div></div><div class="rpt-c"><div class="rpt-v" style="color:var(--red)">${totalS}</div><div class="rpt-l">Dispatched</div></div><div class="rpt-c"><div class="rpt-v" style="color:var(--amber)">${products.filter(p=>(p.total-p.packed)<10).length}</div><div class="rpt-l">Low Stock</div></div><div class="rpt-c"><div class="rpt-v" style="color:var(--blue)">${rtos.length}</div><div class="rpt-l">RTO</div></div>`;
-  $('repToday').innerHTML=`<div style="display:flex;flex-direction:column;gap:9px"><div style="display:flex;justify-content:space-between;font-size:13px"><span style="color:var(--bark-lt)">Dispatched Today</span><b style="color:var(--red);font-size:15px">${ts}</b></div><div class="dvd"></div><div style="display:flex;justify-content:space-between;font-size:13px"><span style="color:var(--bark-lt)">Boxed Today</span><b style="color:var(--leaf);font-size:15px">${todayP}</b></div><div class="dvd"></div><div style="display:flex;justify-content:space-between;font-size:13px"><span style="color:var(--bark-lt)">Total Entries</span><b style="font-size:15px">${activities.filter(a=>new Date(a.time).toDateString()===new Date().toDateString()).length}</b></div></div>`;
-  const sorted=[...products].sort((a,b)=>b.total-a.total).slice(0,5);
-  $('repTop').innerHTML=sorted.map((p,i)=>`<div class="top-row"><div class="top-num">${i+1}</div><div style="flex:1;min-width:0"><div style="font-size:12.5px;font-weight:600;color:var(--bark);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${p.name}</div><div style="font-size:10px;color:var(--bark-lt)">${p.type} · ${p.size}</div></div><div style="text-align:right;flex-shrink:0"><div style="font-size:16px;font-weight:700;font-family:'Fraunces',serif;color:var(--clay)">${p.total}</div><div style="font-size:9.5px;color:var(--bark-lt)">${p.packed} boxed</div></div></div>`).join('');
-  const types={};
-  products.forEach(p=>{if(!types[p.type])types[p.type]={total:0,packed:0,count:0};types[p.type].total+=p.total;types[p.type].packed+=p.packed;types[p.type].count++;});
-  $('repCats').innerHTML=Object.entries(types).map(([type,d])=>`<div style="margin-bottom:13px"><div style="display:flex;justify-content:space-between;margin-bottom:5px"><span style="font-size:12.5px;font-weight:700;color:var(--bark)">${EM[type]||'✨'} ${type}</span><span style="font-size:10.5px;color:var(--bark-lt)">${d.count} products · ${d.total} units</span></div><div class="prog" style="height:6px"><div class="prog-b" style="width:${d.total?Math.round(d.packed/d.total*100):0}%"></div></div><div class="prog-meta" style="margin-top:4px"><span>${d.packed} boxed</span><span>${Math.round(d.packed/d.total*100)||0}%</span></div></div>`).join('');
-}
-
+// ── PROFILE ──
 function renderProfile(){
-  $('prof-total').textContent=products.length;
-  $('prof-sales').textContent=activities.filter(a=>a.type==='sale').reduce((s,a)=>s+a.qty,0);
-  $('prof-packs').textContent=activities.filter(a=>a.type==='pack').length;
-  $('prof-today').textContent=todayS();
-  $('prof-rto').textContent=rtos.length;
+  var av=allVariants();
+  eid('prof-total').textContent=products.length;
+  eid('prof-vars').textContent=av.length;
+  eid('prof-stock').textContent=av.reduce(function(s,v){return s+v.stock;},0);
+  eid('prof-today').textContent=todaySale();
+  eid('prof-rto').textContent=rtos.length;
 }
 
-/* ══════════════════════════════════════════════════
-   BOOT — Load local first, then sync from Sheet
-══════════════════════════════════════════════════ */
-// 1. Load from localStorage immediately (fast render)
-loadLocal();
-
-// 2. Init UI
-buildCatChips(); renderDash(); setET('pack'); buildRTOChips();
-$('entProd').addEventListener('change', updateES);
-
-// 3. Sync from Google Sheet after 1 second
-setSS('busy', 'Connecting…');
-setTimeout(syncNow, 1000);
-
-// 4. Auto sync every 2 minutes
-setInterval(syncNow, 120000);
+// ── BOOT ──
+(function init(){
+  var d=new Date(),h=d.getHours();
+  eid('dashGreet').textContent=(h<12?'Namaste 🙏':h<17?'Kem Cho ☀️':'Ram Ram 🌙')+', Kamal';
+  eid('dateLbl').textContent=d.toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  loadLocal();
+  // No dummy data — only real data from Sheet
+  buildTabs();buildFilters();renderDash();renderProds();
+  setET('pack');populateEntSel();buildRTOChips();renderRTO();
+  setSS('busy','Connecting…');
+  setTimeout(syncNow,1000);
+  setInterval(syncNow,120000);
+})();
 </script>
 </body>
 </html>
